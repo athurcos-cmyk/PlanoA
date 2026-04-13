@@ -1,3 +1,4 @@
+import { getAlimentoPorId, getMacrosPor100gDoItem } from '../data/alimentos'
 import type { Macros, ItemOpcao, ItemRegistrado } from '../data/tipos'
 
 export function somarMacros(...lista: Macros[]): Macros {
@@ -14,11 +15,12 @@ export function somarMacros(...lista: Macros[]): Macros {
 
 export function calcularMacrosItem(item: ItemOpcao, gramas: number): Macros {
   const fator = gramas / 100
+  const macrosBase = getMacrosPor100gDoItem(item)
   return {
-    kcal: Math.round(item.macrosPor100g.kcal * fator),
-    p: +(item.macrosPor100g.p * fator).toFixed(1),
-    c: +(item.macrosPor100g.c * fator).toFixed(1),
-    g: +(item.macrosPor100g.g * fator).toFixed(1),
+    kcal: Math.round(macrosBase.kcal * fator),
+    p: +(macrosBase.p * fator).toFixed(1),
+    c: +(macrosBase.c * fator).toFixed(1),
+    g: +(macrosBase.g * fator).toFixed(1),
   }
 }
 
@@ -37,6 +39,17 @@ export function calcularMacrosOpcao(
   return itens.reduce((acc, item) => {
     const reg = registrados.find((r) => r.itemId === item.id)
     const gramas = reg ? reg.gramasReais : item.gramasPlano
+    const substituto = reg?.substitutoId ? getAlimentoPorId(reg.substitutoId) : undefined
+
+    if (substituto) {
+      return somarMacros(acc, {
+        kcal: Math.round((substituto.kcal * gramas) / 100),
+        p: +((substituto.p * gramas) / 100).toFixed(1),
+        c: +((substituto.c * gramas) / 100).toFixed(1),
+        g: +((substituto.g * gramas) / 100).toFixed(1),
+      })
+    }
+
     return somarMacros(acc, calcularMacrosItem(item, gramas))
   }, { kcal: 0, p: 0, c: 0, g: 0 })
 }

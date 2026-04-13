@@ -6,11 +6,20 @@ import { cn } from '../../utils/cn'
 interface Props {
   itens: ItemOpcao[]
   registrados: ItemRegistrado[]
+  itensComPadraoAtivo?: Set<string>
   onChange: (registrados: ItemRegistrado[]) => void
   onTapNome?: (item: ItemOpcao) => void
+  onRestoreOriginal?: (item: ItemOpcao) => void
 }
 
-export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props) {
+export function ItemChecklist({
+  itens,
+  registrados,
+  itensComPadraoAtivo,
+  onChange,
+  onTapNome,
+  onRestoreOriginal,
+}: Props) {
   const [expandedId, setExpandedId] = useState<string | null>(null)
 
   function getReg(itemId: string): ItemRegistrado {
@@ -43,9 +52,15 @@ export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props
 
   function toggleCheck(item: ItemOpcao) {
     if (isChecked(item.id)) {
-      updateItem(item.id, 0)
+      updateItem(item.id, 0, {
+        substitutoId: undefined,
+        substitutoNome: undefined,
+      })
     } else {
-      updateItem(item.id, item.gramasPlano)
+      updateItem(item.id, item.gramasPlano, {
+        substitutoId: undefined,
+        substitutoNome: undefined,
+      })
     }
   }
 
@@ -62,10 +77,12 @@ export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props
   return (
     <div className="flex flex-col">
       {itens.map((item) => {
-        const checked = isChecked(item.id)
-        const gramas = getGramas(item.id)
+        const reg = getReg(item.id)
+        const checked = reg.gramasReais > 0
+        const gramas = reg.gramasReais
         const isAdjusted = gramas !== item.gramasPlano && gramas > 0
         const showStepper = expandedId === item.id
+        const temPadraoAtivo = itensComPadraoAtivo?.has(item.id)
 
         return (
           <div key={item.id} className="border-b border-border-soft last:border-b-0">
@@ -87,21 +104,35 @@ export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props
               </button>
 
               {/* Name (tappable for swap) */}
-              <button
-                type="button"
-                onClick={() => onTapNome?.(item)}
-                className={cn(
-                  'flex-1 text-left text-sm min-h-[44px] flex items-center',
-                  checked ? 'text-ink' : 'text-ink-3 line-through'
+              <div className="min-w-0 flex-1">
+                <button
+                  type="button"
+                  onClick={() => onTapNome?.(item)}
+                  className={cn(
+                    'flex min-h-[44px] w-full items-center text-left text-sm',
+                    checked ? 'text-ink' : 'text-ink-3 line-through'
+                  )}
+                >
+                  <span className="truncate">{item.nome}</span>
+                </button>
+
+                {reg.substitutoNome && (
+                  <div className="mt-0.5 flex items-center gap-2 text-[11px]">
+                    <span className="truncate text-accent">
+                      usando {reg.substitutoNome}
+                    </span>
+                    {onRestoreOriginal && (
+                      <button
+                        type="button"
+                        onClick={() => onRestoreOriginal(item)}
+                        className="shrink-0 rounded border border-border-soft px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] text-ink-3 active:bg-surface-2"
+                      >
+                        {temPadraoAtivo ? 'Remover padrao' : 'Voltar ao plano'}
+                      </button>
+                    )}
+                  </div>
                 )}
-              >
-                {item.nome}
-                {getReg(item.id).substitutoNome && (
-                  <span className="ml-1 text-xs text-accent">
-                    ({getReg(item.id).substitutoNome})
-                  </span>
-                )}
-              </button>
+              </div>
 
               {/* Gram badge */}
               <button
@@ -114,9 +145,7 @@ export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props
                     : 'border border-border-soft text-ink-2 bg-surface-2'
                 )}
               >
-                {item.unidade === 'un' && item.unidadeNome
-                  ? `${+(gramas / item.gramasPlano).toFixed(1)} ${item.unidadeNome}`
-                  : `${gramas}${item.unidade}`}
+                {formatQuantidade(item, gramas)}
               </button>
             </div>
 
@@ -131,9 +160,7 @@ export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props
                 <StepButton onClick={() => adjustGrams(item, -10)} label="-10" />
                 <StepButton onClick={() => adjustGrams(item, -5)} label="-5" />
                 <span className="w-16 text-center text-sm font-[family-name:var(--font-mono)] text-ink">
-                  {item.unidade === 'un' && item.unidadeNome
-                    ? `${+(gramas / item.gramasPlano).toFixed(1)} ${item.unidadeNome}`
-                    : `${gramas}${item.unidade}`}
+                  {formatQuantidade(item, gramas)}
                 </span>
                 <StepButton onClick={() => adjustGrams(item, 5)} label="+5" />
                 <StepButton onClick={() => adjustGrams(item, 10)} label="+10" />
@@ -162,4 +189,17 @@ function StepButton({ onClick, label }: { onClick: () => void; label: string }) 
       {label}
     </button>
   )
+}
+
+function formatQuantidade(item: ItemOpcao, quantidade: number): string {
+  if (item.unidade === 'un' && item.unidadeNome) {
+    const unidades = quantidade / Math.max(item.gramasPlano, 1)
+    const texto =
+      Math.abs(unidades - Math.round(unidades)) < 0.05
+        ? `${Math.round(unidades)}`
+        : `${unidades.toFixed(1).replace(/\.0$/, '')}`
+    return `${texto} ${item.unidadeNome}`
+  }
+  if (item.unidade === 'ml') return `${quantidade}ml`
+  return `${quantidade}g`
 }

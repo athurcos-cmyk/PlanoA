@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano A — Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     PLANO A — DESIGN SYSTEM (CSS variables)
+     ============================================ */
+  :root {
+    /* SURFACE — Brutalist Atlético Noturno (warm dark) */
+    --bg:        #0E0E0C;
+    --surface:   #171714;
+    --surface-2: #1F1F1B;
+    --surface-3: #2A2A25;
+
+    /* TEXTO — warm off-white, não branco puro */
+    --ink:   #F2F2EC;
+    --ink-2: #A8A89F;
+    --ink-3: #6B6B62;
+
+    /* BORDER — soft white pra não cortar a vista */
+    --border:      #F2F2EC;
+    --border-soft: #2A2A25;
+
+    /* PROGRESS */
+    --done:    #F2F2EC;
+    --warn:    #F59E0B;
+    --over:    #EF4444;
+
+    /* ACCENT — vermelho-tijolo um pouco mais brilhante pra contraste no dark */
+    --accent:        #EF4444;
+    --accent-soft:   #2A0F0F;
+    --accent-darker: #DC2626;
+
+    /* TYPOGRAPHY */
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+
+    --text-xs:   12px;
+    --text-sm:   14px;
+    --text-base: 16px;
+    --text-lg:   20px;
+    --text-xl:   28px;
+    --text-2xl:  40px;
+    --text-3xl:  64px;
+
+    /* SPACING */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+
+    /* RADIUS */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html, body {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--ink);
+    background: #1F1F1B;
+    min-height: 100vh;
+  }
+
+  /* GALLERY (página de exibição) */
+  .gallery {
+    padding: 48px 24px;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  .gallery-header {
+    color: white;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  .gallery-header h1 {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .gallery-header p {
+    color: #999;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .frames {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: center;
+  }
+
+  .frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .frame-label {
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+
+  .phone {
+    width: 375px;
+    height: 812px;
+    background: var(--bg);
+    border: 1px solid rgba(242, 242, 236, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.6);
+  }
+
+  /* ============================================
+     APP — PLANO A
+     ============================================ */
+  .page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+  }
+
+  /* Header */
+  .header {
+    height: 56px;
+    padding: 0 var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1.5px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .header-date {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .header-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .header-tipo {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .header-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .header-back {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: -12px;
+  }
+
+  .header-title {
+    flex: 1;
+    font-size: var(--text-base);
+    font-weight: 700;
+  }
+
+  /* Content area */
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    height: 56px;
+    border-top: 1.5px solid var(--border);
+    background: var(--surface);
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--ink-3);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .nav-item.active {
+    color: var(--ink);
+  }
+
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 2px;
+    background: var(--ink);
+  }
+
+  .nav-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  .nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== DASHBOARD ===== */
+  .agora-card {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+
+  .agora-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .agora-title {
+    font-size: var(--text-xl);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: var(--space-5);
+  }
+
+  .cta-primary {
+    width: 100%;
+    height: 56px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .cta-primary:active {
+    background: var(--accent-darker);
+    transform: scale(0.98);
+  }
+
+  .cta-big {
+    height: 72px;
+    font-size: var(--text-lg);
+  }
+
+  .cta-secondary {
+    width: 100%;
+    height: 56px;
+    background: var(--bg);
+    color: var(--ink);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .kcal-display {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .kcal-current {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .kcal-target {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--ink-3);
+  }
+
+  .progress-bar {
+    height: 12px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: var(--space-5);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--done);
+  }
+
+  .macro-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .macro-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 700;
+    width: 18px;
+  }
+
+  .macro-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .macro-fill {
+    height: 100%;
+    background: var(--done);
+  }
+
+  .macro-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--ink-2);
+    min-width: 80px;
+    text-align: right;
+  }
+
+  /* ===== DIETA — LISTA ===== */
+  .dieta-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .refeicao-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    cursor: pointer;
+  }
+
+  .refeicao-card.feita {
+    background: var(--surface-2);
+    border-color: var(--border-soft);
+    color: var(--ink-2);
+  }
+
+  .refeicao-card.expanded {
+    border-width: 2px;
+  }
+
+  .refeicao-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .refeicao-info h3 {
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .refeicao-time {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--ink-2);
+    margin-right: var(--space-3);
+  }
+
+  .refeicao-macros {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+
+  .refeicao-status {
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  /* Opcoes (camada 2) */
+  .opcoes-list {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .opcao-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .opcao-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+  }
+
+  .opcao-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 900;
+  }
+
+  .opcao-name {
+    font-size: var(--text-base);
+    font-weight: 700;
+  }
+
+  .opcao-macros {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .opcao-actions {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .btn-fiz {
+    flex: 1;
+    height: 48px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+
+  .btn-mais {
+    width: 48px;
+    height: 48px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .btn-swap {
+    width: 100%;
+    height: 48px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    margin-top: var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  /* ===== DIETA — DETALHE OPÇÃO ===== */
+  .detalhe-title {
+    font-size: var(--text-xl);
+    font-weight: 900;
+    margin-bottom: var(--space-2);
+  }
+
+  .detalhe-kcal {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    margin-bottom: var(--space-4);
+  }
+
+  .detalhe-macros-row {
+    display: flex;
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-5);
+    border-bottom: 1.5px solid var(--border-soft);
+  }
+
+  .detalhe-macro {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 700;
+  }
+
+  .itens-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-3);
+  }
+
+  .itens-list {
+    margin-bottom: var(--space-5);
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 14px 0;
+    font-size: var(--text-base);
+    color: var(--ink);
+    border-bottom: 1px solid var(--border-soft);
+    min-height: 48px;
+  }
+  .item:last-child {
+    border-bottom: none;
+  }
+
+  .item-check {
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--bg);
+    background: var(--ink);
+  }
+
+  .item.skipped .item-check {
+    background: transparent;
+    color: transparent;
+  }
+
+  .item.skipped .item-text {
+    text-decoration: line-through;
+    color: var(--ink-3);
+  }
+
+  .item-text {
+    flex: 1;
+    font-size: var(--text-sm);
+  }
+
+  .item-gram {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--ink-2);
+    background: var(--surface-2);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    padding: 4px 10px;
+    min-width: 56px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .item.adjusted .item-gram {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .item.skipped .item-gram {
+    opacity: 0.3;
+  }
+
+  .gram-stepper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 0 4px 36px;
+  }
+
+  .gram-step-btn {
+    width: 44px;
+    height: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-2);
+  }
+
+  /* ===== TREINO ===== */
+  .timer-bar {
+    height: 32px;
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-4);
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .timer-fill {
+    flex: 1;
+    height: 8px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .timer-fill > div {
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .timer-text {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    min-width: 36px;
+  }
+
+  .timer-toggle {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .bloco-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .exercicio-title {
+    font-size: var(--text-lg);
+    font-weight: 900;
+    margin-bottom: var(--space-1);
+  }
+
+  .exercicio-meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-3);
+    margin-bottom: var(--space-5);
+  }
+
+  .series-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-5);
+  }
+
+  .serie-cell {
+    padding: var(--space-3) var(--space-2);
+    text-align: center;
+    border-right: 1.5px solid var(--border);
+    background: var(--surface);
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+  }
+
+  .serie-cell:last-child {
+    border-right: none;
+  }
+
+  .serie-cell.feita {
+    background: var(--surface-2);
+  }
+
+  .serie-cell.atual {
+    background: var(--accent-soft);
+  }
+
+  .serie-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--ink-2);
+  }
+
+  .serie-status {
+    font-size: 16px;
+  }
+
+  .serie-data {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--ink-2);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .serie-divider {
+    height: 1.5px;
+    background: var(--border-soft);
+    margin: var(--space-5) 0;
+  }
+
+  .serie-current-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-4);
+  }
+
+  .serie-current-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .serie-recall {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+  }
+
+  .stepper-section {
+    margin-bottom: var(--space-5);
+  }
+
+  .stepper-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-2);
+    text-align: center;
+    margin-bottom: var(--space-2);
+  }
+
+  .stepper {
+    display: grid;
+    grid-template-columns: 64px 1fr 64px;
+    height: 80px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .stepper-btn {
+    background: var(--surface);
+    border: none;
+    border-right: 1.5px solid var(--border);
+    cursor: pointer;
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--font-sans);
+  }
+
+  .stepper-btn:last-child {
+    border-right: none;
+    border-left: 1.5px solid var(--border);
+  }
+
+  .stepper-value {
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+  }
+
+  /* ===== PERFIL ===== */
+  .perfil-name {
+    font-size: var(--text-xl);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-1);
+  }
+
+  .perfil-meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .perfil-divider {
+    height: 1.5px;
+    background: var(--border-soft);
+    margin: var(--space-5) 0;
+  }
+
+  .peso-display {
+    text-align: left;
+  }
+
+  .peso-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-3xl);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: var(--space-2);
+  }
+
+  .peso-meta {
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .historico-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+  }
+
+  .historico-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--ink-2);
+  }
+
+  .historico-row .data {
+    font-weight: 500;
+  }
+
+  .historico-row .peso {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .meta-info {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+    line-height: 1.8;
+  }
+
+  /* SCROLLBAR (cleaner) */
+  .content::-webkit-scrollbar {
+    width: 0;
+  }
+
+  /* ============================================
+     CALENDÁRIO / HISTÓRICO
+     ============================================ */
+  .cal-month {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .cal-weekday {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--ink-3);
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    position: relative;
+  }
+  .cal-day.empty {
+    border: none;
+    background: transparent;
+  }
+  .cal-day.today {
+    border: 1.5px solid var(--accent);
+  }
+  .cal-day.full {
+    background: var(--surface-2);
+    border-color: var(--ink);
+  }
+  .cal-day.partial {
+    background: var(--surface);
+  }
+  .cal-day.miss {
+    opacity: 0.4;
+  }
+  .cal-day-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .cal-day-dots {
+    display: flex;
+    gap: 2px;
+    margin-top: 2px;
+    height: 4px;
+  }
+  .cal-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .cal-dot.skip {
+    background: transparent;
+  }
+  .cal-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .cal-stat {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+  }
+  .cal-stat-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-xl);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .cal-stat-label {
+    font-size: 11px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  /* ============================================
+     LISTA DE TREINOS
+     ============================================ */
+  .treino-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .treino-card.last {
+    border-color: var(--accent);
+  }
+  .treino-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .treino-letra {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .treino-data {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    font-weight: 700;
+  }
+  .treino-grupo {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .treino-exs {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .treino-iniciar {
+    width: 100%;
+    height: 56px;
+    background: var(--accent);
+    color: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: var(--text-base);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+
+  /* ============================================
+     MODAL: REGISTRAR PESO (sheet)
+     ============================================ */
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: flex-end;
+  }
+  .modal-sheet {
+    width: 100%;
+    background: var(--bg);
+    border-top: 2px solid var(--border);
+    border-radius: 16px 16px 0 0;
+    padding: 24px;
+    padding-top: 16px;
+  }
+  .sheet-handle {
+    width: 48px;
+    height: 4px;
+    background: var(--ink-3);
+    border-radius: 2px;
+    margin: 0 auto 16px;
+  }
+  .sheet-title {
+    font-size: var(--text-lg);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .sheet-meta {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-bottom: 24px;
+  }
+  .peso-input-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 8px;
+    margin: 24px 0;
+  }
+  .peso-input-num {
+    font-family: var(--font-mono);
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .peso-input-unit {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--ink-3);
+  }
+  .peso-stepper {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 16px 0 24px;
+  }
+  .peso-step-btn {
+    width: 56px;
+    height: 56px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .sheet-cta {
+    width: 100%;
+    height: 64px;
+    background: var(--accent);
+    color: white;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-weight: 900;
+    font-size: var(--text-base);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .sheet-cancel {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--ink-3);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 12px;
+    padding: 12px;
+  }
+
+  /* ============================================
+     PROGRESSÃO DE CARGA (histórico por exercício)
+     ============================================ */
+  .pr-card {
+    background: var(--surface);
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+  .pr-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .pr-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .pr-reps {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+    color: var(--ink-2);
+    font-weight: 700;
+    margin-left: 4px;
+  }
+  .pr-delta {
+    font-size: 12px;
+    color: var(--ink-2);
+    margin-top: 6px;
+    font-family: var(--font-mono);
+  }
+  .session-row {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .session-row:last-child {
+    border-bottom: none;
+  }
+  .session-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-3);
+  }
+  .session-main {
+    display: flex;
+    flex-direction: column;
+  }
+  .session-load {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .session-reps {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+  .session-bar {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    margin-top: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .session-bar > div {
+    height: 100%;
+    background: var(--ink);
+  }
+  .session-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.05em;
+  }
+  .session-tag.up {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .session-tag.start {
+    background: var(--surface-2);
+    color: var(--ink-3);
+    border: 1px solid var(--border-soft);
+  }
+</style>
+</head>
+<body>
+
+<div class="gallery">
+  <div class="gallery-header">
+    <h1>Plano A</h1>
+    <p>10 telas do app · Brutalist Atlético Noturno · 375×812 · Inter + JetBrains Mono</p>
+  </div>
+
+  <div class="frames">
+
+    <!-- ============== DASHBOARD ============== -->
+    <div class="frame">
+      <div class="frame-label">01 — Dashboard</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-left">
+              <div class="header-date">TER 11/04</div>
+              <div class="header-dot"></div>
+              <div class="header-tipo">PLANTÃO</div>
+            </div>
+            <div class="header-icon">⚙</div>
+          </div>
+
+          <div class="content">
+            <div class="agora-card">
+              <div class="agora-label">AGORA · 12:30</div>
+              <div class="agora-title">Almoço</div>
+              <button class="cta-primary">VER OPÇÕES →</button>
+            </div>
+
+            <div class="section-label">HOJE</div>
+
+            <div class="kcal-display">
+              <div class="kcal-current">1840</div>
+              <div class="kcal-target">/ 2600 kcal</div>
+            </div>
+
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 71%"></div>
+            </div>
+
+            <div class="macro-row">
+              <div class="macro-label">P</div>
+              <div class="macro-bar"><div class="macro-fill" style="width: 71%"></div></div>
+              <div class="macro-value">142 / 200g</div>
+            </div>
+            <div class="macro-row">
+              <div class="macro-label">C</div>
+              <div class="macro-bar"><div class="macro-fill" style="width: 66%"></div></div>
+              <div class="macro-value">198 / 300g</div>
+            </div>
+            <div class="macro-row">
+              <div class="macro-label">G</div>
+              <div class="macro-bar"><div class="macro-fill" style="width: 51%"></div></div>
+              <div class="macro-value">38 / 75g</div>
+            </div>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item active">
+              <div class="nav-icon">⌂</div>
+              <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">🍽</div>
+              <div class="nav-label">Dieta</div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">🏋</div>
+              <div class="nav-label">Treino</div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">👤</div>
+              <div class="nav-label">Perfil</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== DIETA ============== -->
+    <div class="frame">
+      <div class="frame-label">02 — Dieta (lista + expandida)</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">Dieta · Plantão</div>
+            <div class="header-icon"></div>
+          </div>
+
+          <div class="content">
+            <div class="dieta-list">
+              <div class="refeicao-card feita">
+                <div class="refeicao-row">
+                  <div class="refeicao-info">
+                    <h3><span class="refeicao-time">06:30</span>Pré-Treino</h3>
+                    <div class="refeicao-macros">~350 kcal • 18g P</div>
+                  </div>
+                  <div class="refeicao-status">✓</div>
+                </div>
+              </div>
+
+              <div class="refeicao-card feita">
+                <div class="refeicao-row">
+                  <div class="refeicao-info">
+                    <h3><span class="refeicao-time">09:30</span>Pós-Plantão</h3>
+                    <div class="refeicao-macros">~480 kcal • 35g P</div>
+                  </div>
+                  <div class="refeicao-status">✓</div>
+                </div>
+              </div>
+
+              <div class="refeicao-card expanded">
+                <div class="refeicao-row">
+                  <div class="refeicao-info">
+                    <h3><span class="refeicao-time">12:30</span>Almoço</h3>
+                    <div class="refeicao-macros">~780 kcal • 55g P</div>
+                  </div>
+                  <div class="refeicao-status">⌃</div>
+                </div>
+
+                <div class="opcoes-list">
+                  <div class="opcao-card">
+                    <div class="opcao-header">
+                      <div class="opcao-num">①</div>
+                      <div class="opcao-name">Arroz, feijão e frango</div>
+                    </div>
+                    <div class="opcao-macros">805 kcal • 69P 77C 21G</div>
+                    <div class="opcao-actions">
+                      <button class="btn-fiz">✓ FIZ ESSA</button>
+                      <button class="btn-mais">···</button>
+                    </div>
+                  </div>
+
+                  <div class="opcao-card">
+                    <div class="opcao-header">
+                      <div class="opcao-num">②</div>
+                      <div class="opcao-name">Macarrão à bolonhesa</div>
+                    </div>
+                    <div class="opcao-macros">775 kcal • 50P 77C 19G</div>
+                    <div class="opcao-actions">
+                      <button class="btn-fiz">✓ FIZ ESSA</button>
+                      <button class="btn-mais">···</button>
+                    </div>
+                  </div>
+
+                  <div class="opcao-card">
+                    <div class="opcao-header">
+                      <div class="opcao-num">③</div>
+                      <div class="opcao-name">Arroz com sardinha</div>
+                    </div>
+                    <div class="opcao-macros">700 kcal • 58P 83C 15G</div>
+                    <div class="opcao-actions">
+                      <button class="btn-fiz">✓ FIZ ESSA</button>
+                      <button class="btn-mais">···</button>
+                    </div>
+                  </div>
+
+                  <button class="btn-swap">🔄 BUSCAR SIMILAR</button>
+                </div>
+              </div>
+
+              <div class="refeicao-card">
+                <div class="refeicao-row">
+                  <div class="refeicao-info">
+                    <h3><span class="refeicao-time">16:00</span>Lanche</h3>
+                    <div class="refeicao-macros">~440 kcal • 28g P</div>
+                  </div>
+                  <div class="refeicao-status">⌄</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item">
+              <div class="nav-icon">⌂</div>
+              <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item active">
+              <div class="nav-icon">🍽</div>
+              <div class="nav-label">Dieta</div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">🏋</div>
+              <div class="nav-label">Treino</div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">👤</div>
+              <div class="nav-label">Perfil</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== DETALHE OPÇÃO ============== -->
+    <div class="frame">
+      <div class="frame-label">03 — Detalhe opção (gramagem editável)</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">Almoço · Opção 1</div>
+            <div class="header-icon"></div>
+          </div>
+
+          <div class="content">
+            <div class="detalhe-title">Arroz, feijão e frango</div>
+            <div class="detalhe-kcal">755 kcal</div>
+
+            <div class="detalhe-macros-row">
+              <div class="detalhe-macro">P 63g</div>
+              <div class="detalhe-macro">C 78g</div>
+              <div class="detalhe-macro">G 20g</div>
+            </div>
+
+            <div class="itens-label">ITENS · TOQUE NO PESO PRA AJUSTAR</div>
+
+            <div class="itens-list">
+              <div class="item">
+                <div class="item-check">✓</div>
+                <div class="item-text">Arroz cozido</div>
+                <div class="item-gram">180g</div>
+              </div>
+              <div class="item">
+                <div class="item-check">✓</div>
+                <div class="item-text">Feijão (2 conchas)</div>
+                <div class="item-gram">160g</div>
+              </div>
+              <div class="item adjusted">
+                <div class="item-check">✓</div>
+                <div class="item-text">Peito frango grelhado</div>
+                <div class="item-gram">150g</div>
+              </div>
+              <div class="gram-stepper">
+                <button class="gram-step-btn">−10</button>
+                <button class="gram-step-btn">−5</button>
+                <button class="gram-step-btn">+5</button>
+                <button class="gram-step-btn">+10</button>
+              </div>
+              <div class="item">
+                <div class="item-check">✓</div>
+                <div class="item-text">Salada grande</div>
+                <div class="item-gram">200g</div>
+              </div>
+              <div class="item">
+                <div class="item-check">✓</div>
+                <div class="item-text">Azeite</div>
+                <div class="item-gram">15ml</div>
+              </div>
+            </div>
+
+            <button class="cta-primary cta-big">✓ REGISTRAR · 755 KCAL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== TREINO ============== -->
+    <div class="frame">
+      <div class="frame-label">04 — Treino (série + timer)</div>
+      <div class="phone">
+        <div class="page">
+          <div class="timer-bar">
+            <div class="timer-fill"><div style="width: 64%"></div></div>
+            <div class="timer-text">0:48</div>
+            <div class="timer-toggle">🔇</div>
+          </div>
+
+          <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">Treino A · Upper</div>
+            <div class="header-icon"></div>
+          </div>
+
+          <div class="content">
+            <div class="bloco-label">BLOCO 1 · PEITO/OMBRO</div>
+            <div class="exercicio-title">A1. Supino halteres no chão</div>
+            <div class="exercicio-meta">4 séries × 10-12 reps</div>
+
+            <div class="series-row">
+              <div class="serie-cell feita">
+                <div class="serie-num">1</div>
+                <div class="serie-status">✓</div>
+                <div class="serie-data">12kg<br>12r</div>
+              </div>
+              <div class="serie-cell atual">
+                <div class="serie-num">2</div>
+                <div class="serie-status">⏵</div>
+                <div class="serie-data">&nbsp;</div>
+              </div>
+              <div class="serie-cell">
+                <div class="serie-num">3</div>
+                <div class="serie-status">&nbsp;</div>
+                <div class="serie-data">&nbsp;</div>
+              </div>
+              <div class="serie-cell">
+                <div class="serie-num">4</div>
+                <div class="serie-status">&nbsp;</div>
+                <div class="serie-data">&nbsp;</div>
+              </div>
+            </div>
+
+            <div class="serie-current-header">
+              <div class="serie-current-label">SÉRIE 2</div>
+              <div class="serie-recall">última: 12kg × 11</div>
+            </div>
+
+            <div class="stepper-section">
+              <div class="stepper-label">CARGA (kg)</div>
+              <div class="stepper">
+                <button class="stepper-btn">−</button>
+                <div class="stepper-value">12</div>
+                <button class="stepper-btn">+</button>
+              </div>
+            </div>
+
+            <div class="stepper-section">
+              <div class="stepper-label">REPS</div>
+              <div class="stepper">
+                <button class="stepper-btn">−</button>
+                <div class="stepper-value">12</div>
+                <button class="stepper-btn">+</button>
+              </div>
+            </div>
+
+            <button class="cta-primary cta-big">✓ REGISTRAR SÉRIE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== PERFIL ============== -->
+    <div class="frame">
+      <div class="frame-label">05 — Perfil</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">Perfil</div>
+            <div class="header-icon"></div>
+          </div>
+
+          <div class="content">
+            <div class="perfil-name">ARTHUR</div>
+            <div class="perfil-meta">24 anos · 1.80m</div>
+
+            <div class="perfil-divider"></div>
+
+            <div class="section-label">PESO ATUAL</div>
+            <div class="peso-value">96.4 kg</div>
+            <div class="peso-meta">registrado há 2 dias</div>
+
+            <button class="cta-primary">REGISTRAR PESO HOJE</button>
+
+            <div class="perfil-divider"></div>
+
+            <div class="section-label">HISTÓRICO</div>
+            <div class="historico-list">
+              <div class="historico-row"><span class="data">09/04</span><span class="peso">96.4 kg</span></div>
+              <div class="historico-row"><span class="data">02/04</span><span class="peso">96.8 kg</span></div>
+              <div class="historico-row"><span class="data">26/03</span><span class="peso">97.1 kg</span></div>
+              <div class="historico-row"><span class="data">19/03</span><span class="peso">97.4 kg</span></div>
+            </div>
+
+            <div class="perfil-divider"></div>
+
+            <div class="section-label">META DIÁRIA</div>
+            <div class="meta-info">
+              2.600 kcal<br>
+              200g P · 300g C · 75g F
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== HISTÓRICO / CALENDÁRIO ============== -->
+    <div class="frame">
+      <div class="frame-label">07 — Histórico</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">Histórico</div>
+            <div class="header-icon">⚙</div>
+          </div>
+
+          <div class="content">
+            <div class="cal-month">Abril 2026 ◀ ▶</div>
+            <div class="cal-weekdays">
+              <div class="cal-weekday">D</div>
+              <div class="cal-weekday">S</div>
+              <div class="cal-weekday">T</div>
+              <div class="cal-weekday">Q</div>
+              <div class="cal-weekday">Q</div>
+              <div class="cal-weekday">S</div>
+              <div class="cal-weekday">S</div>
+            </div>
+            <div class="cal-grid">
+              <div class="cal-day empty"></div>
+              <div class="cal-day empty"></div>
+              <div class="cal-day empty"></div>
+              <div class="cal-day full"><div class="cal-day-num">1</div><div class="cal-day-dots"><div class="cal-dot"></div><div class="cal-dot"></div></div></div>
+              <div class="cal-day full"><div class="cal-day-num">2</div><div class="cal-day-dots"><div class="cal-dot"></div><div class="cal-dot"></div></div></div>
+              <div class="cal-day partial"><div class="cal-day-num">3</div><div class="cal-day-dots"><div class="cal-dot"></div></div></div>
+              <div class="cal-day full"><div class="cal-day-num">4</div><div class="cal-day-dots"><div class="cal-dot"></div><div class="cal-dot"></div></div></div>
+
+              <div class="cal-day full"><div class="cal-day-num">5</div><div class="cal-day-dots"><div class="cal-dot"></div><div class="cal-dot"></div></div></div>
+              <div class="cal-day full"><div class="cal-day-num">6</div><div class="cal-day-dots"><div class="cal-dot"></div><div class="cal-dot"></div></div></div>
+              <div class="cal-day partial"><div class="cal-day-num">7</div><div class="cal-day-dots"><div class="cal-dot"></div></div></div>
+              <div class="cal-day full"><div class="cal-day-num">8</div><div class="cal-day-dots"><div class="cal-dot"></div><div class="cal-dot"></div></div></div>
+              <div class="cal-day partial"><div class="cal-day-num">9</div><div class="cal-day-dots"><div class="cal-dot"></div></div></div>
+              <div class="cal-day miss"><div class="cal-day-num">10</div></div>
+              <div class="cal-day today"><div class="cal-day-num">11</div><div class="cal-day-dots"><div class="cal-dot"></div></div></div>
+
+              <div class="cal-day"><div class="cal-day-num">12</div></div>
+              <div class="cal-day"><div class="cal-day-num">13</div></div>
+              <div class="cal-day"><div class="cal-day-num">14</div></div>
+              <div class="cal-day"><div class="cal-day-num">15</div></div>
+              <div class="cal-day"><div class="cal-day-num">16</div></div>
+              <div class="cal-day"><div class="cal-day-num">17</div></div>
+              <div class="cal-day"><div class="cal-day-num">18</div></div>
+
+              <div class="cal-day"><div class="cal-day-num">19</div></div>
+              <div class="cal-day"><div class="cal-day-num">20</div></div>
+              <div class="cal-day"><div class="cal-day-num">21</div></div>
+              <div class="cal-day"><div class="cal-day-num">22</div></div>
+              <div class="cal-day"><div class="cal-day-num">23</div></div>
+              <div class="cal-day"><div class="cal-day-num">24</div></div>
+              <div class="cal-day"><div class="cal-day-num">25</div></div>
+
+              <div class="cal-day"><div class="cal-day-num">26</div></div>
+              <div class="cal-day"><div class="cal-day-num">27</div></div>
+              <div class="cal-day"><div class="cal-day-num">28</div></div>
+              <div class="cal-day"><div class="cal-day-num">29</div></div>
+              <div class="cal-day"><div class="cal-day-num">30</div></div>
+              <div class="cal-day empty"></div>
+              <div class="cal-day empty"></div>
+            </div>
+
+            <div class="cal-summary">
+              <div class="cal-stat">
+                <div class="cal-stat-num">8/11</div>
+                <div class="cal-stat-label">Dias completos</div>
+              </div>
+              <div class="cal-stat">
+                <div class="cal-stat-num">73%</div>
+                <div class="cal-stat-label">Aderência</div>
+              </div>
+              <div class="cal-stat">
+                <div class="cal-stat-num">6</div>
+                <div class="cal-stat-label">Treinos feitos</div>
+              </div>
+              <div class="cal-stat">
+                <div class="cal-stat-num">−0,7</div>
+                <div class="cal-stat-label">kg no mês</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== LISTA DE TREINOS ============== -->
+    <div class="frame">
+      <div class="frame-label">08 — Treinos (lista)</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-left">
+              <div class="header-date">TER 11/04</div>
+              <div class="header-dot"></div>
+              <div class="header-tipo">PLANTÃO</div>
+            </div>
+            <div class="header-icon">⚙</div>
+          </div>
+
+          <div class="content">
+            <div class="section-label">ESCOLHE O TREINO DE HOJE</div>
+
+            <div class="treino-card last">
+              <div class="treino-card-top">
+                <div class="treino-letra">A</div>
+                <div class="treino-data">PRÓXIMO · seg 10/04</div>
+              </div>
+              <div class="treino-grupo">Upper · Peito / Ombro / Costas / Braço</div>
+              <div class="treino-exs">Supino halteres · Desenvolvimento · Remada serrote · Face pull</div>
+              <button class="treino-iniciar">▶ INICIAR TREINO A</button>
+            </div>
+
+            <div class="treino-card">
+              <div class="treino-card-top">
+                <div class="treino-letra">B</div>
+                <div class="treino-data">qua 09/04</div>
+              </div>
+              <div class="treino-grupo">Lower · Pernas / Glúteo / Core</div>
+              <div class="treino-exs">Agachamento goblet · Afundo · Stiff · Ponte glútea</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== MODAL: REGISTRAR PESO ============== -->
+    <div class="frame">
+      <div class="frame-label">09 — Registrar peso (sheet)</div>
+      <div class="phone">
+        <div class="page" style="filter: blur(1px); opacity: 0.4;">
+          <div class="header">
+            <div class="header-left">
+              <div class="header-date">TER 11/04</div>
+            </div>
+            <div class="header-icon">⚙</div>
+          </div>
+          <div class="content">
+            <div class="perfil-name">ARTHUR</div>
+            <div class="peso-display">
+              <div class="peso-value">96.4</div>
+              <div class="peso-meta">kg · há 2 dias</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-backdrop">
+          <div class="modal-sheet">
+            <div class="sheet-handle"></div>
+            <div class="sheet-title">Registrar peso</div>
+            <div class="sheet-meta">Terça 11 de abril · em jejum, melhor</div>
+
+            <div class="peso-input-row">
+              <div class="peso-input-num">96.2</div>
+              <div class="peso-input-unit">kg</div>
+            </div>
+
+            <div class="peso-stepper">
+              <button class="peso-step-btn">−0.5</button>
+              <button class="peso-step-btn">−0.1</button>
+              <button class="peso-step-btn">+0.1</button>
+              <button class="peso-step-btn">+0.5</button>
+            </div>
+
+            <button class="sheet-cta">✓ SALVAR</button>
+            <button class="sheet-cancel">CANCELAR</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== PROGRESSÃO DE CARGA ============== -->
+    <div class="frame">
+      <div class="frame-label">10 — Progressão de carga</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">Supino halteres</div>
+            <div class="header-icon">⚙</div>
+          </div>
+
+          <div class="content">
+            <div class="bloco-label">A1 · TREINO A</div>
+
+            <div class="pr-card">
+              <div class="pr-label">PR atual</div>
+              <div>
+                <span class="pr-value">12</span>
+                <span class="pr-reps">kg × 12 reps</span>
+              </div>
+              <div class="pr-delta">↑ +2 kg em 17 dias · próximo: 13 kg</div>
+            </div>
+
+            <div class="section-label">HISTÓRICO DE CARGA</div>
+
+            <div class="session-row">
+              <div class="session-date">11/04<br><span style="opacity:0.6;">hoje</span></div>
+              <div class="session-main">
+                <div class="session-load">12 kg</div>
+                <div class="session-reps">4 × 12 reps</div>
+              </div>
+              <div class="session-tag up">↑ +1</div>
+            </div>
+
+            <div class="session-row">
+              <div class="session-date">08/04</div>
+              <div class="session-main">
+                <div class="session-load">11 kg</div>
+                <div class="session-reps">4 × 12 reps</div>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="session-row">
+              <div class="session-date">04/04</div>
+              <div class="session-main">
+                <div class="session-load">11 kg</div>
+                <div class="session-reps">4 × 10 reps</div>
+              </div>
+              <div class="session-tag up">↑ +1</div>
+            </div>
+
+            <div class="session-row">
+              <div class="session-date">01/04</div>
+              <div class="session-main">
+                <div class="session-load">10 kg</div>
+                <div class="session-reps">4 × 12 reps</div>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="session-row">
+              <div class="session-date">28/03</div>
+              <div class="session-main">
+                <div class="session-load">10 kg</div>
+                <div class="session-reps">4 × 10 reps</div>
+              </div>
+              <div></div>
+            </div>
+
+            <div class="session-row">
+              <div class="session-date">25/03</div>
+              <div class="session-main">
+                <div class="session-load">10 kg</div>
+                <div class="session-reps">4 × 8 reps</div>
+              </div>
+              <div class="session-tag start">início</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== SWAP MODAL ============== -->
+    <div class="frame">
+      <div class="frame-label">06 — Swap modal</div>
+      <div class="phone">
+        <div class="page">
+          <div class="header">
+            <div class="header-back">←</div>
+            <div class="header-title">Buscar similar</div>
+            <div class="header-icon"></div>
+          </div>
+
+          <div class="content">
+            <div class="bloco-label">LANCHE DA TARDE</div>
+            <div class="exercicio-title">~440 kcal • 28g P</div>
+            <div class="exercicio-meta">Encontrei 4 opções compatíveis</div>
+
+            <div class="dieta-list">
+              <div class="opcao-card" style="background: var(--surface); border-width: 2px;">
+                <div class="opcao-header">
+                  <div class="opcao-name">Pão com ovo e queijo</div>
+                </div>
+                <div class="opcao-macros" style="font-size: var(--text-xs); color: var(--ink-3);">Café · Plantão</div>
+                <div class="opcao-macros">440 kcal • 23P 55C 16G</div>
+                <div class="macro-bar" style="margin-top: 8px;"><div class="macro-fill" style="width: 92%"></div></div>
+                <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                  <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); font-weight: 700;">MATCH</span>
+                  <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 900;">92%</span>
+                </div>
+              </div>
+
+              <div class="opcao-card" style="background: var(--surface);">
+                <div class="opcao-header">
+                  <div class="opcao-name">Panqueca de aveia</div>
+                </div>
+                <div class="opcao-macros" style="font-size: var(--text-xs); color: var(--ink-3);">Pré-treino · Folga</div>
+                <div class="opcao-macros">342 kcal • 17P 44C 12G</div>
+                <div class="macro-bar" style="margin-top: 8px;"><div class="macro-fill" style="width: 88%"></div></div>
+                <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                  <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); font-weight: 700;">MATCH</span>
+                  <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 900;">88%</span>
+                </div>
+              </div>
+
+              <div class="opcao-card" style="background: var(--surface);">
+                <div class="opcao-header">
+                  <div class="opcao-name">Shake whey + banana</div>
+                </div>
+                <div class="opcao-macros" style="font-size: var(--text-xs); color: var(--ink-3);">Café · Plantão</div>
+                <div class="opcao-macros">450 kcal • 39P 65C 4G</div>
+                <div class="macro-bar" style="margin-top: 8px;"><div class="macro-fill" style="width: 85%"></div></div>
+                <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                  <span style="font-family: var(--font-mono); font-size: 11px; color: var(--ink-3); font-weight: 700;">MATCH</span>
+                  <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 900;">85%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

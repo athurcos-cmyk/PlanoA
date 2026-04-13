@@ -1,14 +1,83 @@
+import { getMacrosPor100gDoItem } from '../data/alimentos'
 import type { Alimento, ItemOpcao, CategoriaAlimento } from '../data/tipos'
+
+function calcularMacrosItemOriginal(item: ItemOpcao) {
+  const fator = item.gramasPlano / 100
+  const macrosBase = getMacrosPor100gDoItem(item)
+  return {
+    kcal: macrosBase.kcal * fator,
+    p: macrosBase.p * fator,
+    c: macrosBase.c * fator,
+    g: macrosBase.g * fator,
+  }
+}
+
+function calcularMacrosAlimento(alimento: Alimento, gramas: number) {
+  const fator = gramas / 100
+  return {
+    kcal: alimento.kcal * fator,
+    p: alimento.p * fator,
+    c: alimento.c * fator,
+    g: alimento.g * fator,
+  }
+}
+
+export function calcularScoreSubstituicao(
+  itemOriginal: ItemOpcao,
+  substituto: Alimento,
+  gramas: number,
+  macroPrincipal: 'p' | 'c' | 'g'
+): number {
+  const alvo = calcularMacrosItemOriginal(itemOriginal)
+  const atual = calcularMacrosAlimento(substituto, gramas)
+  const erroRelativo = (a: number, b: number) => {
+    if (a <= 0.01) return Math.abs(b - a) <= 0.01 ? 0 : 1
+    return Math.abs(a - b) / a
+  }
+
+  const pesos = {
+    kcal: 0.2,
+    p: macroPrincipal === 'p' ? 0.45 : 0.2,
+    c: macroPrincipal === 'c' ? 0.45 : 0.2,
+    g: macroPrincipal === 'g' ? 0.45 : 0.2,
+  }
+
+  const erro =
+    pesos.kcal * erroRelativo(alvo.kcal, atual.kcal) +
+    pesos.p * erroRelativo(alvo.p, atual.p) +
+    pesos.c * erroRelativo(alvo.c, atual.c) +
+    pesos.g * erroRelativo(alvo.g, atual.g)
+
+  return Math.max(0, Math.round((1 - erro) * 100))
+}
 
 export function calcularGramasSubstituto(
   itemOriginal: ItemOpcao,
   substituto: Alimento,
   macroPrincipal: 'p' | 'c' | 'g'
 ): number {
-  const macroOriginal = itemOriginal.macrosPor100g[macroPrincipal]
+  const macrosBase = getMacrosPor100gDoItem(itemOriginal)
+  const macroOriginalTotal = (macrosBase[macroPrincipal] * itemOriginal.gramasPlano) / 100
   const macroSub = substituto[macroPrincipal]
+
   if (macroSub === 0) return 0
-  return Math.round(itemOriginal.gramasPlano * (macroOriginal / macroSub))
+
+  const estimativaInicial = Math.max(1, Math.round((macroOriginalTotal / macroSub) * 100))
+  const minimo = Math.max(1, Math.round(estimativaInicial * 0.4))
+  const maximo = Math.min(600, Math.max(80, Math.round(estimativaInicial * 1.8)))
+
+  let melhorGramas = estimativaInicial
+  let melhorScore = -1
+
+  for (let gramas = minimo; gramas <= maximo; gramas += 5) {
+    const score = calcularScoreSubstituicao(itemOriginal, substituto, gramas, macroPrincipal)
+    if (score > melhorScore) {
+      melhorScore = score
+      melhorGramas = gramas
+    }
+  }
+
+  return melhorGramas
 }
 
 export function getCategoriaSwap(categoria: CategoriaAlimento): 'p' | 'c' | 'g' {

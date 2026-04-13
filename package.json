@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "check:dieta": "node scripts/check-dieta-data.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

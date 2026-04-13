@@ -1,5 +1,6 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { useLiveQuery } from 'dexie-react-hooks'
 import { ArrowLeft, RefreshCw } from 'lucide-react'
 import type {
   ItemOpcao,
@@ -8,12 +9,19 @@ import type {
   SlotRefeicao,
   Alimento,
   CategoriaAlimento,
+  SubstituicaoPadrao,
 } from '../../data/tipos'
+import { getAlimentoPorId } from '../../data/alimentos'
 import { DIETA_FOLGA } from '../../data/dieta-folga'
 import { DIETA_PLANTAO } from '../../data/dieta-plantao'
 import { useDiaStore } from '../../stores/useDiaStore'
 import { calcularMacrosOpcao } from '../../utils/macros'
-import { registrarRefeicao } from '../../db/queries'
+import {
+  desativarSubstituicao,
+  getSubstituicoesAtivas,
+  registrarRefeicao,
+  salvarSubstituicao,
+} from '../../db/queries'
 import { hoje } from '../../utils/datas'
 import { cn } from '../../utils/cn'
 import { ItemChecklist } from '../../components/dieta/ItemChecklist'
@@ -57,6 +65,38 @@ function inferCategoria(item: ItemOpcao): CategoriaAlimento {
   return 'carboidrato'
 }
 
+function criarRegistradosComSubstituicoes(
+  opcaoAtual: OpcaoRefeicao | null,
+  substituicoes: SubstituicaoPadrao[]
+): ItemRegistrado[] {
+  if (!opcaoAtual) return []
+
+  const substituicoesPorItem = new Map(
+    substituicoes.map((substituicao) => [substituicao.itemOriginalId, substituicao])
+  )
+
+  return opcaoAtual.itens.map((item) => {
+    const substituicao = substituicoesPorItem.get(item.id)
+    const substituto = substituicao
+      ? getAlimentoPorId(substituicao.itemSubstitutoId)
+      : undefined
+
+    if (!substituicao || !substituto) {
+      return {
+        itemId: item.id,
+        gramasReais: item.gramasPlano,
+      }
+    }
+
+    return {
+      itemId: item.id,
+      gramasReais: substituicao.gramasSubstituto,
+      substitutoId: substituto.id,
+      substitutoNome: substituto.nome,
+    }
+  })
+}
+
 export function OpcaoDetalhePage() {
   const { slotId, opcaoId } = useParams<{ slotId: string; opcaoId: string }>()
   const navigate = useNavigate()
@@ -76,15 +116,31 @@ export function OpcaoDetalhePage() {
 
   const slot = found?.slot || null
   const opcao = swappedOpcao?.opcao || found?.opcao || null
+  const substituicoesAtivas =
+    useLiveQuery(
+      () =>
+        slot
+          ? getSubstituicoesAtivas(slot.id)
+          : Promise.resolve<SubstituicaoPadrao[]>([]),
+      [slot?.id]
+    ) || []
+  const substituicoesAtivasMap = useMemo(
+    () => new Map(substituicoesAtivas.map((substituicao) => [substituicao.itemOriginalId, substituicao])),
+    [substituicoesAtivas]
+  )
+  const itensComPadraoAtivo = useMemo(
+    () => new Set(substituicoesAtivas.map((substituicao) => substituicao.itemOriginalId)),
+    [substituicoesAtivas]
+  )
+
+  const criarRegistrados = useCallback(
+    (opcaoAtual: OpcaoRefeicao | null) =>
+      criarRegistradosComSubstituicoes(opcaoAtual, substituicoesAtivas),
+    [substituicoesAtivas]
+  )
 
   // Initialize registrados from option items
-  const [registrados, setRegistrados] = useState<ItemRegistrado[]>(() => {
-    if (!opcao) return []
-    return opcao.itens.map((item) => ({
-      itemId: item.id,
-      gramasReais: item.gramasPlano,
-    }))
-  })
+  const [registrados, setRegistrados] = useState<ItemRegistrado[]>(() => criarRegistrados(opcao))
 
   // Swap modal states
   const [showSwapModal, setShowSwapModal] = useState(false)
@@ -105,15 +161,10 @@ export function OpcaoDetalhePage() {
   const handleSwapOpcao = useCallback(
     (novaOpcao: OpcaoRefeicao, fromSlot: string, fromDieta: string) => {
       setSwappedOpcao({ opcao: novaOpcao, fromSlot, fromDieta })
-      setRegistrados(
-        novaOpcao.itens.map((item) => ({
-          itemId: item.id,
-          gramasReais: item.gramasPlano,
-        }))
-      )
+      setRegistrados(criarRegistrados(novaOpcao))
       setShowSwapModal(false)
     },
-    []
+    [criarRegistrados]
   )
 
   // Handle ingredient swap result
@@ -131,6 +182,58 @@ export function OpcaoDetalhePage() {
     },
     [swapIngredienteItem]
   )
+
+  const handleSalvarSubstituicaoPadrao = useCallback(
+    async (substituto: Alimento, gramas: number) => {
+      if (!slot || !swapIngredienteItem) return
+
+      await salvarSubstituicao({
+        slotRefeicaoId: slot.id,
+        itemOriginalId: swapIngredienteItem.id,
+        itemSubstitutoId: substituto.id,
+        gramasSubstituto: gramas,
+        ativa: true,
+        criadaEm: hoje(),
+      })
+
+      handleSwapIngrediente(substituto, gramas)
+    },
+    [handleSwapIngrediente, slot, swapIngredienteItem]
+  )
+
+  const handleRestaurarItemOriginal = useCallback(
+    async (item: ItemOpcao) => {
+      const substituicaoAtiva = substituicoesAtivasMap.get(item.id)
+
+      if (substituicaoAtiva?.id) {
+        await desativarSubstituicao(substituicaoAtiva.id)
+      }
+
+      setRegistrados((prev) =>
+        prev.map((registrado) =>
+          registrado.itemId === item.id
+            ? {
+                itemId: item.id,
+                gramasReais: item.gramasPlano,
+                substitutoId: undefined,
+                substitutoNome: undefined,
+              }
+            : registrado
+        )
+      )
+    },
+    [substituicoesAtivasMap]
+  )
+
+  useEffect(() => {
+    setSwappedOpcao(null)
+  }, [tipoDia, slotId, opcaoId])
+
+  useEffect(() => {
+    if (!swappedOpcao) {
+      setRegistrados(criarRegistrados(found?.opcao ?? null))
+    }
+  }, [found?.opcao, swappedOpcao, criarRegistrados])
 
   async function handleRegistrar() {
     if (!slot || !opcao) return
@@ -223,8 +326,10 @@ export function OpcaoDetalhePage() {
         <ItemChecklist
           itens={opcao.itens}
           registrados={registrados}
+          itensComPadraoAtivo={itensComPadraoAtivo}
           onChange={setRegistrados}
           onTapNome={(item) => setSwapIngredienteItem(item)}
+          onRestoreOriginal={handleRestaurarItemOriginal}
         />
       </div>
 
@@ -243,6 +348,8 @@ export function OpcaoDetalhePage() {
       {showSwapModal && slot && (
         <SwapModal
           slotAtual={slot}
+          opcaoAtual={opcao}
+          dietaAtual={tipoDia}
           onSelect={handleSwapOpcao}
           onClose={() => setShowSwapModal(false)}
         />
@@ -254,6 +361,7 @@ export function OpcaoDetalhePage() {
           item={swapIngredienteItem}
           categoriaItem={inferCategoria(swapIngredienteItem)}
           onSelect={handleSwapIngrediente}
+          onSalvarPadrao={handleSalvarSubstituicaoPadrao}
           onClose={() => setSwapIngredienteItem(null)}
         />
       )}

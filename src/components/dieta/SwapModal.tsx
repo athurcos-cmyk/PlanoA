@@ -9,30 +9,62 @@ import { cn } from '../../utils/cn'
 
 interface Props {
   slotAtual: SlotRefeicao
+  opcaoAtual: OpcaoRefeicao
+  dietaAtual: 'folga' | 'plantao'
   onSelect: (opcao: OpcaoRefeicao, fromSlot: string, fromDieta: string) => void
   onClose: () => void
 }
 
 function getAllOptions() {
-  const result: { opcao: OpcaoRefeicao; slotId: string; dieta: string }[] = []
+  const result: {
+    opcao: OpcaoRefeicao
+    slotId: string
+    slotNome: string
+    dieta: string
+    horario: string
+  }[] = []
   for (const slot of DIETA_FOLGA.slots) {
     for (const opcao of slot.opcoes) {
-      result.push({ opcao, slotId: slot.id, dieta: 'folga' })
+      result.push({
+        opcao,
+        slotId: slot.id,
+        slotNome: slot.nome,
+        dieta: 'folga',
+        horario: slot.horario,
+      })
     }
   }
   for (const slot of DIETA_PLANTAO.slots) {
     for (const opcao of slot.opcoes) {
-      result.push({ opcao, slotId: slot.id, dieta: 'plantao' })
+      result.push({
+        opcao,
+        slotId: slot.id,
+        slotNome: slot.nome,
+        dieta: 'plantao',
+        horario: slot.horario,
+      })
     }
   }
   return result
 }
 
-export function SwapModal({ slotAtual, onSelect, onClose }: Props) {
+function formatSigned(value: number): string {
+  if (value === 0) return '0'
+  return value > 0 ? `+${value}` : `${value}`
+}
+
+function deltaTone(absDiff: number, close: number, medium: number): string {
+  if (absDiff <= close) return 'border-green/30 bg-green/10 text-green'
+  if (absDiff <= medium) return 'border-yellow-500/30 bg-yellow-500/10 text-yellow-300'
+  return 'border-accent/30 bg-accent-soft text-accent'
+}
+
+export function SwapModal({ slotAtual, opcaoAtual, dietaAtual, onSelect, onClose }: Props) {
+  const macrosOpcaoAtual = useMemo(() => calcularMacrosOpcao(opcaoAtual.itens), [opcaoAtual])
   const similares = useMemo(() => {
     const todas = getAllOptions()
-    return findSimilarOptions(slotAtual, todas)
-  }, [slotAtual])
+    return findSimilarOptions(slotAtual, opcaoAtual, dietaAtual, todas)
+  }, [slotAtual, opcaoAtual, dietaAtual])
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60" onClick={onClose}>
@@ -53,7 +85,10 @@ export function SwapModal({ slotAtual, onSelect, onClose }: Props) {
         </div>
 
         <p className="px-4 pt-3 pb-2 text-xs text-ink-3">
-          Opcoes com macros similares a {slotAtual.nome} ({slotAtual.macrosAlvo.kcal} kcal)
+          Trocas proximas para {opcaoAtual.nome} em {slotAtual.nome}
+        </p>
+        <p className="px-4 pb-3 text-[11px] text-ink-3">
+          Ranking compara com a opcao atual. Mesmo slot e mesma dieta recebem prioridade.
         </p>
 
         {/* List */}
@@ -64,14 +99,19 @@ export function SwapModal({ slotAtual, onSelect, onClose }: Props) {
             </p>
           )}
 
-          {similares.map(({ opcao, slotId, dieta, score }) => {
+          {similares.map(({ opcao, slotId, slotNome, dieta, horario, score }) => {
             const macros = calcularMacrosOpcao(opcao.itens)
+            const deltaKcal = Math.round(macros.kcal - macrosOpcaoAtual.kcal)
+            const deltaP = Math.round(macros.p - macrosOpcaoAtual.p)
+            const deltaC = Math.round(macros.c - macrosOpcaoAtual.c)
+            const deltaG = Math.round(macros.g - macrosOpcaoAtual.g)
+
             return (
               <button
                 key={`${dieta}-${opcao.id}`}
                 type="button"
                 onClick={() => onSelect(opcao, slotId, dieta)}
-                className="flex w-full items-center gap-3 rounded py-3 px-2 text-left transition-colors active:bg-surface-2"
+                className="flex w-full items-start gap-3 rounded py-3 px-2 text-left transition-colors active:bg-surface-2"
               >
                 {/* Score badge */}
                 <div
@@ -100,8 +140,44 @@ export function SwapModal({ slotAtual, onSelect, onClose }: Props) {
                     <span className="font-[family-name:var(--font-mono)]">{macros.g.toFixed(0)}</span>g
                   </p>
                   <p className="text-[10px] text-ink-3 mt-0.5">
+                    {slotId === slotAtual.id ? 'Mesmo slot' : `${slotNome} ${horario}`}
+                    {' / '}
                     {dieta === 'folga' ? 'Folga' : 'Plantao'}
                   </p>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    <span
+                      className={cn(
+                        'rounded border px-1.5 py-0.5 text-[10px] font-[family-name:var(--font-mono)]',
+                        deltaTone(Math.abs(deltaKcal), 25, 60)
+                      )}
+                    >
+                      K {formatSigned(deltaKcal)}
+                    </span>
+                    <span
+                      className={cn(
+                        'rounded border px-1.5 py-0.5 text-[10px] font-[family-name:var(--font-mono)]',
+                        deltaTone(Math.abs(deltaP), 4, 9)
+                      )}
+                    >
+                      P {formatSigned(deltaP)}
+                    </span>
+                    <span
+                      className={cn(
+                        'rounded border px-1.5 py-0.5 text-[10px] font-[family-name:var(--font-mono)]',
+                        deltaTone(Math.abs(deltaC), 6, 14)
+                      )}
+                    >
+                      C {formatSigned(deltaC)}
+                    </span>
+                    <span
+                      className={cn(
+                        'rounded border px-1.5 py-0.5 text-[10px] font-[family-name:var(--font-mono)]',
+                        deltaTone(Math.abs(deltaG), 3, 7)
+                      )}
+                    >
+                      G {formatSigned(deltaG)}
+                    </span>
+                  </div>
                 </div>
               </button>
             )

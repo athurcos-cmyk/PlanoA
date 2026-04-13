@@ -37,7 +37,7 @@ export interface OpcaoRefeicao {
   id: string
   nome: string
   itens: ItemOpcao[]
-  categoria: string
+  categoria: 'cafe' | 'lanche' | 'prato-principal' | 'shake'
 }
 
 export interface SlotRefeicao {
