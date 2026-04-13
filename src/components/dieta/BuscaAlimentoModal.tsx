@@ -43,7 +43,7 @@ export function BuscaAlimentoModal({ onSelect, onClose, titulo = 'Buscar aliment
   }, [])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60" onClick={onClose}>
+    <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60" onClick={onClose}>
       <div
         className="flex w-full max-w-lg flex-col rounded-t-lg bg-surface max-h-[85vh]"
         onClick={(e) => e.stopPropagation()}

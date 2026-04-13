@@ -5,9 +5,10 @@ interface BlocoTreinoProps {
   bloco: BlocoTreinoType
   seriesFeitas: SerieFeita[]
   onRegistrarSerie: (serie: SerieFeita) => void
+  onRemoverSerie: (exercicioId: string, serieNum: number) => void
 }
 
-export function BlocoTreino({ bloco, seriesFeitas, onRegistrarSerie }: BlocoTreinoProps) {
+export function BlocoTreino({ bloco, seriesFeitas, onRegistrarSerie, onRemoverSerie }: BlocoTreinoProps) {
   const temBiset = bloco.exercicios.some((e) => e.bisetCom)
 
   return (
@@ -29,6 +30,7 @@ export function BlocoTreino({ bloco, seriesFeitas, onRegistrarSerie }: BlocoTrei
             exercicio={exercicio}
             seriesFeitas={seriesFeitas.filter((s) => s.exercicioId === exercicio.id)}
             onRegistrarSerie={onRegistrarSerie}
+            onRemoverSerie={onRemoverSerie}
           />
         ))}
       </div>

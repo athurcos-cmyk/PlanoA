@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import type { Exercicio, SerieFeita } from '../../data/tipos'
 
 interface SerieInputProps {
@@ -21,7 +21,14 @@ export function SerieInput({
 
   const [reps, setReps] = useState(defaultReps)
   const [carga, setCarga] = useState(defaultCarga)
+  const [editandoCarga, setEditandoCarga] = useState(false)
+  const [cargaText, setCargaText] = useState(String(defaultCarga))
+  const cargaInputRef = useRef<HTMLInputElement>(null)
   const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    if (editandoCarga) cargaInputRef.current?.select()
+  }, [editandoCarga])
 
   const handleSubmit = () => {
     onSubmit({
@@ -119,9 +126,31 @@ export function SerieInput({
             >
               -.5
             </button>
-            <span className="text-3xl font-bold font-[family-name:var(--font-mono)] text-ink w-24 text-center">
-              {carga}
-            </span>
+            {editandoCarga ? (
+              <input
+                ref={cargaInputRef}
+                type="number"
+                inputMode="decimal"
+                value={cargaText}
+                onChange={(e) => setCargaText(e.target.value)}
+                onBlur={() => {
+                  const val = parseFloat(cargaText)
+                  if (!isNaN(val) && val >= 0) setCarga(+(val.toFixed(1)))
+                  else setCargaText(String(carga))
+                  setEditandoCarga(false)
+                }}
+                onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur() }}
+                className="w-24 text-3xl font-bold font-[family-name:var(--font-mono)] text-ink text-center bg-surface-3 rounded-lg outline-none border-2 border-accent"
+              />
+            ) : (
+              <button
+                type="button"
+                onClick={() => { setCargaText(String(carga)); setEditandoCarga(true) }}
+                className="text-3xl font-bold font-[family-name:var(--font-mono)] text-ink w-24 text-center rounded-lg active:bg-surface-3 transition-colors"
+              >
+                {carga}
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setCarga((c) => +(c + 0.5).toFixed(1))}

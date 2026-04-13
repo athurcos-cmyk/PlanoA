@@ -9,14 +9,17 @@ interface ExercicioCardProps {
   exercicio: Exercicio
   seriesFeitas: SerieFeita[]
   onRegistrarSerie: (serie: SerieFeita) => void
+  onRemoverSerie: (exercicioId: string, serieNum: number) => void
 }
 
 export function ExercicioCard({
   exercicio,
   seriesFeitas,
   onRegistrarSerie,
+  onRemoverSerie,
 }: ExercicioCardProps) {
   const [inputAberto, setInputAberto] = useState<number | null>(null)
+  const [descAberta, setDescAberta] = useState(false)
 
   const seriesFeitasDoExercicio = seriesFeitas.filter(
     (s) => s.exercicioId === exercicio.id
@@ -48,16 +51,30 @@ export function ExercicioCard({
               )}
             </p>
           </div>
-          <Link
-            to={`/treino/exercicio/${exercicio.id}`}
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-3 active:text-ink transition-colors"
-          >
-            <BarChart3 size={18} />
-          </Link>
+          <div className="flex items-center">
+            {exercicio.nota && (
+              <button
+                type="button"
+                onClick={() => setDescAberta((v) => !v)}
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-3 active:text-ink transition-colors text-xs font-bold"
+                title="Ver descrição"
+              >
+                ?
+              </button>
+            )}
+            <Link
+              to={`/treino/exercicio/${exercicio.id}`}
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-3 active:text-ink transition-colors"
+            >
+              <BarChart3 size={18} />
+            </Link>
+          </div>
         </div>
 
-        {exercicio.nota && (
-          <p className="text-xs text-ink-3 italic mb-2">{exercicio.nota}</p>
+        {exercicio.nota && descAberta && (
+          <p className="text-xs text-ink-2 bg-surface-3 rounded px-2 py-1.5 mb-2">
+            {exercicio.nota}
+          </p>
         )}
 
         {/* Series badges */}
@@ -70,12 +87,16 @@ export function ExercicioCard({
                 key={num}
                 type="button"
                 onClick={() => {
-                  if (!feita) setInputAberto(num)
+                  if (feita) {
+                    onRemoverSerie(exercicio.id, num)
+                  } else {
+                    setInputAberto(num)
+                  }
                 }}
                 className={cn(
                   'min-h-[44px] min-w-[44px] rounded-lg flex flex-col items-center justify-center text-xs transition-colors',
                   feita
-                    ? 'bg-green/20 text-green border border-green/30'
+                    ? 'bg-green/20 text-green border border-green/30 active:bg-red-900/20 active:border-red-500/30 active:text-red-400'
                     : num === proximaSerie
                       ? 'bg-accent-soft text-accent border border-accent/30 active:bg-accent/20'
                       : 'bg-surface-3 text-ink-3 border border-border-soft'

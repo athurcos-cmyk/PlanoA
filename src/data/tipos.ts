@@ -29,6 +29,7 @@ export interface ItemOpcao {
   nome: string
   gramasPlano: number
   unidade: 'g' | 'ml' | 'un'
+  unidadeNome?: string   // ex: "ovo", "banana", "fatia" — exibido em vez de gramas
   macrosPor100g: Macros
 }
 

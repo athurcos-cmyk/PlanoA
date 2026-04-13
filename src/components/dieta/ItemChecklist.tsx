@@ -114,7 +114,9 @@ export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props
                     : 'border border-border-soft text-ink-2 bg-surface-2'
                 )}
               >
-                {gramas}{item.unidade}
+                {item.unidade === 'un' && item.unidadeNome
+                  ? `${+(gramas / item.gramasPlano).toFixed(1)} ${item.unidadeNome}`
+                  : `${gramas}${item.unidade}`}
               </button>
             </div>
 
@@ -129,7 +131,9 @@ export function ItemChecklist({ itens, registrados, onChange, onTapNome }: Props
                 <StepButton onClick={() => adjustGrams(item, -10)} label="-10" />
                 <StepButton onClick={() => adjustGrams(item, -5)} label="-5" />
                 <span className="w-16 text-center text-sm font-[family-name:var(--font-mono)] text-ink">
-                  {gramas}{item.unidade}
+                  {item.unidade === 'un' && item.unidadeNome
+                    ? `${+(gramas / item.gramasPlano).toFixed(1)} ${item.unidadeNome}`
+                    : `${gramas}${item.unidade}`}
                 </span>
                 <StepButton onClick={() => adjustGrams(item, 5)} label="+5" />
                 <StepButton onClick={() => adjustGrams(item, 10)} label="+10" />

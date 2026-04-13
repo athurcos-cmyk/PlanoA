@@ -57,7 +57,7 @@ export function SwapModal({ slotAtual, onSelect, onClose }: Props) {
         </p>
 
         {/* List */}
-        <div className="max-h-[60vh] overflow-y-auto px-4">
+        <div className="max-h-[60vh] overflow-y-auto overscroll-contain px-4">
           {similares.length === 0 && (
             <p className="py-8 text-center text-sm text-ink-3">
               Nenhuma opcao compativel encontrada

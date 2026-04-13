@@ -25,30 +25,17 @@ export function findSimilarOptions(
   slotAtual: SlotRefeicao,
   todasOpcoes: { opcao: OpcaoRefeicao; slotId: string; dieta: string }[]
 ): OpcaoComScore[] {
-  const alvo = slotAtual.macrosAlvo
-  const kcalMin = alvo.kcal * 0.85
-  const kcalMax = alvo.kcal * 1.15
-  const pMin = alvo.p * 0.80
-  const pMax = alvo.p * 1.20
-
   // Exclude options already in the current slot
   const opcaoIdsAtuais = new Set(slotAtual.opcoes.map((o) => o.id))
+  const alvo = slotAtual.macrosAlvo
 
   return todasOpcoes
-    .filter((item) => {
-      if (opcaoIdsAtuais.has(item.opcao.id)) return false
-      const macros = calcularMacrosOpcao(item.opcao.itens)
-      return (
-        macros.kcal >= kcalMin &&
-        macros.kcal <= kcalMax &&
-        macros.p >= pMin &&
-        macros.p <= pMax
-      )
-    })
+    .filter((item) => !opcaoIdsAtuais.has(item.opcao.id))
     .map((item) => {
       const macros = calcularMacrosOpcao(item.opcao.itens)
       return { ...item, score: calcularScore(alvo, macros) }
     })
+    .filter((item) => item.score >= 35)   // remove opções completamente incompatíveis
     .sort((a, b) => b.score - a.score)
-    .slice(0, 5)
+    .slice(0, 10)
 }

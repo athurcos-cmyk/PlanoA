@@ -20,6 +20,7 @@ export function TreinoAtivoPage() {
     treinoAtivo,
     seriesFeitas,
     registrarSerie,
+    removerSerie,
     finalizarTreino: finalizarStore,
   } = useTreinoStore()
   const [confirmFinalizar, setConfirmFinalizar] = useState(false)
@@ -126,6 +127,7 @@ export function TreinoAtivoPage() {
             bloco={bloco}
             seriesFeitas={seriesFeitas}
             onRegistrarSerie={handleRegistrarSerie}
+            onRemoverSerie={removerSerie}
           />
         ))}
 

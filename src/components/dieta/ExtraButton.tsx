@@ -62,7 +62,7 @@ export function ExtraButton() {
 
       {/* Choice modal */}
       {mode === 'choice' && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60" onClick={reset}>
+        <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60" onClick={reset}>
           <div
             className="w-full max-w-lg rounded-t-lg bg-surface p-4 pb-8"
             onClick={(e) => e.stopPropagation()}
@@ -112,7 +112,7 @@ export function ExtraButton() {
 
       {/* Gram stepper */}
       {mode === 'grams' && selectedAlimento && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60" onClick={reset}>
+        <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/60" onClick={reset}>
           <div
             className="w-full max-w-lg rounded-t-lg bg-surface p-4 pb-8"
             onClick={(e) => e.stopPropagation()}
