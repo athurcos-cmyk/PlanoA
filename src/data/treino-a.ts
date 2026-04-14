@@ -44,12 +44,11 @@ export const TREINO_A: Treino = {
           descansoSegundos: 75,
         },
         {
-          id: 'remada-curvada',
-          nome: 'Remada curvada com barra',
+          id: 'puxada-alta-elastico',
+          nome: 'Puxada alta com elastico',
           series: 3,
-          repsAlvo: '10-15',
-          cargaKg: 22,
-          nota: 'Tronco firme e costas retas, sem roubar com a lombar.',
+          repsAlvo: '12-20',
+          nota: 'Prender alto. Puxar para a parte alta do peito com cotovelos descendo. Se nao tiver onde prender, fazer remada com elastico sentado preso nos pes.',
           descansoSegundos: 75,
         },
         {
