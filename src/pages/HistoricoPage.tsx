@@ -83,6 +83,7 @@ export function HistoricoPage() {
 
   const calendarDays = eachDayOfInterval({ start: calStart, end: calEnd })
   const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+  const currentMonthTime = currentMonth.getTime()
 
   const selectedStr = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : null
   const selectedData = selectedStr ? dataMap[selectedStr] : null
@@ -90,9 +91,14 @@ export function HistoricoPage() {
   // Stats: streak and adherence
   const stats = useMemo(() => {
     if (!refeicoes) return { streak: 0, adherence: 0 }
+    const currentMonthDate = new Date(currentMonthTime)
+    const monthStartDate = startOfMonth(currentMonthDate)
+    const monthEndDate = endOfMonth(currentMonthDate)
     const daysWithMeals = new Set((refeicoes ?? []).map((r) => r.data))
-    const totalDays = eachDayOfInterval({ start: monthStart, end: new Date() > monthEnd ? monthEnd : new Date() })
-      .filter((d) => isSameMonth(d, currentMonth))
+    const totalDays = eachDayOfInterval({
+      start: monthStartDate,
+      end: new Date() > monthEndDate ? monthEndDate : new Date(),
+    }).filter((d) => isSameMonth(d, currentMonthDate))
     const adherence = totalDays.length > 0
       ? Math.round((totalDays.filter((d) => daysWithMeals.has(format(d, 'yyyy-MM-dd'))).length / totalDays.length) * 100)
       : 0
@@ -111,7 +117,7 @@ export function HistoricoPage() {
       }
     }
     return { streak, adherence }
-  }, [refeicoes, dataMap, currentMonth, monthStart, monthEnd])
+  }, [refeicoes, dataMap, currentMonthTime])
 
   return (
     <div className="p-4 flex flex-col gap-4">

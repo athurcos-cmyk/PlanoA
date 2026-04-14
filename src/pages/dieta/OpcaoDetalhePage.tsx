@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { ArrowLeft, RefreshCw } from 'lucide-react'
@@ -77,28 +77,79 @@ export function OpcaoDetalhePage() {
   const navigate = useNavigate()
   const tipoDia = useDiaStore((s) => s.tipoDia)
 
-  // Allow swap to override the option being viewed
-  const [swappedOpcao, setSwappedOpcao] = useState<{
-    opcao: OpcaoRefeicao
-    fromSlot: string
-    fromDieta: string
-  } | null>(null)
-
   const found = useMemo(
     () => findSlotAndOpcao(tipoDia, slotId || '', opcaoId || ''),
     [tipoDia, slotId, opcaoId]
   )
 
   const slot = found?.slot || null
-  const opcao = swappedOpcao?.opcao || found?.opcao || null
-  const substituicoesAtivas =
-    useLiveQuery(
-      () =>
-        slot
-          ? getSubstituicoesAtivas(slot.id)
-          : Promise.resolve<SubstituicaoPadrao[]>([]),
-      [slot?.id]
-    ) || []
+  const substituicoesAtivasResult = useLiveQuery(
+    () =>
+      slot
+        ? getSubstituicoesAtivas(slot.id)
+        : Promise.resolve<SubstituicaoPadrao[]>([]),
+    [slot?.id]
+  )
+  const substituicoesAtivas = useMemo(
+    () => substituicoesAtivasResult ?? [],
+    [substituicoesAtivasResult]
+  )
+
+  if (!slot || !found?.opcao) {
+    return (
+      <div className="p-4">
+        <p className="text-ink-2">Opcao nao encontrada</p>
+        <button
+          type="button"
+          onClick={() => navigate('/dieta')}
+          className="mt-2 text-sm text-accent"
+        >
+          Voltar
+        </button>
+      </div>
+    )
+  }
+
+  const substituicoesKey = substituicoesAtivas
+    .map((substituicao) => `${substituicao.itemOriginalId}:${substituicao.itemSubstitutoId}:${substituicao.gramasSubstituto}`)
+    .sort()
+    .join('|')
+  const pageKey = `${tipoDia}:${slot.id}:${found.opcao.id}:${substituicoesKey}`
+
+  return (
+    <OpcaoDetalheContent
+      key={pageKey}
+      navigate={navigate}
+      tipoDia={tipoDia}
+      slot={slot}
+      opcaoBase={found.opcao}
+      substituicoesAtivas={substituicoesAtivas}
+    />
+  )
+}
+
+function OpcaoDetalheContent({
+  navigate,
+  tipoDia,
+  slot,
+  opcaoBase,
+  substituicoesAtivas,
+}: {
+  navigate: ReturnType<typeof useNavigate>
+  tipoDia: 'folga' | 'plantao'
+  slot: SlotRefeicao
+  opcaoBase: OpcaoRefeicao
+  substituicoesAtivas: SubstituicaoPadrao[]
+}) {
+  const [swappedOpcao, setSwappedOpcao] = useState<{
+    opcao: OpcaoRefeicao
+    fromSlot: string
+    fromDieta: string
+  } | null>(null)
+  const [showSwapModal, setShowSwapModal] = useState(false)
+  const [swapIngredienteItem, setSwapIngredienteItem] = useState<ItemOpcao | null>(null)
+
+  const opcao = swappedOpcao?.opcao || opcaoBase
   const substituicoesAtivasMap = useMemo(
     () => new Map(substituicoesAtivas.map((substituicao) => [substituicao.itemOriginalId, substituicao])),
     [substituicoesAtivas]
@@ -107,32 +158,22 @@ export function OpcaoDetalhePage() {
     () => new Set(substituicoesAtivas.map((substituicao) => substituicao.itemOriginalId)),
     [substituicoesAtivas]
   )
-
   const criarRegistrados = useCallback(
     (opcaoAtual: OpcaoRefeicao | null) =>
       criarRegistradosComSubstituicoes(opcaoAtual, substituicoesAtivas),
     [substituicoesAtivas]
   )
+  const [registrados, setRegistrados] = useState<ItemRegistrado[]>(() => criarRegistrados(opcaoBase))
 
-  // Initialize registrados from option items
-  const [registrados, setRegistrados] = useState<ItemRegistrado[]>(() => criarRegistrados(opcao))
+  const macrosAtuais = useMemo(
+    () => calcularMacrosOpcao(opcao.itens, registrados),
+    [opcao, registrados]
+  )
+  const macrosPlano = useMemo(
+    () => calcularMacrosOpcao(opcao.itens),
+    [opcao]
+  )
 
-  // Swap modal states
-  const [showSwapModal, setShowSwapModal] = useState(false)
-  const [swapIngredienteItem, setSwapIngredienteItem] = useState<ItemOpcao | null>(null)
-
-  // Recalculate when registrados change
-  const macrosAtuais = useMemo(() => {
-    if (!opcao) return { kcal: 0, p: 0, c: 0, g: 0 }
-    return calcularMacrosOpcao(opcao.itens, registrados)
-  }, [opcao, registrados])
-
-  const macrosPlano = useMemo(() => {
-    if (!opcao) return { kcal: 0, p: 0, c: 0, g: 0 }
-    return calcularMacrosOpcao(opcao.itens)
-  }, [opcao])
-
-  // Reset registrados when opcao changes via swap
   const handleSwapOpcao = useCallback(
     (novaOpcao: OpcaoRefeicao, fromSlot: string, fromDieta: string) => {
       setSwappedOpcao({ opcao: novaOpcao, fromSlot, fromDieta })
@@ -142,7 +183,6 @@ export function OpcaoDetalhePage() {
     [criarRegistrados]
   )
 
-  // Handle ingredient swap result
   const handleSwapIngrediente = useCallback(
     (substituto: Alimento, gramas: number) => {
       if (!swapIngredienteItem) return
@@ -160,7 +200,7 @@ export function OpcaoDetalhePage() {
 
   const handleSalvarSubstituicaoPadrao = useCallback(
     async (substituto: Alimento, gramas: number) => {
-      if (!slot || !swapIngredienteItem) return
+      if (!swapIngredienteItem) return
 
       await salvarSubstituicao({
         slotRefeicaoId: slot.id,
@@ -173,7 +213,7 @@ export function OpcaoDetalhePage() {
 
       handleSwapIngrediente(substituto, gramas)
     },
-    [handleSwapIngrediente, slot, swapIngredienteItem]
+    [handleSwapIngrediente, slot.id, swapIngredienteItem]
   )
 
   const handleRestaurarItemOriginal = useCallback(
@@ -200,19 +240,7 @@ export function OpcaoDetalhePage() {
     [substituicoesAtivasMap]
   )
 
-  useEffect(() => {
-    setSwappedOpcao(null)
-  }, [tipoDia, slotId, opcaoId])
-
-  useEffect(() => {
-    if (!swappedOpcao) {
-      setRegistrados(criarRegistrados(found?.opcao ?? null))
-    }
-  }, [found?.opcao, swappedOpcao, criarRegistrados])
-
   async function handleRegistrar() {
-    if (!slot || !opcao) return
-
     await registrarRefeicao({
       data: hoje(),
       slotRefeicaoId: slot.id,
@@ -223,21 +251,6 @@ export function OpcaoDetalhePage() {
     })
 
     navigate('/dieta')
-  }
-
-  if (!slot || !opcao) {
-    return (
-      <div className="p-4">
-        <p className="text-ink-2">Opcao nao encontrada</p>
-        <button
-          type="button"
-          onClick={() => navigate('/dieta')}
-          className="mt-2 text-sm text-accent"
-        >
-          Voltar
-        </button>
-      </div>
-    )
   }
 
   const kcalDiff = macrosAtuais.kcal - macrosPlano.kcal

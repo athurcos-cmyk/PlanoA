@@ -1,5 +1,9 @@
 # Project Context: Plano A
 
+## Versao Atual
+
+O projeto pode ser tratado oficialmente como **v1.0.0**.
+
 ## Visao Geral
 
 `Plano A` e um app PWA pessoal de dieta e treino, pensado para uso diario no celular, com foco em:
@@ -155,6 +159,8 @@ A implementacao foi endurecida para uso real:
 
 - o treino ativo agora persiste localmente entre refresh, fechamento e reabertura do app
 - a lista de treinos mostra `CONTINUAR TREINO` quando existe sessao em andamento
+- entrar em um treino sem registrar nenhuma serie nao deve prender o usuario naquele treino
+- ao voltar sem series feitas, a sessao ativa deve ser cancelada automaticamente
 - o estado temporario do treino fica separado do historico final salvo no Dexie
 
 O planejamento tambem deixa clara a intencao da area de treino:

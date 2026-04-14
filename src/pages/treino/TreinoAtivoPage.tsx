@@ -19,6 +19,7 @@ export function TreinoAtivoPage() {
   const {
     treinoAtivo,
     seriesFeitas,
+    cancelarTreino,
     registrarSerie,
     removerSerie,
     finalizarTreino: finalizarStore,
@@ -62,6 +63,13 @@ export function TreinoAtivoPage() {
     timer.start(secs)
   }
 
+  const handleVoltar = () => {
+    if (seriesFeitas.length === 0) {
+      cancelarTreino()
+    }
+    navigate('/treino')
+  }
+
   const handleFinalizar = async () => {
     const result = finalizarStore()
     if (result) {
@@ -85,13 +93,13 @@ export function TreinoAtivoPage() {
       {/* Header */}
       <div className="sticky top-0 z-40 bg-bg/95 backdrop-blur-sm border-b border-border-soft">
         <div className="flex items-center justify-between px-4 py-2">
-          <button
-            type="button"
-            onClick={() => navigate('/treino')}
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-2"
-          >
-            <ChevronLeft size={24} />
-          </button>
+        <button
+          type="button"
+          onClick={handleVoltar}
+          className="min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-2"
+        >
+          <ChevronLeft size={24} />
+        </button>
           <div className="text-center">
             <p className="text-sm font-bold text-ink">{treino.nome}</p>
             <p className="text-xs text-ink-3">
@@ -134,18 +142,32 @@ export function TreinoAtivoPage() {
         {/* Finalizar */}
         <div className="mt-4 mb-8">
           {!confirmFinalizar ? (
-            <button
-              type="button"
-              onClick={() => setConfirmFinalizar(true)}
-              className={cn(
-                'w-full min-h-[52px] rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors',
-                seriesFeitas.length > 0
-                  ? 'bg-green/20 text-green active:bg-green/30'
-                  : 'bg-surface-2 text-ink-3'
+            <div className="flex flex-col gap-2">
+              {seriesFeitas.length === 0 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    cancelarTreino()
+                    navigate('/treino')
+                  }}
+                  className="w-full min-h-[48px] rounded-lg bg-surface-2 text-sm font-bold text-ink-2 active:bg-surface-3 transition-colors"
+                >
+                  SAIR SEM INICIAR
+                </button>
               )}
-            >
-              FINALIZAR TREINO
-            </button>
+              <button
+                type="button"
+                onClick={() => setConfirmFinalizar(true)}
+                className={cn(
+                  'w-full min-h-[52px] rounded-lg text-sm font-bold flex items-center justify-center gap-2 transition-colors',
+                  seriesFeitas.length > 0
+                    ? 'bg-green/20 text-green active:bg-green/30'
+                    : 'bg-surface-2 text-ink-3'
+                )}
+              >
+                FINALIZAR TREINO
+              </button>
+            </div>
           ) : (
             <div className="flex flex-col gap-2">
               <p className="text-sm text-ink-2 text-center">

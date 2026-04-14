@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { X, Loader2, AlertCircle } from 'lucide-react'
+import type { Html5Qrcode } from 'html5-qrcode'
 import type { Alimento } from '../../data/tipos'
 
 
@@ -21,7 +22,7 @@ interface OpenFoodFactsProduct {
 
 export function BarcodeScanner({ onResult, onClose, onFallbackSearch }: Props) {
   const scannerRef = useRef<HTMLDivElement>(null)
-  const html5QrRef = useRef<any>(null)
+  const html5QrRef = useRef<Html5Qrcode | null>(null)
   const [status, setStatus] = useState<'scanning' | 'loading' | 'found' | 'not-found' | 'error'>('scanning')
   const [produto, setProduto] = useState<{ nome: string; alimento: Alimento } | null>(null)
   const [errorMsg, setErrorMsg] = useState('')
@@ -65,7 +66,7 @@ export function BarcodeScanner({ onResult, onClose, onFallbackSearch }: Props) {
             // ignore scan failures
           }
         )
-      } catch (err) {
+      } catch {
         if (mounted) {
           setStatus('error')
           setErrorMsg('Nao foi possivel acessar a camera')

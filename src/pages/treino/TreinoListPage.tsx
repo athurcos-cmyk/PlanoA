@@ -14,6 +14,7 @@ const treinos = [TREINO_A, TREINO_B]
 export function TreinoListPage() {
   const navigate = useNavigate()
   const iniciarTreino = useTreinoStore((s) => s.iniciarTreino)
+  const seriesFeitas = useTreinoStore((s) => s.seriesFeitas)
   const treinoAtivo = useTreinoStore((s) => s.treinoAtivo)
 
   const ultimosTreinos = useLiveQuery(async () => {
@@ -34,7 +35,7 @@ export function TreinoListPage() {
   })()
 
   const handleIniciar = (id: 'A' | 'B') => {
-    if (treinoAtivo) {
+    if (treinoAtivo && seriesFeitas.length > 0) {
       navigate('/treino/ativo')
       return
     }

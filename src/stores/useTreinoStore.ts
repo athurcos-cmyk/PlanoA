@@ -8,6 +8,7 @@ interface TreinoStore {
   inicioTimestamp: number | null
 
   iniciarTreino: (id: 'A' | 'B') => void
+  cancelarTreino: () => void
   registrarSerie: (serie: SerieFeita) => void
   removerSerie: (exercicioId: string, serieNum: number) => void
   finalizarTreino: () => { series: SerieFeita[]; duracaoMin: number } | null
@@ -28,6 +29,9 @@ export const useTreinoStore = create<TreinoStore>()(
 
           return { treinoAtivo: id, seriesFeitas: [], inicioTimestamp: Date.now() }
         }),
+
+      cancelarTreino: () =>
+        set({ treinoAtivo: null, seriesFeitas: [], inicioTimestamp: null }),
 
       registrarSerie: (serie) =>
         set((s) => ({
