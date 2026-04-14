@@ -4,6 +4,7 @@ import type { Alimento, ItemOpcao } from '../../data/tipos'
 import { ALIMENTOS, buscarAlimentos, isMesmoAlimentoId } from '../../data/alimentos'
 import { calcularMacrosItem } from '../../utils/macros'
 import { cn } from '../../utils/cn'
+import { formatQuantidadeAlimento, formatQuantidadeItem } from '../../utils/quantidade'
 import {
   calcularGramasSubstituto,
   calcularScoreSubstituicao,
@@ -39,19 +40,6 @@ function deltaTone(absDiff: number, close: number, medium: number): string {
   if (absDiff <= close) return 'border-green/30 bg-green/10 text-green'
   if (absDiff <= medium) return 'border-yellow-500/30 bg-yellow-500/10 text-yellow-300'
   return 'border-accent/30 bg-accent-soft text-accent'
-}
-
-function formatQuantidade(item: ItemOpcao, quantidade: number): string {
-  if (item.unidade === 'un' && item.unidadeNome) {
-    const unidades = quantidade / Math.max(item.gramasPlano, 1)
-    const texto =
-      Math.abs(unidades - Math.round(unidades)) < 0.05
-        ? `${Math.round(unidades)}`
-        : `${unidades.toFixed(1).replace(/\.0$/, '')}`
-    return `${texto} ${item.unidadeNome}`
-  }
-  if (item.unidade === 'ml') return `${quantidade}ml`
-  return `${quantidade}g`
 }
 
 export function SwapIngredienteModal({
@@ -107,7 +95,7 @@ export function SwapIngredienteModal({
           <div className="min-w-0 flex-1">
             <h2 className="truncate text-lg font-bold text-ink">Substituir</h2>
             <p className="truncate text-xs text-ink-3">
-              {item.nome} ({formatQuantidade(item, item.gramasPlano)})
+              {item.nome} ({formatQuantidadeItem(item, item.gramasPlano)})
             </p>
           </div>
           <button
@@ -209,7 +197,7 @@ export function SwapIngredienteModal({
                   </div>
                   <div className="shrink-0 text-right">
                     <p className="text-sm font-bold text-accent font-[family-name:var(--font-mono)]">
-                      {formatQuantidade(item, gramasCalc)}
+                      {formatQuantidadeAlimento(alimento, gramasCalc)}
                     </p>
                     <p className="text-[10px] text-ink-3">{score}% match</p>
                   </div>

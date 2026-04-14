@@ -50,6 +50,7 @@ function loadModule(file) {
 function main() {
   const alimentosModule = loadModule('src/data/alimentos/index.ts')
   const getAlimentoPorId = alimentosModule.getAlimentoPorId
+  const getMedidaCaseira = alimentosModule.getMedidaCaseira
 
   const dietas = [
     loadModule('src/data/dieta-folga.ts').DIETA_FOLGA,
@@ -57,6 +58,8 @@ function main() {
   ]
 
   const unresolved = []
+  const unitRefsMissing = []
+  const macroDrift = []
   const duplicates = new Set()
 
   for (const dieta of dietas) {
@@ -76,6 +79,41 @@ function main() {
               itemNome: item.nome,
             })
           }
+
+          const alimento = getAlimentoPorId(item.id)
+          if (alimento) {
+            const diffKcal = Math.abs(item.macrosPor100g.kcal - alimento.kcal)
+            const diffP = Math.abs(item.macrosPor100g.p - alimento.p)
+            const diffC = Math.abs(item.macrosPor100g.c - alimento.c)
+            const diffG = Math.abs(item.macrosPor100g.g - alimento.g)
+
+            if (diffKcal > 1 || diffP > 0.11 || diffC > 0.11 || diffG > 0.11) {
+              macroDrift.push({
+                dieta: dieta.id,
+                slot: slot.id,
+                opcao: opcao.id,
+                itemId: item.id,
+                itemNome: item.nome,
+                dietaMacros: item.macrosPor100g,
+                catalogoMacros: {
+                  kcal: alimento.kcal,
+                  p: alimento.p,
+                  c: alimento.c,
+                  g: alimento.g,
+                },
+              })
+            }
+          }
+
+          if (item.unidade === 'un' && item.unidadeNome && !getMedidaCaseira(item.id)) {
+            unitRefsMissing.push({
+              dieta: dieta.id,
+              slot: slot.id,
+              opcao: opcao.id,
+              itemId: item.id,
+              itemNome: item.nome,
+            })
+          }
         }
       }
     }
@@ -84,6 +122,18 @@ function main() {
   if (unresolved.length > 0) {
     console.error('Itens da dieta sem correspondencia no catalogo:')
     console.error(JSON.stringify(unresolved, null, 2))
+    process.exit(1)
+  }
+
+  if (unitRefsMissing.length > 0) {
+    console.error('Itens com unidade "un" sem medida caseira no catalogo:')
+    console.error(JSON.stringify(unitRefsMissing, null, 2))
+    process.exit(1)
+  }
+
+  if (macroDrift.length > 0) {
+    console.error('Itens da dieta com macros divergentes do catalogo:')
+    console.error(JSON.stringify(macroDrift, null, 2))
     process.exit(1)
   }
 

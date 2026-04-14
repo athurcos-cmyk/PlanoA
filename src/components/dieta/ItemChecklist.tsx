@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Check } from 'lucide-react'
 import type { ItemOpcao, ItemRegistrado } from '../../data/tipos'
 import { cn } from '../../utils/cn'
+import { formatQuantidadeItem } from '../../utils/quantidade'
 
 interface Props {
   itens: ItemOpcao[]
@@ -145,7 +146,7 @@ export function ItemChecklist({
                     : 'border border-border-soft text-ink-2 bg-surface-2'
                 )}
               >
-                {formatQuantidade(item, gramas)}
+                {formatQuantidadeItem(item, gramas)}
               </button>
             </div>
 
@@ -160,7 +161,7 @@ export function ItemChecklist({
                 <StepButton onClick={() => adjustGrams(item, -10)} label="-10" />
                 <StepButton onClick={() => adjustGrams(item, -5)} label="-5" />
                 <span className="w-16 text-center text-sm font-[family-name:var(--font-mono)] text-ink">
-                  {formatQuantidade(item, gramas)}
+                  {formatQuantidadeItem(item, gramas)}
                 </span>
                 <StepButton onClick={() => adjustGrams(item, 5)} label="+5" />
                 <StepButton onClick={() => adjustGrams(item, 10)} label="+10" />
@@ -189,17 +190,4 @@ function StepButton({ onClick, label }: { onClick: () => void; label: string }) 
       {label}
     </button>
   )
-}
-
-function formatQuantidade(item: ItemOpcao, quantidade: number): string {
-  if (item.unidade === 'un' && item.unidadeNome) {
-    const unidades = quantidade / Math.max(item.gramasPlano, 1)
-    const texto =
-      Math.abs(unidades - Math.round(unidades)) < 0.05
-        ? `${Math.round(unidades)}`
-        : `${unidades.toFixed(1).replace(/\.0$/, '')}`
-    return `${texto} ${item.unidadeNome}`
-  }
-  if (item.unidade === 'ml') return `${quantidade}ml`
-  return `${quantidade}g`
 }
