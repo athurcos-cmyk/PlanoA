@@ -135,6 +135,7 @@ Pontos endurecidos na dieta para uso real:
 - a gramagem exibida continua sendo o peso real na balanca; o texto extra serve apenas como contexto visual
 - os almocos de `folga` e `plantao` agora incluem uma opcao com ovos (`arroz + feijao + ovos + atum`) para aparecer tambem na troca da refeicao inteira
 - o catalogo de extras foi ampliado com frutas comuns como `laranja`, `caqui`, `mamao`, `manga`, `melancia`, `abacaxi`, `tangerina` e `pera`
+- a base do frango foi deixada mais conservadora na proteina para uso real do app, e os almocos/jantares tiraram o azeite explicito em favor de refeicoes mais faceis de executar
 
 ### Treino
 

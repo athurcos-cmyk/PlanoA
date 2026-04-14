@@ -1,6 +1,6 @@
 # DIETA — DIA DE PLANTÃO (Sem treino, foco em praticidade)
 
-**Total diário alvo:** 2.660 kcal | 198g P | 307g C | 68g F
+**Total diário alvo:** 2.615 kcal | 207g P | 310g C | 59g F
 
 Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no almoço, lanches **práticos de transportar** (sem potes de atum, sem pasta de amendoim que vaza, sem talheres extras). Jantar forte em casa após o plantão.
 
@@ -85,38 +85,36 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 ---
 
 ## 12:30 — Almoço (Marmita)
-**Alvo:** ~680 kcal | 50g P | 75g C | 15g F
+**Alvo:** ~640 kcal | 57g P | 78g C | 9g F
 
 ### Opção 1 — Arroz, feijão e frango
 - 210g arroz cozido
 - 1 concha feijão (80g)
-- 130g frango grelhado
+- 160g frango grelhado
 - 200g legumes cozidos (abobrinha, cenoura, chuchu)
-- 2 colheres (chá) de azeite
 
-**Macros:** ~673 kcal | 52g P | 79g C | 15g F
+**Macros:** ~632 kcal | 59g P | 80g C | 5g F
 
 ---
 
 ### Opção 2 — Batata doce com frango
 - 350g batata doce
-- 150g frango grelhado
+- 170g frango grelhado
 - 1 concha feijão
 - Salada crua grande (alface, tomate, pepino)
-- 10ml azeite
 
-**Macros:** ~681 kcal | 55g P | 79g C | 16g F
+**Macros:** ~624 kcal | 58g P | 79g C | 5g F
 
 ---
 
 ### Opção 3 — Arroz com frango e sardinha
 - 210g arroz cozido
 - 1 concha feijão
-- 80g frango grelhado
+- 100g frango grelhado
 - 80g sardinha sem óleo
 - Salada
 
-**Macros:** ~656 kcal | 53g P | 76g C | 15g F
+**Macros:** ~644 kcal | 58g P | 76g C | 10g F
 
 > 💡 Marmita é montada na véspera (dia de folga). **Domingo de noite = prep de marmita da semana inteira**. Isso é 50% do sucesso do plano.
 
@@ -125,11 +123,11 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 ### Opção 4 — Arroz, feijão, ovos e atum
 - 220g arroz cozido
 - 1 concha feijão (80g)
-- 3 ovos inteiros
-- 80g atum em lata drenado
+- 2 ovos inteiros
+- 120g atum em lata drenado
 - Salada
 
-**Macros:** ~669 kcal | 50g P | 76g C | 16g F
+**Macros:** ~651 kcal | 54g P | 77g C | 12g F
 
 > 💡 Essa vira a opção de almoço com ovos mais honesta do plano: prática, forte em proteína e fácil de montar.
 
@@ -204,16 +202,16 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 ---
 
 ## 21:00 — Jantar Pós-Plantão (em casa, refeição principal)
-**Alvo:** ~620 kcal | 50g P | 70g C | 15g F
+**Alvo:** ~615 kcal | 52g P | 70g C | 12g F
 
 ### Opção 1 — Jantar Clássico
 - 200g arroz cozido
-- 130g frango grelhado
+- 140g frango grelhado
+- 1 ovo inteiro
 - Salada grande
 - Legumes refogados
-- 2 colheres (chá) de azeite
 
-**Macros:** ~620 kcal | 50g P | 70g C | 14g F
+**Macros:** ~623 kcal | 57g P | 70g C | 9g F
 
 ---
 
@@ -223,7 +221,7 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 - Legumes (tomate, cebola, pimentão, abobrinha)
 - 150g arroz OU 180g batata doce cozida
 
-**Macros:** ~640 kcal | 52g P | 65g C | 18g F
+**Macros:** ~639 kcal | 51g P | 72g C | 14g F
 
 ---
 

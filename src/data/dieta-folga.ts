@@ -64,7 +64,7 @@ export const DIETA_FOLGA: TipoDia = {
           categoria: 'lanche',
           itens: [
             { id: 'pao-frances', nome: 'Pão francês', gramasPlano: 50, unidade: 'un', unidadeNome: 'pão', macrosPor100g: { kcal: 300, p: 8, c: 58.6, g: 3.1 } },
-            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 31.5, c: 0, g: 3.2 } },
+            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 30, c: 0, g: 3.2 } },
           ],
         },
         {
@@ -73,7 +73,7 @@ export const DIETA_FOLGA: TipoDia = {
           categoria: 'cafe',
           itens: [
             { id: 'cuscuz-cozido', nome: 'Cuscuz cozido', gramasPlano: 120, unidade: 'g', macrosPor100g: { kcal: 113, p: 2.6, c: 23.4, g: 0.5 } },
-            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 31.5, c: 0, g: 3.2 } },
+            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 30, c: 0, g: 3.2 } },
           ],
         },
       ],
@@ -82,7 +82,7 @@ export const DIETA_FOLGA: TipoDia = {
       id: 'almoco-folga',
       nome: 'Almoço',
       horario: '12:30',
-      macrosAlvo: { kcal: 780, p: 55, c: 85, g: 18 },
+      macrosAlvo: { kcal: 720, p: 58, c: 86, g: 14 },
       opcoes: [
         {
           id: 'almoco-folga-frango',
@@ -91,9 +91,9 @@ export const DIETA_FOLGA: TipoDia = {
           itens: [
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 220, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'feijao-cozido', nome: 'Feijão cozido', gramasPlano: 160, unidade: 'g', macrosPor100g: { kcal: 76, p: 4.8, c: 13.6, g: 0.5 } },
-            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 130, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 2.5 } },
+            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 130, unidade: 'g', macrosPor100g: { kcal: 159, p: 30, c: 0, g: 2.5 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
-            { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 12, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
           ],
         },
         {
@@ -104,7 +104,6 @@ export const DIETA_FOLGA: TipoDia = {
             { id: 'macarrao-cozido', nome: 'Macarrão cozido', gramasPlano: 250, unidade: 'g', macrosPor100g: { kcal: 144, p: 5, c: 29.4, g: 0.5 } },
             { id: 'carne-moida-patinho', nome: 'Carne moída patinho', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 212, p: 26.7, c: 0, g: 11.2 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
-            { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 5, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
           ],
         },
         {
@@ -125,8 +124,8 @@ export const DIETA_FOLGA: TipoDia = {
           itens: [
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 220, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'feijao-cozido', nome: 'Feijao cozido', gramasPlano: 140, unidade: 'g', macrosPor100g: { kcal: 76, p: 4.8, c: 13.6, g: 0.5 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 200, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
-            { id: 'atum-lata', nome: 'Atum em lata (drenado)', gramasPlano: 60, unidade: 'g', macrosPor100g: { kcal: 116, p: 25.5, c: 0, g: 1 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 150, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
+            { id: 'atum-lata', nome: 'Atum em lata (drenado)', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 116, p: 25.5, c: 0, g: 1 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
           ],
         },
@@ -155,7 +154,7 @@ export const DIETA_FOLGA: TipoDia = {
           categoria: 'lanche',
           itens: [
             { id: 'pao-frances', nome: 'Pão francês', gramasPlano: 50, unidade: 'un', unidadeNome: 'pão', macrosPor100g: { kcal: 300, p: 8, c: 58.6, g: 3.1 } },
-            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 40, unidade: 'g', macrosPor100g: { kcal: 163, p: 31.5, c: 0, g: 3.2 } },
+            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 40, unidade: 'g', macrosPor100g: { kcal: 163, p: 30, c: 0, g: 3.2 } },
             { id: 'iogurte-natural', nome: 'Iogurte natural desnatado', gramasPlano: 170, unidade: 'g', macrosPor100g: { kcal: 42, p: 4.3, c: 5.6, g: 0.3 } },
             { id: 'banana', nome: 'Banana', gramasPlano: 60, unidade: 'un', unidadeNome: 'banana', macrosPor100g: { kcal: 92, p: 1.4, c: 23.8, g: 0.1 } },
             { id: 'amendoim-torrado', nome: 'Amendoim torrado', gramasPlano: 15, unidade: 'g', macrosPor100g: { kcal: 589, p: 27.2, c: 18.7, g: 45.3 } },
@@ -178,7 +177,7 @@ export const DIETA_FOLGA: TipoDia = {
       id: 'jantar-folga',
       nome: 'Jantar',
       horario: '20:00',
-      macrosAlvo: { kcal: 560, p: 45, c: 60, g: 15 },
+      macrosAlvo: { kcal: 585, p: 49, c: 63, g: 12 },
       opcoes: [
         {
           id: 'jantar-folga-frango-arroz',
@@ -186,10 +185,10 @@ export const DIETA_FOLGA: TipoDia = {
           categoria: 'prato-principal',
           itens: [
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 180, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
-            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 120, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 2.5 } },
+            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 130, unidade: 'g', macrosPor100g: { kcal: 159, p: 30, c: 0, g: 2.5 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
-            { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 10, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
           ],
         },
         {
@@ -198,7 +197,7 @@ export const DIETA_FOLGA: TipoDia = {
           categoria: 'prato-principal',
           itens: [
             { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
-            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 31.5, c: 0, g: 3.2 } },
+            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 30, c: 0, g: 3.2 } },
             { id: 'batata-doce', nome: 'Batata doce cozida', gramasPlano: 280, unidade: 'g', macrosPor100g: { kcal: 77, p: 0.6, c: 18.4, g: 0.1 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
           ],

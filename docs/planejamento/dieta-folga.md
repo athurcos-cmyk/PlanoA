@@ -1,6 +1,6 @@
 # DIETA — DIA DE FOLGA (Treino Manhã)
 
-**Total diário alvo:** 2.650 kcal | 193g P | 305g C | 67g F
+**Total diário alvo:** 2.615 kcal | 200g P | 309g C | 60g F
 
 Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que couber no dia. Macros por opção estão explícitos (vão alimentar o tracker do app).
 
@@ -73,16 +73,16 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 ---
 
 ## 12:30 — Almoço (refeição principal)
-**Alvo:** ~780 kcal | 55g P | 85g C | 18g F
+**Alvo:** ~720 kcal | 58g P | 86g C | 14g F
 
 ### Opção 1 — Arroz, feijão e frango
 - 220g arroz cozido
 - 2 conchas de feijão (160g)
 - 130g peito de frango grelhado
+- 1 ovo inteiro
 - Salada grande (alface, tomate, cebola, pepino — à vontade)
-- 12ml de azeite no prato
 
-**Macros:** ~740 kcal | 56g P | 88g C | 18g F
+**Macros:** ~707 kcal | 60g P | 88g C | 10g F
 
 ---
 
@@ -92,7 +92,7 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 - Molho de tomate caseiro (sem açúcar)
 - 200g de cenoura/abobrinha cozida
 
-**Macros:** ~775 kcal | 50g P | 77g C | 19g F
+**Macros:** ~726 kcal | 54g P | 83g C | 19g F
 
 ---
 
@@ -111,11 +111,11 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 ### Opção 4 — Arroz, feijão, ovos e atum
 - 220g arroz cozido
 - 140g feijão cozido
-- 4 ovos inteiros
-- 60g atum em lata drenado
+- 3 ovos inteiros
+- 100g atum em lata drenado
 - Salada grande
 
-**Macros:** ~772 kcal | 55g P | 86g C | 21g F
+**Macros:** ~746 kcal | 59g P | 86g C | 17g F
 
 > 💡 Essa é a opção prática para quando você quer almoço com ovos sem derrubar demais a proteína do prato.
 
@@ -156,16 +156,16 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 ---
 
 ## 20:00 — Jantar
-**Alvo:** ~560 kcal | 45g P | 60g C | 15g F
+**Alvo:** ~585 kcal | 49g P | 63g C | 12g F
 
 ### Opção 1 — Jantar Clássico
 - 180g arroz cozido
-- 160g peito de frango grelhado
+- 130g peito de frango grelhado
+- 1 ovo inteiro
 - Salada grande
 - 200g legumes refogados (chuchu, abobrinha, cenoura)
-- 1 colher (chá) de azeite
 
-**Macros:** ~610 kcal | 55g P | 63g C | 11g F
+**Macros:** ~581 kcal | 53g P | 65g C | 9g F
 
 ---
 
@@ -175,7 +175,7 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 - 280g batata doce cozida
 - Legumes no vapor (brócolis, vagem, abobrinha — 150g)
 
-**Macros:** ~560 kcal | 48g P | 60g C | 14g F
+**Macros:** ~561 kcal | 46g P | 59g C | 13g F
 
 ---
 

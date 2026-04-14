@@ -2,8 +2,9 @@ import type { Alimento, CategoriaAlimento, ItemOpcao, Macros } from '../tipos'
 
 export const ALIMENTOS: Alimento[] = [
   // ── PROTEINAS (15) ─────────────────────────────────────────
-  { id: 'frango-peito-grelhado', nome: 'Peito de frango grelhado', kcal: 159, p: 32, c: 0, g: 2.5, categoria: 'proteina', unidadeRef: '1 file = 150g' },
-  { id: 'frango-desfiado', nome: 'Frango desfiado cozido', kcal: 163, p: 31.5, c: 0, g: 3.2, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
+  // Base conservadora para uso real do app: mantem uma margem de seguranca na proteina do frango.
+  { id: 'frango-peito-grelhado', nome: 'Peito de frango grelhado', kcal: 159, p: 30, c: 0, g: 2.5, categoria: 'proteina', unidadeRef: '1 file = 150g' },
+  { id: 'frango-desfiado', nome: 'Frango desfiado cozido', kcal: 163, p: 30, c: 0, g: 3.2, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
   { id: 'frango-coxa-assada', nome: 'Coxa de frango assada', kcal: 215, p: 26, c: 0, g: 12, categoria: 'proteina', unidadeRef: '---' },
   { id: 'patinho-moido', nome: 'Patinho moido refogado', kcal: 212, p: 26.7, c: 0, g: 11.2, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
   { id: 'patinho-bife', nome: 'Patinho grelhado (bife)', kcal: 219, p: 35.9, c: 0, g: 7.3, categoria: 'proteina', unidadeRef: '1 bife = 100g' },
