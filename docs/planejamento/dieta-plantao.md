@@ -1,6 +1,6 @@
 # DIETA — DIA DE PLANTÃO (Sem treino, foco em praticidade)
 
-**Total diário alvo:** 2.600 kcal | 195g P | 305g C | 72g F
+**Total diário alvo:** 2.660 kcal | 198g P | 307g C | 68g F
 
 Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no almoço, lanches **práticos de transportar** (sem potes de atum, sem pasta de amendoim que vaza, sem talheres extras). Jantar forte em casa após o plantão.
 
@@ -13,33 +13,35 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 ## 05:00 — Café da Manhã (em casa, antes de sair)
 **Alvo:** ~470 kcal | 30g P | 60g C | 12g F
 
-### Opção 1 — Pão com ovo e banana
-- 1 pão francês
-- 3 ovos mexidos
+### Opção 1 — Pão com ovo, peru e banana
+- 60g pão francês
+- 2 ovos mexidos
+- 60g peito de peru fatiado
 - 1 banana
 - Café preto
 
-**Macros:** ~440 kcal | 23g P | 55g C | 16g F
+**Macros:** ~481 kcal | 30g P | 61g C | 13g F
 
 ---
 
 ### Opção 2 — Shake whey + banana
-- 40g aveia
-- 1 scoop whey FTW
-- 250ml leite desnatado
+- 30g aveia
+- 20g whey FTW
+- 250ml leite integral
 - 1 banana
 
-**Macros:** ~450 kcal | 39g P | 65g C | 4g F
+**Macros:** ~440 kcal | 29g P | 57g C | 12g F
 
 ---
 
-### Opção 3 — Cuscuz com ovo
-- 60g cuscuz cru (vira ~180g cozido)
-- 3 ovos mexidos
+### Opção 3 — Cuscuz com ovos, peru e banana
+- 150g cuscuz cozido
+- 2 ovos mexidos
+- 70g peito de peru fatiado
 - 1 banana
 - Café preto
 
-**Macros:** ~510 kcal | 25g P | 70g C | 16g F
+**Macros:** ~482 kcal | 31g P | 61g C | 12g F
 
 > 💡 Refeição precisa ser densa — é o que sustenta a primeira metade do plantão.
 
@@ -62,11 +64,11 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 
 ### Opção 2 — Sanduíche frio com peru
 - 1 pão francês
-- 4 fatias de peito de peru OU presunto magro (40g)
+- 80g peito de peru fatiado
 - 1 ovo cozido
-- 1 maçã
+- 1 maçã pequena
 
-**Macros:** ~400 kcal | 26g P | 50g C | 12g F
+**Macros:** ~370 kcal | 25g P | 48g C | 9g F
 
 ---
 
@@ -86,34 +88,35 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 **Alvo:** ~680 kcal | 50g P | 75g C | 15g F
 
 ### Opção 1 — Arroz, feijão e frango
-- 180g arroz cozido
+- 210g arroz cozido
 - 1 concha feijão (80g)
-- 160g frango grelhado OU 160g patinho moído
+- 130g frango grelhado
 - 200g legumes cozidos (abobrinha, cenoura, chuchu)
-- 1 colher (chá) de azeite
+- 2 colheres (chá) de azeite
 
-**Macros:** ~655 kcal | 60g P | 70g C | 11g F
+**Macros:** ~673 kcal | 52g P | 79g C | 15g F
 
 ---
 
-### Opção 2 — Batata doce com patinho
-- 250g batata doce OU mandioca cozida
-- 180g patinho moído
+### Opção 2 — Batata doce com frango
+- 350g batata doce
+- 150g frango grelhado
 - 1 concha feijão
 - Salada crua grande (alface, tomate, pepino)
+- 10ml azeite
 
-**Macros:** ~680 kcal | 48g P | 65g C | 18g F
+**Macros:** ~681 kcal | 55g P | 79g C | 16g F
 
 ---
 
-### Opção 3 — Arroz com ovo e sardinha
-- 180g arroz cozido
+### Opção 3 — Arroz com frango e sardinha
+- 210g arroz cozido
 - 1 concha feijão
-- 3 ovos cozidos
-- 1 lata de sardinha sem óleo
+- 80g frango grelhado
+- 80g sardinha sem óleo
 - Salada
 
-**Macros:** ~680 kcal | 50g P | 64g C | 23g F
+**Macros:** ~656 kcal | 53g P | 76g C | 15g F
 
 > 💡 Marmita é montada na véspera (dia de folga). **Domingo de noite = prep de marmita da semana inteira**. Isso é 50% do sucesso do plano.
 
@@ -123,34 +126,35 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 **Alvo:** ~350 kcal | 25g P | 45g C | 8g F
 
 ### Opção 1 — Shake whey com banana
-- 1 scoop whey FTW
-- 300ml leite desnatado (ou água)
+- 15g whey FTW
+- 250ml leite integral
 - 1 banana
+- 15g aveia
 
-**Macros:** ~315 kcal | 35g P | 41g C | 1g F
+**Macros:** ~361 kcal | 23g P | 47g C | 10g F
 
 ---
 
-### Opção 2 — Pão com ovo e banana
+### Opção 2 — Pão com ovo, peru e banana
 - 1 pão francês
-- 3 ovos cozidos
-- 1 banana
+- 1 ovo cozido
+- 75g peito de peru fatiado
+- banana pequena
 
-> **Mudança:** removida a pasta de amendoim (você odeia + é impraticável pra levar). Virou sanduíche de ovo simples.
-
-**Macros:** ~440 kcal | 23g P | 55g C | 16g F
+**Macros:** ~366 kcal | 25g P | 48g C | 9g F
 
 ---
 
 ### Opção 3 — Shake com pão e paçoca
-- 1 scoop whey FTW no shaker (com água)
-- 1 pão francês
+- 20g whey FTW
+- 100ml leite integral
+- 40g pão francês
 - 1 banana
-- 1 paçoca
+- meia paçoca
 
 > **Mudança:** removido o atum. Agora é shake + pão + fruta + paçoca (100% prático e transportável).
 
-**Macros:** ~465 kcal | 28g P | 70g C | 7g F
+**Macros:** ~354 kcal | 25g P | 47g C | 8g F
 
 ---
 
@@ -212,11 +216,11 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 
 ### Opção 3 — Macarrão com carne
 - 200g macarrão cozido
-- 160g patinho moído OU 1 lata de atum (em casa, não precisa levar)
+- 130g patinho moído
 - Molho de tomate caseiro
 - 150g legumes salteados
 
-**Macros:** ~660 kcal | 48g P | 72g C | 18g F
+**Macros:** ~615 kcal | 47g P | 69g C | 16g F
 
 > 💡 Esse é o maior prato do dia no plantão — você passou horas sem comer decente, corpo precisa de reposição séria antes de dormir.
 

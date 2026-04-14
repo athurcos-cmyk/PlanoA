@@ -4,12 +4,13 @@ import { useProgressoMacros } from '../../hooks/useProgressoMacros'
 import { PERFIL } from '../../data/perfil'
 import { RefeicaoCard } from '../../components/dieta/RefeicaoCard'
 import { cn } from '../../utils/cn'
+import { calcularMacrosAlvoDia } from '../../utils/dieta'
 
 export function DietaPage() {
   const { tipoDia, dieta } = useDiaAtual()
   const refeicoes = useRefeicoesFeitas()
   const macros = useProgressoMacros()
-  const alvo = PERFIL.macrosAlvo
+  const alvo = calcularMacrosAlvoDia(dieta)
 
   const feitasCount = refeicoes.length
   const totalSlots = dieta.slots.length
@@ -37,6 +38,9 @@ export function DietaPage() {
             {Math.round(macros.kcal)}
             <span className="text-sm font-normal text-ink-3"> kcal</span>
           </span>
+          <span className="text-xs text-ink-3">
+            alvo do dia {Math.round(alvo.kcal)} kcal
+          </span>
         </div>
         <div className="flex gap-4 text-xs font-[family-name:var(--font-mono)] text-ink-2">
           <div className="flex flex-col items-center">
@@ -56,6 +60,9 @@ export function DietaPage() {
           <span className="text-xs text-ink-3">Refeicoes</span>
           <span className="text-sm font-[family-name:var(--font-mono)] text-ink">
             {feitasCount}/{totalSlots}
+          </span>
+          <span className="text-xs text-ink-3">
+            base {PERFIL.metaKcal} kcal
           </span>
         </div>
       </div>

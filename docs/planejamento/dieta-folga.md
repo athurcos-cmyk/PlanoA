@@ -1,6 +1,6 @@
 # DIETA — DIA DE FOLGA (Treino Manhã)
 
-**Total diário alvo:** 2.600 kcal | 200g P | 300g C | 75g F
+**Total diário alvo:** 2.650 kcal | 193g P | 305g C | 67g F
 
 Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que couber no dia. Macros por opção estão explícitos (vão alimentar o tracker do app).
 
@@ -32,13 +32,13 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 
 ---
 
-### Opção 3 — Shake whey + banana
-- 1 scoop whey FTW (~30g)
+### Opção 3 — Vitamina leve com banana e aveia
+- 10g whey FTW
 - 1 banana
-- 30g aveia
-- 200ml leite desnatado (ou água)
+- 20g aveia
+- 200ml leite integral
 
-**Macros:** ~390 kcal | 36g P | 56g C | 3g F
+**Macros:** ~331 kcal | 18g P | 47g C | 9g F
 
 > 💡 Pré-treino matinal é leve pra não pesar. O forte vem no pós-treino.
 
@@ -76,13 +76,13 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 **Alvo:** ~780 kcal | 55g P | 85g C | 18g F
 
 ### Opção 1 — Arroz, feijão e frango
-- 180g arroz cozido
+- 220g arroz cozido
 - 2 conchas de feijão (160g)
-- 180g peito de frango grelhado
+- 130g peito de frango grelhado
 - Salada grande (alface, tomate, cebola, pepino — à vontade)
-- 1 colher (sopa) de azeite no prato
+- 12ml de azeite no prato
 
-**Macros:** ~805 kcal | 69g P | 77g C | 21g F
+**Macros:** ~740 kcal | 56g P | 88g C | 18g F
 
 ---
 
@@ -111,24 +111,24 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 ## 16:00 — Lanche da Tarde
 **Alvo:** ~440 kcal | 28g P | 55g C | 12g F
 
-### Opção 1 — Pão com ovo e banana
+### Opção 1 — Pão com ovo, peru e banana
 - 1 pão francês
-- 3 ovos cozidos
+- 2 ovos cozidos
+- 50g peito de peru fatiado
 - 1 banana
 
-**Macros:** ~440 kcal | 23g P | 55g C | 16g F
+**Macros:** ~441 kcal | 28g P | 55g C | 13g F
 
 ---
 
 ### Opção 2 — Sanduíche de frango com iogurte
 - 1 pão francês
-- 80g frango desfiado (sobra do almoço temperado)
+- 40g frango desfiado (sobra do almoço temperado)
 - 1 iogurte natural 170g (Itambé, Batavo, Vigor — pote individual)
-- 1 banana
+- meia banana grande
+- 15g amendoim torrado
 
-> **Mudança:** removida a opção com pasta de amendoim. Virou sanduíche de frango + iogurte.
-
-**Macros:** ~445 kcal | 36g P | 61g C | 6g F
+**Macros:** ~429 kcal | 29g P | 56g C | 11g F
 
 ---
 
@@ -157,12 +157,12 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 ---
 
 ### Opção 2 — Omelete Gigante
-- 3 ovos inteiros
+- 2 ovos inteiros
 - 100g frango desfiado (refogado)
-- 180g batata doce cozida
+- 280g batata doce cozida
 - Legumes no vapor (brócolis, vagem, abobrinha — 150g)
 
-**Macros:** ~580 kcal | 51g P | 38g C | 18g F
+**Macros:** ~560 kcal | 48g P | 60g C | 14g F
 
 ---
 
@@ -200,12 +200,12 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 
 ---
 
-### Opção 3 — Shake Pré-Sono
-- 1 scoop whey FTW
-- 200ml leite desnatado
-- 15g aveia
+### Opção 3 — Vitamina Pré-Sono
+- 250ml leite desnatado
+- 20g aveia
+- 10g amendoim torrado
 
-**Macros:** ~245 kcal | 33g P | 23g C | 2g F
+**Macros:** ~226 kcal | 14g P | 27g C | 7g F
 
 ---
 
