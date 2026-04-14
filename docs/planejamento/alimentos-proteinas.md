@@ -1,7 +1,7 @@
 # Banco de Alimentos — Proteinas (120 itens)
 
-Macros por 100g · Base TACO (Tabela Brasileira de Composicao de Alimentos, UNICAMP 4a ed.)
-Itens fora da TACO usam rotulo de produto padrao de mercado.
+Macros por 100g · Base TACO/TBCA com viés conservador para uso real do app.
+Quando ha variacao relevante entre cru/cozido ou entre tabelas, o app prefere a media conservadora.
 
 ---
 
@@ -17,7 +17,7 @@ Itens fora da TACO usam rotulo de produto padrao de mercado.
 | 006 | frango-moela-cozida | Moela de frango cozida | 124.0 | 22.5 | 0.5 | 3.1 | 1 porcao = ~80g |
 | 007 | frango-coracao-grelhado | Coracao de frango grelhado | 171.0 | 21.8 | 0.5 | 8.6 | 1 espeto = ~100g |
 | 008 | peru-fatiado | Peru fatiado (frio/fatiado) | 95.0 | 17.5 | 1.5 | 1.8 | 1 fatia = ~15g |
-| 009 | ovo-inteiro-cozido | Ovo de galinha inteiro cozido | 146.0 | 13.3 | 0.6 | 9.5 | 1 ovo = ~50g |
+| 009 | ovo-inteiro-cozido | Ovo de galinha inteiro (base conservadora do app) | 135.0 | 12.0 | 1.5 | 9.0 | 1 ovo = ~50g |
 | 010 | ovo-codorna-cozido | Ovo de codorna cozido | 177.0 | 13.7 | 0.4 | 13.3 | 1 ovo = ~10g |
 | 011 | frango-empanado-frito | Frango empanado frito | 264.0 | 18.5 | 14.2 | 14.8 | 1 file = ~120g |
 | 012 | omelete-simples | Omelete simples (2 ovos) | 154.0 | 11.0 | 0.8 | 12.0 | 1 omelete = ~120g |

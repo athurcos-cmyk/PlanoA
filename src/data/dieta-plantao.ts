@@ -16,8 +16,8 @@ export const DIETA_PLANTAO: TipoDia = {
           categoria: 'cafe',
           itens: [
             { id: 'pao-frances', nome: 'Pão francês', gramasPlano: 60, unidade: 'un', unidadeNome: 'pão', macrosPor100g: { kcal: 300, p: 8, c: 58.6, g: 3.1 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
-            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 60, unidade: 'g', macrosPor100g: { kcal: 105, p: 18, c: 2, g: 2.8 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
+            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 60, unidade: 'g', macrosPor100g: { kcal: 95, p: 17.5, c: 1.5, g: 1.8 } },
             { id: 'banana', nome: 'Banana', gramasPlano: 100, unidade: 'un', unidadeNome: 'banana', macrosPor100g: { kcal: 92, p: 1.4, c: 23.8, g: 0.1 } },
           ],
         },
@@ -38,8 +38,8 @@ export const DIETA_PLANTAO: TipoDia = {
           categoria: 'cafe',
           itens: [
             { id: 'cuscuz-cozido', nome: 'Cuscuz cozido', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 113, p: 2.6, c: 23.4, g: 0.5 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
-            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 70, unidade: 'g', macrosPor100g: { kcal: 105, p: 18, c: 2, g: 2.8 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
+            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 70, unidade: 'g', macrosPor100g: { kcal: 95, p: 17.5, c: 1.5, g: 1.8 } },
             { id: 'banana', nome: 'Banana', gramasPlano: 100, unidade: 'un', unidadeNome: 'banana', macrosPor100g: { kcal: 92, p: 1.4, c: 23.8, g: 0.1 } },
           ],
         },
@@ -59,7 +59,7 @@ export const DIETA_PLANTAO: TipoDia = {
             { id: 'iogurte-natural', nome: 'Iogurte natural desnatado', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 42, p: 4.3, c: 5.6, g: 0.3 } },
             { id: 'aveia-flocos', nome: 'Aveia em flocos', gramasPlano: 15, unidade: 'g', macrosPor100g: { kcal: 394, p: 14, c: 66.6, g: 8.5 } },
             { id: 'banana', nome: 'Banana', gramasPlano: 100, unidade: 'un', unidadeNome: 'banana', macrosPor100g: { kcal: 92, p: 1.4, c: 23.8, g: 0.1 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
           ],
         },
         {
@@ -68,8 +68,8 @@ export const DIETA_PLANTAO: TipoDia = {
           categoria: 'lanche',
           itens: [
             { id: 'pao-frances', nome: 'Pão francês', gramasPlano: 50, unidade: 'un', unidadeNome: 'pão', macrosPor100g: { kcal: 300, p: 8, c: 58.6, g: 3.1 } },
-            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 105, p: 18, c: 2, g: 2.8 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
+            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 95, p: 17.5, c: 1.5, g: 1.8 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
             { id: 'maca', nome: 'Maçã', gramasPlano: 100, unidade: 'un', unidadeNome: 'maçã', macrosPor100g: { kcal: 63, p: 0.3, c: 16.6, g: 0 } },
           ],
         },
@@ -132,8 +132,8 @@ export const DIETA_PLANTAO: TipoDia = {
           itens: [
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 220, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'feijao-cozido', nome: 'Feijao cozido', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 76, p: 4.8, c: 13.6, g: 0.5 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
-            { id: 'atum-lata', nome: 'Atum em lata (drenado)', gramasPlano: 120, unidade: 'g', macrosPor100g: { kcal: 116, p: 25.5, c: 0, g: 1 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
+            { id: 'atum-lata', nome: 'Atum em lata (agua, drenado)', gramasPlano: 120, unidade: 'g', macrosPor100g: { kcal: 107, p: 25.5, c: 0, g: 0.6 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
           ],
         },
@@ -162,8 +162,8 @@ export const DIETA_PLANTAO: TipoDia = {
           categoria: 'lanche',
           itens: [
             { id: 'pao-frances', nome: 'Pão francês', gramasPlano: 50, unidade: 'un', unidadeNome: 'pão', macrosPor100g: { kcal: 300, p: 8, c: 58.6, g: 3.1 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
-            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 75, unidade: 'g', macrosPor100g: { kcal: 105, p: 18, c: 2, g: 2.8 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
+            { id: 'peru-fatiado', nome: 'Peito de peru fatiado', gramasPlano: 75, unidade: 'g', macrosPor100g: { kcal: 95, p: 17.5, c: 1.5, g: 1.8 } },
             { id: 'banana', nome: 'Banana', gramasPlano: 70, unidade: 'un', unidadeNome: 'banana', macrosPor100g: { kcal: 92, p: 1.4, c: 23.8, g: 0.1 } },
           ],
         },
@@ -194,7 +194,7 @@ export const DIETA_PLANTAO: TipoDia = {
           itens: [
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 140, unidade: 'g', macrosPor100g: { kcal: 159, p: 30, c: 0, g: 2.5 } },
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 50, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
           ],
@@ -204,7 +204,7 @@ export const DIETA_PLANTAO: TipoDia = {
           nome: 'Omelete com frango e arroz',
           categoria: 'prato-principal',
           itens: [
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
             { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 30, c: 0, g: 3.2 } },
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 220, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
@@ -234,7 +234,7 @@ export const DIETA_PLANTAO: TipoDia = {
           nome: 'Ovo cozido com iogurte',
           categoria: 'lanche',
           itens: [
-            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 135, p: 12, c: 1.5, g: 9 } },
             { id: 'iogurte-natural', nome: 'Iogurte natural desnatado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 42, p: 4.3, c: 5.6, g: 0.3 } },
           ],
         },

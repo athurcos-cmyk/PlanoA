@@ -2,20 +2,20 @@ import type { Alimento, CategoriaAlimento, ItemOpcao, Macros } from '../tipos'
 
 export const ALIMENTOS: Alimento[] = [
   // ── PROTEINAS (15) ─────────────────────────────────────────
-  // Base conservadora para uso real do app: mantem uma margem de seguranca na proteina do frango.
+  // Base conservadora para uso real do app: mantem margem de seguranca nas proteinas mais variaveis.
   { id: 'frango-peito-grelhado', nome: 'Peito de frango grelhado', kcal: 159, p: 30, c: 0, g: 2.5, categoria: 'proteina', unidadeRef: '1 file = 150g' },
   { id: 'frango-desfiado', nome: 'Frango desfiado cozido', kcal: 163, p: 30, c: 0, g: 3.2, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
   { id: 'frango-coxa-assada', nome: 'Coxa de frango assada', kcal: 215, p: 26, c: 0, g: 12, categoria: 'proteina', unidadeRef: '---' },
   { id: 'patinho-moido', nome: 'Patinho moido refogado', kcal: 212, p: 26.7, c: 0, g: 11.2, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
   { id: 'patinho-bife', nome: 'Patinho grelhado (bife)', kcal: 219, p: 35.9, c: 0, g: 7.3, categoria: 'proteina', unidadeRef: '1 bife = 100g' },
-  { id: 'ovo-inteiro', nome: 'Ovo inteiro', kcal: 146, p: 13.3, c: 0.6, g: 9.5, categoria: 'proteina', unidadeRef: '1 ovo = 50g' },
+  { id: 'ovo-inteiro', nome: 'Ovo inteiro', kcal: 135, p: 12, c: 1.5, g: 9, categoria: 'proteina', unidadeRef: '1 ovo = 50g' },
   { id: 'clara-ovo', nome: 'Clara de ovo cozida', kcal: 59, p: 13.4, c: 0, g: 0.1, categoria: 'proteina', unidadeRef: '1 clara = 33g' },
-  { id: 'atum-lata', nome: 'Atum em lata (drenado)', kcal: 116, p: 25.5, c: 0, g: 1, categoria: 'proteina', unidadeRef: '1 lata = 120g' },
+  { id: 'atum-lata', nome: 'Atum em lata (agua, drenado)', kcal: 107, p: 25.5, c: 0, g: 0.6, categoria: 'proteina', unidadeRef: '1 lata = 120g' },
   { id: 'sardinha-lata', nome: 'Sardinha em lata', kcal: 165, p: 21.5, c: 2, g: 7.8, categoria: 'proteina', unidadeRef: '1 lata = 130g' },
   { id: 'tilapia-grelhada', nome: 'Tilapia grelhada', kcal: 128, p: 26, c: 0, g: 2.7, categoria: 'proteina', unidadeRef: '---' },
   { id: 'salmao-grelhado', nome: 'Salmao grelhado', kcal: 208, p: 27.3, c: 0, g: 10.4, categoria: 'proteina', unidadeRef: '---' },
   { id: 'figado-bovino', nome: 'Figado bovino grelhado', kcal: 225, p: 29.1, c: 4.3, g: 9.5, categoria: 'proteina', unidadeRef: '---' },
-  { id: 'peru-fatiado', nome: 'Peito de peru fatiado', kcal: 105, p: 18, c: 2, g: 2.8, categoria: 'proteina', unidadeRef: '1 fatia = 15g' },
+  { id: 'peru-fatiado', nome: 'Peito de peru fatiado', kcal: 95, p: 17.5, c: 1.5, g: 1.8, categoria: 'proteina', unidadeRef: '1 fatia = 15g' },
   { id: 'linguica-frango', nome: 'Linguica de frango', kcal: 176, p: 16, c: 2, g: 11, categoria: 'proteina', unidadeRef: '---' },
   { id: 'carne-seca', nome: 'Carne seca desfiada', kcal: 230, p: 34, c: 0, g: 10, categoria: 'proteina', unidadeRef: '---' },
   { id: 'whey-po', nome: 'Whey protein (po)', kcal: 400, p: 80, c: 10, g: 5, categoria: 'suplemento', unidadeRef: '1 scoop = 30g' },

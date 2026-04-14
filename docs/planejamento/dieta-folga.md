@@ -4,6 +4,8 @@
 
 Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que couber no dia. Macros por opção estão explícitos (vão alimentar o tracker do app).
 
+> Obs.: o app passou a usar `ovo inteiro` com base conservadora operacional (~6g de proteína por ovo de 50g). Se algum número daqui divergir alguns pontos, vale o catálogo central em `src/data/alimentos/index.ts`.
+
 > 💡 **Lei da aproximação:** refeições reais não batem macros a 5% de precisão. Cada opção aqui está dentro de ±10-15% do alvo da refeição. O importante é que o **total do dia** fique dentro da margem. Se um dia você ficou +20g de gordura e -15g de carbo, **no dia seguinte você compensa** — não surta.
 
 ---

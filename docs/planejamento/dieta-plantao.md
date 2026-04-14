@@ -4,6 +4,8 @@
 
 Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no almoço, lanches **práticos de transportar** (sem potes de atum, sem pasta de amendoim que vaza, sem talheres extras). Jantar forte em casa após o plantão.
 
+> Obs.: o app passou a usar `ovo inteiro` com base conservadora operacional (~6g de proteína por ovo de 50g). Se algum número daqui divergir alguns pontos, vale o catálogo central em `src/data/alimentos/index.ts`.
+
 > ⚠️ **Regra de ouro dos lanches de plantão:** o que você leva pra trabalhar tem que passar no teste: **(1)** cabe na bolsa sem vazar, **(2)** não precisa de talher ou pote aberto, **(3)** aguenta algumas horas sem refrigeração, **(4)** não cheira forte.
 
 > ⚠️ **Sem treino neste dia** — foco é recuperação.

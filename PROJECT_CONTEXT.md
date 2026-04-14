@@ -136,6 +136,8 @@ Pontos endurecidos na dieta para uso real:
 - os almocos de `folga` e `plantao` agora incluem uma opcao com ovos (`arroz + feijao + ovos + atum`) para aparecer tambem na troca da refeicao inteira
 - o catalogo de extras foi ampliado com frutas comuns como `laranja`, `caqui`, `mamao`, `manga`, `melancia`, `abacaxi`, `tangerina` e `pera`
 - a base do frango foi deixada mais conservadora na proteina para uso real do app, e os almocos/jantares tiraram o azeite explicito em favor de refeicoes mais faceis de executar
+- a base do ovo inteiro tambem foi normalizada para uma media conservadora operacional, evitando contar ~7g de proteina por ovo quando o uso real pode ficar mais perto de ~6g
+- numa auditoria mais pesada dos alimentos realmente usados na dieta, `atum em agua drenado` e `peru fatiado` tambem foram alinhados para a faixa conservadora/media do planejamento
 
 ### Treino
 
@@ -307,6 +309,7 @@ Pontos importantes para a proxima sessao:
 
 - a fonte de verdade nutricional operacional e `src/data/alimentos/index.ts`
 - os arquivos `dieta-folga.ts` e `dieta-plantao.ts` ja foram sincronizados com o catalogo
+- em alimentos com variacao comum entre cru/cozido ou por preparo, o app deve preferir media conservadora em vez da ponta alta
 - o app nao deve mais mostrar algo como `1 ovo` quando estiver calculando `150g`; a exibicao de unidade caseira foi corrigida
 - o pos-treino de folga foi revisado para ter so um shake e duas opcoes solidas mais coerentes com o alvo do slot
 
