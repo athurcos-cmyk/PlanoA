@@ -61,8 +61,17 @@ export interface Exercicio {
   repsAlvo: string        // "10-12", "15", "até falha"
   cargaKg?: number
   nota?: string
+  tutorial?: TutorialExercicio
   bisetCom?: string       // ID do exercício parceiro no bi-set
   descansoSegundos: number
+}
+
+export interface TutorialExercicio {
+  objetivo: string
+  execucao: string[]
+  sentir?: string[]
+  erros?: string[]
+  adaptacoes?: string[]
 }
 
 export interface BlocoTreino {

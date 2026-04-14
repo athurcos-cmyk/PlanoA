@@ -65,10 +65,10 @@ Antes de qualquer treino:
 - **Elevacao lateral** - 2 x 12-20
   > Leve e controlado. Ombro sente mais com tecnica do que com ego.
 
-- **Rosca direta ou martelo** - 2 x 8-12
+- **Rosca direta ou martelo** - 3 x 8-12
   > Escolha a variacao que encaixar melhor no punho e no cotovelo.
 
-- **Triceps testa deitado no chao** - 2 x 8-12
+- **Triceps testa deitado no chao** - 3 x 8-12
   > Cotovelo fixo, amplitude limpa.
 
 ## Bloco 4 - Core curto

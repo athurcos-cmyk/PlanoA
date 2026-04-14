@@ -151,6 +151,12 @@ Fluxo principal:
 4. apos registrar serie, o timer de descanso pode iniciar automaticamente
 5. ao finalizar, o treino vira snapshot persistido no IndexedDB
 
+A implementacao foi endurecida para uso real:
+
+- o treino ativo agora persiste localmente entre refresh, fechamento e reabertura do app
+- a lista de treinos mostra `CONTINUAR TREINO` quando existe sessao em andamento
+- o estado temporario do treino fica separado do historico final salvo no Dexie
+
 O planejamento tambem deixa clara a intencao da area de treino:
 
 - sugerir automaticamente A ou B
@@ -257,6 +263,11 @@ Mantem:
 - treino ativo (`A` ou `B`)
 - series registradas na sessao
 - timestamp de inicio
+
+Observacao importante:
+
+- esse estado agora e persistido localmente com Zustand `persist`
+- refresh e fechamento da aba nao devem mais apagar a sessao de treino em andamento
 
 ## Estado Atual da Dieta
 
@@ -432,6 +443,7 @@ O planejamento mostra que a dieta e o verdadeiro coracao do produto. A ambicao f
 - mostra A e B
 - indica qual seria o proximo treino recomendado
 - puxa ultimo treino de cada tipo do Dexie
+- prioriza continuar a sessao atual quando existe treino em andamento
 
 `TreinoAtivoPage`:
 
@@ -440,6 +452,12 @@ O planejamento mostra que a dieta e o verdadeiro coracao do produto. A ambicao f
 - controla descanso
 - confirma encerramento
 - persiste snapshot final
+
+O treino tambem ganhou suporte melhor para instrucao dentro do proprio app:
+
+- o `?` dos exercicios abre um mini tutorial em modal
+- cada tutorial traz `como fazer`, `onde sentir`, `erros comuns` e `adaptacao em casa`
+- isso foi pensado para reduzir dependencia de procurar execucao no meio do treino
 
 ### Historico
 
@@ -504,6 +522,12 @@ Configurado em [vite.config.ts](C:/Users/Thurcos/Desktop/Dieta/app/vite.config.t
 - app em modo `standalone`
 - orientacao `portrait`
 - nome: `Plano A`
+
+O fluxo de atualizacao do app instalado tambem foi reforcado:
+
+- o app checa atualizacoes em segundo plano
+- caches antigos sao limpos pelo service worker
+- quando existe nova versao, o app pode avisar e atualizar sem exigir apagar historico ou limpar cache manualmente
 
 Isso reforca a intencao de uso como app pessoal mobile-first.
 
@@ -585,6 +609,19 @@ O planejamento e mais ambicioso e detalhado do que a implementacao atual em algu
 - progressao de carga mais central na experiencia
 
 Isso nao e um problema. Significa apenas que o codigo atual representa uma implementacao parcial do norte definido na pasta `planejamento`.
+
+## Follow-up Marcado
+
+Foi combinado fazer uma reavaliacao do treino em **14 de maio de 2026**.
+
+Objetivos dessa reavaliacao:
+
+- revisar adaptacao ao `Treino A/B` apos cerca de 4 semanas de execucao real
+- confirmar se o volume de bracos continua suficiente com `1` exercicio direto de biceps e `1` de triceps, ambos com `3 series`
+- revisar principalmente a resposta de costas no `Treino A`, com foco na combinacao `remada serrote + puxada alta com elastico`
+- checar se algum exercicio ficou ruim logisticamente no ambiente de casa e ajustar com o menor numero possivel de trocas
+
+Se uma nova sessao for aberta depois dessa data, usar este ponto como lembrete operacional.
 
 ## Pasta de Planejamento
 

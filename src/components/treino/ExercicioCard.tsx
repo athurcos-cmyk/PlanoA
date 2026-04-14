@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import type { Exercicio, SerieFeita } from '../../data/tipos'
 import { cn } from '../../utils/cn'
 import { SerieInput } from './SerieInput'
+import { TutorialExercicioModal } from './TutorialExercicioModal'
 
 interface ExercicioCardProps {
   exercicio: Exercicio
@@ -19,7 +20,7 @@ export function ExercicioCard({
   onRemoverSerie,
 }: ExercicioCardProps) {
   const [inputAberto, setInputAberto] = useState<number | null>(null)
-  const [descAberta, setDescAberta] = useState(false)
+  const [tutorialAberto, setTutorialAberto] = useState(false)
 
   const seriesFeitasDoExercicio = seriesFeitas.filter(
     (s) => s.exercicioId === exercicio.id
@@ -39,7 +40,7 @@ export function ExercicioCard({
   return (
     <>
       <div className="rounded-lg bg-surface-2 p-3">
-        <div className="flex items-start justify-between mb-2">
+        <div className="mb-2 flex items-start justify-between">
           <div className="flex-1">
             <p className="text-sm font-medium text-ink">{exercicio.nome}</p>
             <p className="text-xs text-ink-3">
@@ -52,33 +53,26 @@ export function ExercicioCard({
             </p>
           </div>
           <div className="flex items-center">
-            {exercicio.nota && (
+            {(exercicio.tutorial || exercicio.nota) && (
               <button
                 type="button"
-                onClick={() => setDescAberta((v) => !v)}
-                className="min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-3 active:text-ink transition-colors text-xs font-bold"
-                title="Ver descrição"
+                onClick={() => setTutorialAberto(true)}
+                className="flex min-h-[44px] min-w-[44px] items-center justify-center text-xs font-bold text-ink-3 transition-colors active:text-ink"
+                title="Ver tutorial"
               >
                 ?
               </button>
             )}
             <Link
               to={`/treino/exercicio/${exercicio.id}`}
-              className="min-h-[44px] min-w-[44px] flex items-center justify-center text-ink-3 active:text-ink transition-colors"
+              className="flex min-h-[44px] min-w-[44px] items-center justify-center text-ink-3 transition-colors active:text-ink"
             >
               <BarChart3 size={18} />
             </Link>
           </div>
         </div>
 
-        {exercicio.nota && descAberta && (
-          <p className="text-xs text-ink-2 bg-surface-3 rounded px-2 py-1.5 mb-2">
-            {exercicio.nota}
-          </p>
-        )}
-
-        {/* Series badges */}
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex flex-wrap items-center gap-2">
           {Array.from({ length: exercicio.series }, (_, i) => {
             const num = i + 1
             const feita = seriesFeitasDoExercicio.find((s) => s.serie === num)
@@ -94,12 +88,12 @@ export function ExercicioCard({
                   }
                 }}
                 className={cn(
-                  'min-h-[44px] min-w-[44px] rounded-lg flex flex-col items-center justify-center text-xs transition-colors',
+                  'min-h-[44px] min-w-[44px] rounded-lg border text-xs transition-colors flex flex-col items-center justify-center',
                   feita
-                    ? 'bg-green/20 text-green border border-green/30 active:bg-red-900/20 active:border-red-500/30 active:text-red-400'
+                    ? 'border-green/30 bg-green/20 text-green active:border-red-500/30 active:bg-red-900/20 active:text-red-400'
                     : num === proximaSerie
-                      ? 'bg-accent-soft text-accent border border-accent/30 active:bg-accent/20'
-                      : 'bg-surface-3 text-ink-3 border border-border-soft'
+                      ? 'border-accent/30 bg-accent-soft text-accent active:bg-accent/20'
+                      : 'border-border-soft bg-surface-3 text-ink-3'
                 )}
               >
                 <span className="font-bold">S{num}</span>
@@ -121,6 +115,13 @@ export function ExercicioCard({
           onSubmit={handleSubmit}
           onCancel={() => setInputAberto(null)}
           lastSerie={lastSerie}
+        />
+      )}
+
+      {tutorialAberto && exercicio.tutorial && (
+        <TutorialExercicioModal
+          exercicio={exercicio}
+          onClose={() => setTutorialAberto(false)}
         />
       )}
     </>
