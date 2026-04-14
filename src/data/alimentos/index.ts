@@ -59,7 +59,7 @@ export const ALIMENTOS: Alimento[] = [
   { id: 'queijo-cottage', nome: 'Queijo cottage', kcal: 98, p: 11.1, c: 3.4, g: 4.3, categoria: 'laticinio', unidadeRef: '---' },
   { id: 'requeijao-light', nome: 'Requeijao light', kcal: 167, p: 10, c: 5.5, g: 11.5, categoria: 'laticinio', unidadeRef: '1 cs = 15g' },
   { id: 'queijo-mucarela', nome: 'Queijo mucarela', kcal: 330, p: 22.6, c: 1.5, g: 25.2, categoria: 'laticinio', unidadeRef: '1 fatia = 20g' },
-  { id: 'achocolatado', nome: 'Achocolatado em po', kcal: 382, p: 4, c: 82, g: 3.8, categoria: 'laticinio', unidadeRef: '1 cs = 15g' },
+  { id: 'achocolatado', nome: 'Achocolatado em po', kcal: 382, p: 4, c: 82, g: 3.8, categoria: 'snack', unidadeRef: '1 cs = 15g' },
   { id: 'creme-ricota', nome: 'Creme de ricota', kcal: 140, p: 12, c: 4, g: 9, categoria: 'laticinio', unidadeRef: '---' },
 
   // ── VEGETAIS (10) ──────────────────────────────────────────

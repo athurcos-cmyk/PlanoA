@@ -9,6 +9,7 @@ import {
   calcularGramasSubstituto,
   calcularScoreSubstituicao,
   filtrarPorCategoria,
+  filtrarPorGrupoCompativel,
   getCategoriaSwap,
 } from '../../utils/swap-ingrediente'
 
@@ -58,7 +59,8 @@ export function SwapIngredienteModal({
 
   const compativeis = useMemo(() => {
     const categoriaCompativel = filtrarPorCategoria(ALIMENTOS, categoriaItem)
-    const comScore = categoriaCompativel
+    const grupoCompativel = filtrarPorGrupoCompativel(item, categoriaItem, categoriaCompativel)
+    const comScore = grupoCompativel
       .filter((alimento) => !isMesmoAlimentoId(alimento.id, item.id))
       .map((alimento) => {
         const gramas = calcularGramasSubstituto(item, alimento, macroPrincipal)
@@ -68,7 +70,7 @@ export function SwapIngredienteModal({
           score: calcularScoreSubstituicao(item, alimento, gramas, macroPrincipal),
         }
       })
-      .filter((entry) => entry.score >= 45)
+      .filter((entry) => entry.score >= 55)
       .sort((a, b) => b.score - a.score)
 
     if (query.length >= 2) {

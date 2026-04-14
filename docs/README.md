@@ -67,3 +67,27 @@ Mockup navegavel:
 
 - `PROJECT_CONTEXT.md` = contexto-base para qualquer novo chat
 - `docs/planejamento/` = fonte detalhada para produto, design e roadmap
+
+## Estado operacional atual
+
+Para a proxima sessao, assumir como verdade:
+
+- a parte central do app e a dieta
+- a dieta foi auditada recentemente
+- o catalogo central de alimentos e a fonte de verdade nutricional
+- o swap de refeicao e o swap de ingrediente ja existem e estao funcionais, mas devem ser preservados com cuidado
+
+Arquivos-chave para qualquer manutencao nessa area:
+
+- [src/data/alimentos/index.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/data/alimentos/index.ts)
+- [src/data/dieta-folga.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/data/dieta-folga.ts)
+- [src/data/dieta-plantao.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/data/dieta-plantao.ts)
+- [src/utils/swap.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/utils/swap.ts)
+- [src/utils/swap-ingrediente.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/utils/swap-ingrediente.ts)
+- [src/utils/quantidade.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/utils/quantidade.ts)
+
+Antes de encerrar qualquer sessao que mexa em dieta ou swap, rodar:
+
+- `npm run check:dieta`
+- `npm run audit:dieta`
+- `npm run build`

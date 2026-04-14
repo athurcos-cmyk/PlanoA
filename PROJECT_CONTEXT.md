@@ -229,7 +229,7 @@ Comportamentos importantes:
 - registrar refeicao substitui o registro anterior do mesmo `slot` no mesmo dia
 - registrar peso atualiza o mesmo dia se ja existir
 - extras sao somados separadamente
-- substituicao padrao existe no schema, mas o fluxo principal hoje parece mais focado na troca pontual durante o registro
+- substituicao padrao de ingrediente esta integrada ao fluxo de registro da dieta
 
 Observacao importante vinda do planejamento:
 
@@ -257,6 +257,101 @@ Mantem:
 - treino ativo (`A` ou `B`)
 - series registradas na sessao
 - timestamp de inicio
+
+## Estado Atual da Dieta
+
+O nucleo da dieta foi auditado e endurecido para evitar inconsistencias entre:
+
+- tabela central de alimentos
+- macros exibidos nas opcoes da dieta
+- calculo real de macros no app
+- exibicao de unidade caseira no checklist e nos swaps
+
+Arquivos principais envolvidos:
+
+- [src/data/alimentos/index.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/data/alimentos/index.ts)
+- [src/data/dieta-folga.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/data/dieta-folga.ts)
+- [src/data/dieta-plantao.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/data/dieta-plantao.ts)
+- [src/utils/macros.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/utils/macros.ts)
+- [src/utils/quantidade.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/utils/quantidade.ts)
+
+Pontos importantes para a proxima sessao:
+
+- a fonte de verdade nutricional operacional e `src/data/alimentos/index.ts`
+- os arquivos `dieta-folga.ts` e `dieta-plantao.ts` ja foram sincronizados com o catalogo
+- o app nao deve mais mostrar algo como `1 ovo` quando estiver calculando `150g`; a exibicao de unidade caseira foi corrigida
+- a auditoria atual das opcoes da dieta deixa a maioria em `ok` ou `ajuste`, com apenas uma opcao ainda `fora` por decisao pratica: o pos-treino de folga `3 ovos + 1 pao`
+
+## Scripts de Validacao
+
+Foram adicionados scripts para apoiar manutencao da dieta:
+
+- `npm run check:dieta`
+  verifica consistencia entre dieta e catalogo
+  valida correspondencia de itens, medidas caseiras e divergencia de macros
+
+- `npm run sync:dieta`
+  sincroniza `macrosPor100g` dos arquivos da dieta com o catalogo central
+
+- `npm run audit:dieta`
+  audita cada uma das 3 opcoes de cada refeicao contra o alvo do slot e classifica em `ok`, `ajuste` ou `fora`
+
+Esses scripts devem ser rodados sempre que alguem mexer em:
+
+- `src/data/alimentos/index.ts`
+- `src/data/dieta-folga.ts`
+- `src/data/dieta-plantao.ts`
+
+## Estado Atual do Swap
+
+### Swap de refeicao inteira
+
+O swap de refeicao inteira esta funcional e hoje:
+
+- compara com a opcao atual, nao apenas com o alvo generico do slot
+- prioriza mesma dieta e mesmo slot
+- respeita compatibilidade de categoria e janela de horario
+
+Arquivos:
+
+- [src/utils/swap.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/utils/swap.ts)
+- [src/components/dieta/SwapModal.tsx](C:/Users/Thurcos/Desktop/Dieta/app/src/components/dieta/SwapModal.tsx)
+
+### Swap de ingrediente
+
+O swap de ingrediente tambem esta funcional e foi endurecido para evitar trocas semanticas ruins.
+
+Hoje ele:
+
+- calcula gramagem aproximada pelo macro principal
+- usa score de similaridade
+- filtra por categoria
+- filtra por grupos de compatibilidade mais humanos, como:
+  `fruta`, `pao`, `carbo-amido`, `laticinio-liquido`, `queijo-creme`, `proteina-principal`, `ovo`
+- descarta sugestoes muito fracas
+
+Arquivos:
+
+- [src/utils/swap-ingrediente.ts](C:/Users/Thurcos/Desktop/Dieta/app/src/utils/swap-ingrediente.ts)
+- [src/components/dieta/SwapIngredienteModal.tsx](C:/Users/Thurcos/Desktop/Dieta/app/src/components/dieta/SwapIngredienteModal.tsx)
+
+Exemplos de comportamento esperado apos os ajustes:
+
+- `arroz branco` tende a sugerir `batata`, `batata doce`, `mandioca`, `tapioca`, `cuscuz`
+- `iogurte natural` tende a sugerir `leite desnatado` ou `leite em po desnatado`
+- o sistema deve evitar aberrações como `arroz -> banana` ou `iogurte -> achocolatado`
+
+## Observacao de Produto
+
+Nem toda opcao precisa bater o alvo do slot com perfeicao matematica.
+
+Regra atual mais util:
+
+- `ok` = boa proximidade nutricional
+- `ajuste` = aceitavel na vida real
+- `fora` = merece revisao se atrapalhar muito o papel funcional da refeicao
+
+O objetivo do projeto nao e montar uma dieta de laboratorio, e sim uma dieta gostosa, pratica e sustentavel que continue coerente no app.
 
 Ao finalizar:
 

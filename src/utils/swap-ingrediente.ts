@@ -111,6 +111,76 @@ const MAPA_CATEGORIA_SWAP: Record<string, CategoriaAlimento[]> = {
   bebida: ['bebida'],
 }
 
+type GrupoSwap =
+  | 'proteina-principal'
+  | 'ovo'
+  | 'suplemento-proteico'
+  | 'carbo-amido'
+  | 'fruta'
+  | 'pao'
+  | 'laticinio-liquido'
+  | 'queijo-creme'
+  | 'gordura'
+  | 'vegetal'
+  | 'leguminosa'
+  | 'snack'
+  | 'outro'
+
+function getGrupoSwap(id: string, categoria: CategoriaAlimento): GrupoSwap {
+  const normalizado = id.toLowerCase()
+
+  if (categoria === 'proteina') {
+    if (normalizado.includes('ovo')) return 'ovo'
+    return 'proteina-principal'
+  }
+
+  if (categoria === 'suplemento') return 'suplemento-proteico'
+  if (categoria === 'gordura') return 'gordura'
+  if (categoria === 'vegetal') return 'vegetal'
+  if (categoria === 'leguminosa') return 'leguminosa'
+  if (categoria === 'snack') return 'snack'
+
+  if (categoria === 'laticinio') {
+    if (
+      normalizado.includes('queijo') ||
+      normalizado.includes('requeijao') ||
+      normalizado.includes('ricota') ||
+      normalizado.includes('creme')
+    ) {
+      return 'queijo-creme'
+    }
+    return 'laticinio-liquido'
+  }
+
+  if (categoria === 'carboidrato' || categoria === 'farinha') {
+    if (normalizado.includes('banana') || normalizado.includes('maca')) return 'fruta'
+    if (normalizado.includes('pao')) return 'pao'
+    return 'carbo-amido'
+  }
+
+  return 'outro'
+}
+
+function isGrupoCompativel(origem: GrupoSwap, destino: GrupoSwap): boolean {
+  const mapa: Record<GrupoSwap, GrupoSwap[]> = {
+    'proteina-principal': ['proteina-principal', 'ovo'],
+    ovo: ['ovo', 'proteina-principal'],
+    'suplemento-proteico': ['suplemento-proteico'],
+    'carbo-amido': ['carbo-amido', 'pao'],
+    fruta: ['fruta'],
+    pao: ['pao', 'carbo-amido'],
+    'laticinio-liquido': ['laticinio-liquido'],
+    'queijo-creme': ['queijo-creme'],
+    gordura: ['gordura'],
+    vegetal: ['vegetal'],
+    leguminosa: ['leguminosa', 'carbo-amido'],
+    snack: ['snack'],
+    outro: ['outro'],
+  }
+
+  return mapa[origem].includes(destino)
+}
+
 export function filtrarPorCategoria(
   alimentos: Alimento[],
   categoria: CategoriaAlimento
@@ -119,4 +189,17 @@ export function filtrarPorCategoria(
   return alimentos.filter((a) =>
     categoriasCompativeis.includes(a.categoria)
   )
+}
+
+export function filtrarPorGrupoCompativel(
+  itemOriginal: ItemOpcao,
+  categoriaOriginal: CategoriaAlimento,
+  alimentos: Alimento[]
+): Alimento[] {
+  const grupoOriginal = getGrupoSwap(itemOriginal.id, categoriaOriginal)
+
+  return alimentos.filter((alimento) => {
+    const grupoCandidato = getGrupoSwap(alimento.id, alimento.categoria)
+    return isGrupoCompativel(grupoOriginal, grupoCandidato)
+  })
 }
