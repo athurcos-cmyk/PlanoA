@@ -1,16 +1,17 @@
 import { useMemo, useState } from 'react'
 import { Save, Search, X } from 'lucide-react'
 import type { Alimento, ItemOpcao } from '../../data/tipos'
-import { ALIMENTOS, buscarAlimentos, isMesmoAlimentoId } from '../../data/alimentos'
+import { ALIMENTOS } from '../../data/alimentos'
 import { calcularMacrosItem } from '../../utils/macros'
 import { cn } from '../../utils/cn'
-import { formatQuantidadeAlimento, formatQuantidadeItem } from '../../utils/quantidade'
 import {
-  calcularGramasSubstituto,
-  calcularScoreSubstituicao,
-  filtrarPorCategoria,
-  filtrarPorGrupoCompativel,
+  formatQuantidadeAlimento,
+  formatQuantidadeContextoItem,
+  formatQuantidadeItem,
+} from '../../utils/quantidade'
+import {
   getCategoriaSwap,
+  listarSubstitutosCompativeis,
 } from '../../utils/swap-ingrediente'
 
 interface Props {
@@ -56,36 +57,14 @@ export function SwapIngredienteModal({
     () => calcularMacrosItem(item, item.gramasPlano),
     [item]
   )
+  const quantidadeContextoOriginal = useMemo(
+    () => formatQuantidadeContextoItem(item, item.gramasPlano),
+    [item]
+  )
 
   const compativeis = useMemo(() => {
-    const categoriaCompativel = filtrarPorCategoria(ALIMENTOS, categoriaItem)
-    const grupoCompativel = filtrarPorGrupoCompativel(item, categoriaItem, categoriaCompativel)
-    const comScore = grupoCompativel
-      .filter((alimento) => !isMesmoAlimentoId(alimento.id, item.id))
-      .map((alimento) => {
-        const gramas = calcularGramasSubstituto(item, alimento, macroPrincipal)
-        return {
-          alimento,
-          gramas,
-          score: calcularScoreSubstituicao(item, alimento, gramas, macroPrincipal),
-        }
-      })
-      .filter((entry) => entry.score >= 55)
-      .sort((a, b) => b.score - a.score)
-
-    if (query.length >= 2) {
-      const idsCompativeis = new Set(comScore.map((entry) => entry.alimento.id))
-      return buscarAlimentos(query)
-        .filter(
-          (alimento) =>
-            !isMesmoAlimentoId(alimento.id, item.id) && idsCompativeis.has(alimento.id)
-        )
-        .map((alimento) => comScore.find((entry) => entry.alimento.id === alimento.id)!)
-        .filter(Boolean)
-    }
-
-    return comScore
-  }, [query, categoriaItem, item, macroPrincipal])
+    return listarSubstitutosCompativeis(item, categoriaItem, ALIMENTOS, query)
+  }, [categoriaItem, item, query])
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60" onClick={onClose}>
@@ -99,6 +78,11 @@ export function SwapIngredienteModal({
             <p className="truncate text-xs text-ink-3">
               {item.nome} ({formatQuantidadeItem(item, item.gramasPlano)})
             </p>
+            {quantidadeContextoOriginal && (
+              <p className="truncate text-[11px] text-ink-3">
+                ~ {quantidadeContextoOriginal}
+              </p>
+            )}
           </div>
           <button
             type="button"
@@ -113,6 +97,9 @@ export function SwapIngredienteModal({
           <p className="mb-2 text-[11px] text-ink-3">
             Equivalencia prioriza {macroPrincipal === 'p' ? 'proteina' : macroPrincipal === 'c' ? 'carboidrato' : 'gordura'}.
             Toque no item para trocar agora. Use o disquete para salvar como padrao do slot.
+          </p>
+          <p className="mb-2 text-[11px] text-ink-3">
+            A gramagem continua real. A equivalencia usa base por `100g` do alimento pronto/cozido. Em trocas como frango por ovo inteiro, a quantidade sobe mesmo porque o ovo traz mais gordura e menos proteina por `100g`.
           </p>
           <div className="flex items-center gap-2 rounded bg-surface-2 px-3 py-2">
             <Search className="h-4 w-4 text-ink-3" />

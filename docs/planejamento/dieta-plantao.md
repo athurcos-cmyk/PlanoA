@@ -195,12 +195,12 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 
 ### Opção 1 — Jantar Clássico
 - 200g arroz cozido
-- 160g frango grelhado
+- 130g frango grelhado
 - Salada grande
 - Legumes refogados
-- 1 colher (chá) de azeite
+- 2 colheres (chá) de azeite
 
-**Macros:** ~615 kcal | 55g P | 70g C | 11g F
+**Macros:** ~620 kcal | 50g P | 70g C | 14g F
 
 ---
 

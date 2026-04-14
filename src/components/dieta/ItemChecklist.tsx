@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Check } from 'lucide-react'
 import type { ItemOpcao, ItemRegistrado } from '../../data/tipos'
 import { cn } from '../../utils/cn'
-import { formatQuantidadeItem } from '../../utils/quantidade'
+import { formatQuantidadeContextoItem, formatQuantidadeItem } from '../../utils/quantidade'
 
 interface Props {
   itens: ItemOpcao[]
@@ -84,6 +84,7 @@ export function ItemChecklist({
         const isAdjusted = gramas !== item.gramasPlano && gramas > 0
         const showStepper = expandedId === item.id
         const temPadraoAtivo = itensComPadraoAtivo?.has(item.id)
+        const quantidadeContexto = formatQuantidadeContextoItem(item, gramas)
 
         return (
           <div key={item.id} className="border-b border-border-soft last:border-b-0">
@@ -132,6 +133,12 @@ export function ItemChecklist({
                       </button>
                     )}
                   </div>
+                )}
+
+                {quantidadeContexto && checked && (
+                  <p className="mt-0.5 text-[11px] text-ink-3">
+                    ~ {quantidadeContexto}
+                  </p>
                 )}
               </div>
 

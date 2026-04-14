@@ -33,12 +33,16 @@ function formatRotulo(rotulo: string, quantidade: number): string {
   return plural
 }
 
+function formatMedidaCaseira(rotulo: string, quantidadeBase: number, quantidade: number): string {
+  const unidades = quantidade / quantidadeBase
+  return `${formatNumero(unidades)} ${formatRotulo(rotulo, unidades)}`
+}
+
 export function formatQuantidadeItem(item: ItemOpcao, quantidade: number): string {
   if (item.unidade === 'un' && item.unidadeNome) {
     const medida = getMedidaCaseira(item.id)
     if (medida) {
-      const unidades = quantidade / medida.quantidadeBase
-      return `${formatNumero(unidades)} ${formatRotulo(item.unidadeNome, unidades)}`
+      return formatMedidaCaseira(item.unidadeNome, medida.quantidadeBase, quantidade)
     }
   }
 
@@ -50,9 +54,24 @@ export function formatQuantidadeAlimento(alimento: Alimento, quantidade: number)
   const medida = getMedidaCaseira(alimento.id)
 
   if (medida) {
-    const unidades = quantidade / medida.quantidadeBase
-    return `${formatNumero(unidades)} ${formatRotulo(medida.rotulo, unidades)}`
+    return formatMedidaCaseira(medida.rotulo, medida.quantidadeBase, quantidade)
   }
 
   return `${Math.round(quantidade)}g`
+}
+
+export function formatQuantidadeContextoItem(item: ItemOpcao, quantidade: number): string | null {
+  if (item.unidade === 'un') return null
+
+  const medida = getMedidaCaseira(item.id)
+  if (!medida) return null
+
+  return formatMedidaCaseira(medida.rotulo, medida.quantidadeBase, quantidade)
+}
+
+export function formatQuantidadeContextoAlimento(alimento: Alimento, quantidade: number): string | null {
+  const medida = getMedidaCaseira(alimento.id)
+  if (!medida) return null
+
+  return formatMedidaCaseira(medida.rotulo, medida.quantidadeBase, quantidade)
 }

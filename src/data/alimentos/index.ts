@@ -2,13 +2,13 @@ import type { Alimento, CategoriaAlimento, ItemOpcao, Macros } from '../tipos'
 
 export const ALIMENTOS: Alimento[] = [
   // ── PROTEINAS (15) ─────────────────────────────────────────
-  { id: 'frango-peito-grelhado', nome: 'Peito de frango grelhado', kcal: 159, p: 32, c: 0, g: 3.2, categoria: 'proteina', unidadeRef: '---' },
-  { id: 'frango-desfiado', nome: 'Frango desfiado cozido', kcal: 163, p: 31.4, c: 0, g: 3.7, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
+  { id: 'frango-peito-grelhado', nome: 'Peito de frango grelhado', kcal: 159, p: 32, c: 0, g: 2.5, categoria: 'proteina', unidadeRef: '1 file = 150g' },
+  { id: 'frango-desfiado', nome: 'Frango desfiado cozido', kcal: 163, p: 31.5, c: 0, g: 3.2, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
   { id: 'frango-coxa-assada', nome: 'Coxa de frango assada', kcal: 215, p: 26, c: 0, g: 12, categoria: 'proteina', unidadeRef: '---' },
   { id: 'patinho-moido', nome: 'Patinho moido refogado', kcal: 212, p: 26.7, c: 0, g: 11.2, categoria: 'proteina', unidadeRef: '1 concha = 80g' },
   { id: 'patinho-bife', nome: 'Patinho grelhado (bife)', kcal: 219, p: 35.9, c: 0, g: 7.3, categoria: 'proteina', unidadeRef: '1 bife = 100g' },
   { id: 'ovo-inteiro', nome: 'Ovo inteiro', kcal: 146, p: 13.3, c: 0.6, g: 9.5, categoria: 'proteina', unidadeRef: '1 ovo = 50g' },
-  { id: 'clara-ovo', nome: 'Clara de ovo', kcal: 43, p: 9.3, c: 1.1, g: 0, categoria: 'proteina', unidadeRef: '1 clara = 33g' },
+  { id: 'clara-ovo', nome: 'Clara de ovo cozida', kcal: 59, p: 13.4, c: 0, g: 0.1, categoria: 'proteina', unidadeRef: '1 clara = 33g' },
   { id: 'atum-lata', nome: 'Atum em lata (drenado)', kcal: 116, p: 25.5, c: 0, g: 1, categoria: 'proteina', unidadeRef: '1 lata = 120g' },
   { id: 'sardinha-lata', nome: 'Sardinha em lata', kcal: 165, p: 21.5, c: 2, g: 7.8, categoria: 'proteina', unidadeRef: '1 lata = 130g' },
   { id: 'tilapia-grelhada', nome: 'Tilapia grelhada', kcal: 128, p: 26, c: 0, g: 2.7, categoria: 'proteina', unidadeRef: '---' },
@@ -20,7 +20,7 @@ export const ALIMENTOS: Alimento[] = [
   { id: 'whey-po', nome: 'Whey protein (po)', kcal: 400, p: 80, c: 10, g: 5, categoria: 'suplemento', unidadeRef: '1 scoop = 30g' },
 
   // ── CARBOIDRATOS (15) ──────────────────────────────────────
-  { id: 'arroz-branco', nome: 'Arroz branco cozido', kcal: 128, p: 2.5, c: 28.1, g: 0.2, categoria: 'carboidrato', unidadeRef: '---' },
+  { id: 'arroz-branco', nome: 'Arroz branco cozido', kcal: 128, p: 2.5, c: 28.1, g: 0.2, categoria: 'carboidrato', unidadeRef: '1 colher de servir = 45g' },
   { id: 'arroz-integral', nome: 'Arroz integral cozido', kcal: 124, p: 2.6, c: 25.8, g: 1, categoria: 'carboidrato', unidadeRef: '---' },
   { id: 'macarrao-cozido', nome: 'Macarrao cozido', kcal: 144, p: 5, c: 29.4, g: 0.5, categoria: 'carboidrato', unidadeRef: '1 pegador = 110g' },
   { id: 'batata-doce', nome: 'Batata doce cozida', kcal: 77, p: 0.6, c: 18.4, g: 0.1, categoria: 'carboidrato', unidadeRef: '---' },
@@ -30,8 +30,8 @@ export const ALIMENTOS: Alimento[] = [
   { id: 'aveia-flocos', nome: 'Aveia em flocos', kcal: 394, p: 14, c: 66.6, g: 8.5, categoria: 'farinha', unidadeRef: '---' },
   { id: 'banana', nome: 'Banana', kcal: 92, p: 1.4, c: 23.8, g: 0.1, categoria: 'carboidrato', unidadeRef: '1 banana = 100g' },
   { id: 'maca', nome: 'Maca', kcal: 63, p: 0.3, c: 16.6, g: 0, categoria: 'carboidrato', unidadeRef: '1 maçã = 150g' },
-  { id: 'feijao-carioca', nome: 'Feijao carioca cozido', kcal: 76, p: 4.8, c: 13.6, g: 0.5, categoria: 'leguminosa', unidadeRef: '---' },
-  { id: 'feijao-preto', nome: 'Feijao preto cozido', kcal: 77, p: 4.5, c: 14, g: 0.5, categoria: 'leguminosa', unidadeRef: '---' },
+  { id: 'feijao-carioca', nome: 'Feijao carioca cozido', kcal: 76, p: 4.8, c: 13.6, g: 0.5, categoria: 'leguminosa', unidadeRef: '1 concha = 80g' },
+  { id: 'feijao-preto', nome: 'Feijao preto cozido', kcal: 77, p: 4.5, c: 14, g: 0.5, categoria: 'leguminosa', unidadeRef: '1 concha = 80g' },
   { id: 'cuscuz-cozido', nome: 'Cuscuz cozido', kcal: 113, p: 2.6, c: 23.4, g: 0.5, categoria: 'carboidrato', unidadeRef: '1 fatia = 80g' },
   { id: 'tapioca-goma', nome: 'Tapioca (goma hidratada)', kcal: 135, p: 0, c: 33.5, g: 0.1, categoria: 'carboidrato', unidadeRef: '---' },
   { id: 'mandioca-cozida', nome: 'Mandioca cozida', kcal: 125, p: 0.6, c: 30.1, g: 0.3, categoria: 'carboidrato', unidadeRef: '---' },
@@ -208,7 +208,7 @@ export function getMedidaCaseira(alimentoId: string): {
 
   if (!unidadeRef) return null
 
-  const match = unidadeRef.match(/1\s+(.+?)\s*=\s*([\d.,]+)\s*(g|ml)/i)
+  const match = unidadeRef.match(/1\s+(.+?)\s*=\s*~?\s*([\d.,]+)\s*(g|ml)/i)
   if (!match) return null
 
   const [, rotulo, quantidadeTexto, unidade] = match

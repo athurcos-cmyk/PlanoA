@@ -11,10 +11,10 @@ function resolveTs(request, parentFile) {
   if (!request.startsWith('.')) return request
 
   const base = path.resolve(path.dirname(parentFile), request)
-  const candidates = [base, `${base}.ts`, path.join(base, 'index.ts')]
+  const candidates = [`${base}.ts`, path.join(base, 'index.ts'), base]
 
   for (const candidate of candidates) {
-    if (fs.existsSync(candidate)) return candidate
+    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) return candidate
   }
 
   throw new Error(`Nao foi possivel resolver ${request} a partir de ${parentFile}`)
@@ -51,6 +51,9 @@ function main() {
   const alimentosModule = loadModule('src/data/alimentos/index.ts')
   const getAlimentoPorId = alimentosModule.getAlimentoPorId
   const getMedidaCaseira = alimentosModule.getMedidaCaseira
+  const getCategoriaDoItem = alimentosModule.getCategoriaDoItem
+  const alimentos = alimentosModule.ALIMENTOS
+  const { listarSubstitutosCompativeis } = loadModule('src/utils/swap-ingrediente.ts')
 
   const dietas = [
     loadModule('src/data/dieta-folga.ts').DIETA_FOLGA,
@@ -60,6 +63,7 @@ function main() {
   const unresolved = []
   const unitRefsMissing = []
   const macroDrift = []
+  const swapIssues = []
   const duplicates = new Set()
 
   for (const dieta of dietas) {
@@ -134,6 +138,36 @@ function main() {
   if (macroDrift.length > 0) {
     console.error('Itens da dieta com macros divergentes do catalogo:')
     console.error(JSON.stringify(macroDrift, null, 2))
+    process.exit(1)
+  }
+
+  const almocoFolgaFrango = dietas
+    .find((dieta) => dieta.id === 'folga')
+    ?.slots.find((slot) => slot.id === 'almoco-folga')
+    ?.opcoes.find((opcao) => opcao.id === 'almoco-folga-frango')
+    ?.itens.find((item) => item.id === 'frango-grelhado')
+
+  if (almocoFolgaFrango) {
+    const sugestoes = listarSubstitutosCompativeis(
+      almocoFolgaFrango,
+      getCategoriaDoItem(almocoFolgaFrango),
+      alimentos
+    )
+    const ids = new Set(sugestoes.map((entry) => entry.alimento.id))
+
+    for (const esperado of ['ovo-inteiro', 'clara-ovo']) {
+      if (!ids.has(esperado)) {
+        swapIssues.push({
+          itemId: almocoFolgaFrango.id,
+          substitutoEsperado: esperado,
+        })
+      }
+    }
+  }
+
+  if (swapIssues.length > 0) {
+    console.error('Swaps criticos ausentes na dieta:')
+    console.error(JSON.stringify(swapIssues, null, 2))
     process.exit(1)
   }
 

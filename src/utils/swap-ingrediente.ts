@@ -1,4 +1,4 @@
-import { getMacrosPor100gDoItem } from '../data/alimentos'
+import { buscarAlimentos, getMacrosPor100gDoItem, getMedidaCaseira, isMesmoAlimentoId } from '../data/alimentos'
 import type { Alimento, ItemOpcao, CategoriaAlimento } from '../data/tipos'
 
 function calcularMacrosItemOriginal(item: ItemOpcao) {
@@ -62,22 +62,15 @@ export function calcularGramasSubstituto(
 
   if (macroSub === 0) return 0
 
-  const estimativaInicial = Math.max(1, Math.round((macroOriginalTotal / macroSub) * 100))
-  const minimo = Math.max(1, Math.round(estimativaInicial * 0.4))
-  const maximo = Math.min(600, Math.max(80, Math.round(estimativaInicial * 1.8)))
+  const gramasBrutas = Math.max(1, Math.round((macroOriginalTotal / macroSub) * 100))
+  const medida = getMedidaCaseira(substituto.id)
 
-  let melhorGramas = estimativaInicial
-  let melhorScore = -1
-
-  for (let gramas = minimo; gramas <= maximo; gramas += 5) {
-    const score = calcularScoreSubstituicao(itemOriginal, substituto, gramas, macroPrincipal)
-    if (score > melhorScore) {
-      melhorScore = score
-      melhorGramas = gramas
-    }
+  if (medida && medida.quantidadeBase <= 60) {
+    const unidades = Math.max(1, Math.round(gramasBrutas / medida.quantidadeBase))
+    return Math.min(600, unidades * medida.quantidadeBase)
   }
 
-  return melhorGramas
+  return Math.min(600, Math.max(5, Math.round(gramasBrutas / 5) * 5))
 }
 
 export function getCategoriaSwap(categoria: CategoriaAlimento): 'p' | 'c' | 'g' {
@@ -114,6 +107,7 @@ const MAPA_CATEGORIA_SWAP: Record<string, CategoriaAlimento[]> = {
 type GrupoSwap =
   | 'proteina-principal'
   | 'ovo'
+  | 'clara'
   | 'suplemento-proteico'
   | 'carbo-amido'
   | 'fruta'
@@ -130,6 +124,7 @@ function getGrupoSwap(id: string, categoria: CategoriaAlimento): GrupoSwap {
   const normalizado = id.toLowerCase()
 
   if (categoria === 'proteina') {
+    if (normalizado.includes('clara')) return 'clara'
     if (normalizado.includes('ovo')) return 'ovo'
     return 'proteina-principal'
   }
@@ -163,8 +158,9 @@ function getGrupoSwap(id: string, categoria: CategoriaAlimento): GrupoSwap {
 
 function isGrupoCompativel(origem: GrupoSwap, destino: GrupoSwap): boolean {
   const mapa: Record<GrupoSwap, GrupoSwap[]> = {
-    'proteina-principal': ['proteina-principal', 'ovo'],
-    ovo: ['ovo', 'proteina-principal'],
+    'proteina-principal': ['proteina-principal', 'ovo', 'clara'],
+    ovo: ['ovo', 'clara', 'proteina-principal'],
+    clara: ['clara', 'ovo', 'proteina-principal'],
     'suplemento-proteico': ['suplemento-proteico'],
     'carbo-amido': ['carbo-amido', 'pao'],
     fruta: ['fruta'],
@@ -202,4 +198,80 @@ export function filtrarPorGrupoCompativel(
     const grupoCandidato = getGrupoSwap(alimento.id, alimento.categoria)
     return isGrupoCompativel(grupoOriginal, grupoCandidato)
   })
+}
+
+export interface SugestaoSubstituicao {
+  alimento: Alimento
+  gramas: number
+  score: number
+}
+
+function ranquearSubstitutos(
+  itemOriginal: ItemOpcao,
+  categoriaOriginal: CategoriaAlimento,
+  alimentos: Alimento[]
+): SugestaoSubstituicao[] {
+  const macroPrincipal = getCategoriaSwap(categoriaOriginal)
+  const categoriaCompativel = filtrarPorCategoria(alimentos, categoriaOriginal)
+  const grupoCompativel = filtrarPorGrupoCompativel(itemOriginal, categoriaOriginal, categoriaCompativel)
+
+  return grupoCompativel
+    .filter((alimento) => !isMesmoAlimentoId(alimento.id, itemOriginal.id))
+    .map((alimento) => {
+      const gramas = calcularGramasSubstituto(itemOriginal, alimento, macroPrincipal)
+      return {
+        alimento,
+        gramas,
+        score: calcularScoreSubstituicao(itemOriginal, alimento, gramas, macroPrincipal),
+      }
+    })
+    .sort((a, b) => b.score - a.score)
+}
+
+export function listarSubstitutosCompativeis(
+  itemOriginal: ItemOpcao,
+  categoriaOriginal: CategoriaAlimento,
+  alimentos: Alimento[],
+  query = ''
+): SugestaoSubstituicao[] {
+  const ranqueados = ranquearSubstitutos(itemOriginal, categoriaOriginal, alimentos)
+
+  if (query.length >= 2) {
+    const ordemBusca = new Map(
+      buscarAlimentos(query).map((alimento, index) => [alimento.id, index])
+    )
+
+    return ranqueados
+      .filter((entry) => ordemBusca.has(entry.alimento.id))
+      .sort((a, b) => {
+        const ordemA = ordemBusca.get(a.alimento.id) ?? Number.MAX_SAFE_INTEGER
+        const ordemB = ordemBusca.get(b.alimento.id) ?? Number.MAX_SAFE_INTEGER
+        return ordemA - ordemB || b.score - a.score
+      })
+  }
+
+  const sugestoes = ranqueados.filter((entry) => entry.score >= 55)
+  const idsEscolhidos = new Set(sugestoes.map((entry) => entry.alimento.id))
+
+  if (categoriaOriginal === 'proteina') {
+    for (const grupo of ['ovo', 'clara'] as const) {
+      const extra = ranqueados.find((entry) =>
+        getGrupoSwap(entry.alimento.id, entry.alimento.categoria) === grupo
+      )
+
+      if (extra && !idsEscolhidos.has(extra.alimento.id)) {
+        sugestoes.push(extra)
+        idsEscolhidos.add(extra.alimento.id)
+      }
+    }
+  }
+
+  for (const entry of ranqueados) {
+    if (sugestoes.length >= 8) break
+    if (idsEscolhidos.has(entry.alimento.id)) continue
+    sugestoes.push(entry)
+    idsEscolhidos.add(entry.alimento.id)
+  }
+
+  return sugestoes
 }

@@ -98,7 +98,7 @@ export const DIETA_PLANTAO: TipoDia = {
           itens: [
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 210, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'feijao-cozido', nome: 'Feijão cozido', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 76, p: 4.8, c: 13.6, g: 0.5 } },
-            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 130, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 3.2 } },
+            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 130, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 2.5 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
             { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 10, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
           ],
@@ -109,7 +109,7 @@ export const DIETA_PLANTAO: TipoDia = {
           categoria: 'prato-principal',
           itens: [
             { id: 'batata-doce', nome: 'Batata doce cozida', gramasPlano: 350, unidade: 'g', macrosPor100g: { kcal: 77, p: 0.6, c: 18.4, g: 0.1 } },
-            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 3.2 } },
+            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 2.5 } },
             { id: 'feijao-cozido', nome: 'Feijão cozido', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 76, p: 4.8, c: 13.6, g: 0.5 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
             { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 10, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
@@ -122,7 +122,7 @@ export const DIETA_PLANTAO: TipoDia = {
           itens: [
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 210, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'feijao-cozido', nome: 'Feijão cozido', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 76, p: 4.8, c: 13.6, g: 0.5 } },
-            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 3.2 } },
+            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 2.5 } },
             { id: 'sardinha-lata', nome: 'Sardinha em lata', gramasPlano: 80, unidade: 'g', macrosPor100g: { kcal: 165, p: 21.5, c: 2, g: 7.8 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
             { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 5, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
@@ -183,11 +183,11 @@ export const DIETA_PLANTAO: TipoDia = {
           nome: 'Jantar clássico com frango',
           categoria: 'prato-principal',
           itens: [
-            { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 220, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
-            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 130, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 3.2 } },
+            { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
+            { id: 'frango-grelhado', nome: 'Peito de frango grelhado', gramasPlano: 130, unidade: 'g', macrosPor100g: { kcal: 159, p: 32, c: 0, g: 2.5 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
-            { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 5, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
+            { id: 'azeite-oliva', nome: 'Azeite de oliva', gramasPlano: 10, unidade: 'ml', macrosPor100g: { kcal: 884, p: 0, c: 0, g: 100 } },
           ],
         },
         {
@@ -196,7 +196,7 @@ export const DIETA_PLANTAO: TipoDia = {
           categoria: 'prato-principal',
           itens: [
             { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 100, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
-            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 31.4, c: 0, g: 3.7 } },
+            { id: 'frango-desfiado', nome: 'Frango desfiado', gramasPlano: 100, unidade: 'g', macrosPor100g: { kcal: 163, p: 31.5, c: 0, g: 3.2 } },
             { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 220, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
             { id: 'legumes-cozidos', nome: 'Legumes cozidos (abobrinha, cenoura, chuchu)', gramasPlano: 200, unidade: 'g', macrosPor100g: { kcal: 24, p: 0.9, c: 4.8, g: 0.2 } },
           ],

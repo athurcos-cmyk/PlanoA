@@ -9,10 +9,10 @@ Itens fora da TACO usam rotulo de produto padrao de mercado.
 
 | # | ID | Nome | kcal | P | C | G | Ref. unidade |
 |---|------|------|-----:|----:|----:|----:|--------------|
-| 001 | frango-peito-grelhado | Peito de frango grelhado | 159.0 | 32.0 | 0.0 | 3.2 | 1 file = ~150g |
+| 001 | frango-peito-grelhado | Peito de frango grelhado | 159.0 | 32.0 | 0.0 | 2.5 | 1 file = ~150g |
 | 002 | frango-coxa-assada-sem-pele | Coxa de frango assada sem pele | 172.0 | 26.2 | 0.0 | 7.3 | 1 coxa = ~80g |
 | 003 | frango-sobrecoxa-assada | Sobrecoxa de frango assada | 233.0 | 24.3 | 0.0 | 14.8 | 1 sobrecoxa = ~100g |
-| 004 | frango-desfiado | Frango desfiado cozido | 163.0 | 31.4 | 0.0 | 3.7 | 1 concha = ~80g |
+| 004 | frango-desfiado | Frango desfiado cozido | 163.0 | 31.5 | 0.0 | 3.2 | 1 concha = ~80g |
 | 005 | frango-file-coxa | File de coxa de frango grelhado | 179.0 | 27.0 | 0.0 | 7.8 | 1 file = ~80g |
 | 006 | frango-moela-cozida | Moela de frango cozida | 124.0 | 22.5 | 0.5 | 3.1 | 1 porcao = ~80g |
 | 007 | frango-coracao-grelhado | Coracao de frango grelhado | 171.0 | 21.8 | 0.5 | 8.6 | 1 espeto = ~100g |
@@ -169,7 +169,7 @@ Itens fora da TACO usam rotulo de produto padrao de mercado.
 |---|------|------|-----:|----:|----:|----:|--------------|
 | 106 | frango-peito-cozido | Peito de frango cozido desfiado | 150.0 | 31.0 | 0.0 | 2.5 | 1 concha = ~80g |
 | 107 | ovo-frito | Ovo de galinha frito | 196.0 | 12.5 | 0.6 | 15.6 | 1 ovo = ~60g |
-| 108 | ovo-clara-cozida | Clara de ovo cozida | 43.0 | 9.4 | 0.7 | 0.0 | 1 clara = ~33g |
+| 108 | ovo-clara-cozida | Clara de ovo cozida | 59.0 | 13.4 | 0.0 | 0.1 | 1 clara = ~33g |
 | 109 | atum-lata-agua | Atum em lata (agua, drenado) | 107.0 | 25.5 | 0.0 | 0.6 | 1 lata = ~120g |
 | 110 | sardinha-lata-molho-tomate | Sardinha em lata (molho tomate) | 165.0 | 21.5 | 2.0 | 7.8 | 1 lata = ~130g |
 | 111 | carne-moida-patinho-crua | Carne moida de patinho crua | 137.0 | 21.0 | 0.0 | 5.8 | 1 bandeja = ~500g |

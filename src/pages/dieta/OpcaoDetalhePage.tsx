@@ -307,6 +307,10 @@ function OpcaoDetalheContent({
           <MacroPill label="C" value={macrosAtuais.c} alvo={macrosPlano.c} />
           <MacroPill label="G" value={macrosAtuais.g} alvo={macrosPlano.g} />
         </div>
+
+        <p className="mt-2 text-[11px] text-ink-3">
+          Gramagem em tela = peso real na balanca. Macros usam base por `100g` do alimento pronto/cozido.
+        </p>
       </div>
 
       {/* Item checklist */}
