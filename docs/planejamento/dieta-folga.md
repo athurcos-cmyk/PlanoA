@@ -108,6 +108,19 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 
 ---
 
+### Opção 4 — Arroz, feijão, ovos e atum
+- 220g arroz cozido
+- 140g feijão cozido
+- 4 ovos inteiros
+- 60g atum em lata drenado
+- Salada grande
+
+**Macros:** ~772 kcal | 55g P | 86g C | 21g F
+
+> 💡 Essa é a opção prática para quando você quer almoço com ovos sem derrubar demais a proteína do prato.
+
+---
+
 ## 16:00 — Lanche da Tarde
 **Alvo:** ~440 kcal | 28g P | 55g C | 12g F
 

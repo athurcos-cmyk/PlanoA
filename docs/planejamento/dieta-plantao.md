@@ -122,6 +122,19 @@ Estrutura pensada pra rotina de hospital: café denso antes de sair, marmita no 
 
 ---
 
+### Opção 4 — Arroz, feijão, ovos e atum
+- 220g arroz cozido
+- 1 concha feijão (80g)
+- 3 ovos inteiros
+- 80g atum em lata drenado
+- Salada
+
+**Macros:** ~669 kcal | 50g P | 76g C | 16g F
+
+> 💡 Essa vira a opção de almoço com ovos mais honesta do plano: prática, forte em proteína e fácil de montar.
+
+---
+
 ## 16:00 — Lanche da Tarde (no hospital)
 **Alvo:** ~350 kcal | 25g P | 45g C | 8g F
 

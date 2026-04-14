@@ -129,9 +129,12 @@ Tambem existem `extras`, que sao alimentos fora do plano adicionados ao dia.
 Pontos endurecidos na dieta para uso real:
 
 - valores-base dos alimentos principais foram alinhados ao catalogo e mantidos por `100g` do alimento pronto/cozido
-- swaps de proteina agora continuam mostrando alternativas praticas como `ovo inteiro`, mesmo quando o match total e pior do que `clara`
+- swaps de proteina agora continuam mostrando alternativas praticas como `ovo inteiro`, evitando sugerir `clara` como troca padrao por baixa aderencia e desperdicio de gema
+- o score de swap de ingrediente foi suavizado para nao zerar trocas praticas como `frango -> ovo inteiro` so por diferenca grande de gordura/caloria
 - itens como arroz e feijao passaram a exibir contexto de medida caseira no app para reduzir confusao com gramagem
 - a gramagem exibida continua sendo o peso real na balanca; o texto extra serve apenas como contexto visual
+- os almocos de `folga` e `plantao` agora incluem uma opcao com ovos (`arroz + feijao + ovos + atum`) para aparecer tambem na troca da refeicao inteira
+- o catalogo de extras foi ampliado com frutas comuns como `laranja`, `caqui`, `mamao`, `manga`, `melancia`, `abacaxi`, `tangerina` e `pera`
 
 ### Treino
 

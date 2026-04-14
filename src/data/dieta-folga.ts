@@ -118,6 +118,18 @@ export const DIETA_FOLGA: TipoDia = {
             { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
           ],
         },
+        {
+          id: 'almoco-folga-ovo-atum',
+          nome: 'Arroz, feijao, ovos e atum',
+          categoria: 'prato-principal',
+          itens: [
+            { id: 'arroz-branco', nome: 'Arroz branco cozido', gramasPlano: 220, unidade: 'g', macrosPor100g: { kcal: 128, p: 2.5, c: 28.1, g: 0.2 } },
+            { id: 'feijao-cozido', nome: 'Feijao cozido', gramasPlano: 140, unidade: 'g', macrosPor100g: { kcal: 76, p: 4.8, c: 13.6, g: 0.5 } },
+            { id: 'ovo-inteiro', nome: 'Ovo inteiro', gramasPlano: 200, unidade: 'un', unidadeNome: 'ovo', macrosPor100g: { kcal: 146, p: 13.3, c: 0.6, g: 9.5 } },
+            { id: 'atum-lata', nome: 'Atum em lata (drenado)', gramasPlano: 60, unidade: 'g', macrosPor100g: { kcal: 116, p: 25.5, c: 0, g: 1 } },
+            { id: 'salada-crua', nome: 'Salada (alface, tomate, pepino)', gramasPlano: 150, unidade: 'g', macrosPor100g: { kcal: 15, p: 0.8, c: 2.7, g: 0.1 } },
+          ],
+        },
       ],
     },
     {

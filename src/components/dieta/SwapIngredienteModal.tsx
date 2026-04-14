@@ -44,6 +44,13 @@ function deltaTone(absDiff: number, close: number, medium: number): string {
   return 'border-accent/30 bg-accent-soft text-accent'
 }
 
+function getScoreLabel(score: number): string {
+  if (score >= 80) return 'muito proximo'
+  if (score >= 55) return 'bom'
+  if (score >= 30) return 'pratico'
+  return 'distante'
+}
+
 export function SwapIngredienteModal({
   item,
   categoriaItem,
@@ -188,7 +195,7 @@ export function SwapIngredienteModal({
                     <p className="text-sm font-bold text-accent font-[family-name:var(--font-mono)]">
                       {formatQuantidadeAlimento(alimento, gramasCalc)}
                     </p>
-                    <p className="text-[10px] text-ink-3">{score}% match</p>
+                    <p className="text-[10px] text-ink-3">{score}% {getScoreLabel(score)}</p>
                   </div>
                 </button>
 

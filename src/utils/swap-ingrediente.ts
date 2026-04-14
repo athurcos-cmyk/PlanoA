@@ -43,10 +43,10 @@ export function calcularScoreSubstituicao(
   }
 
   const erro =
-    pesos.kcal * erroRelativo(alvo.kcal, atual.kcal) +
-    pesos.p * erroRelativo(alvo.p, atual.p) +
-    pesos.c * erroRelativo(alvo.c, atual.c) +
-    pesos.g * erroRelativo(alvo.g, atual.g)
+    pesos.kcal * Math.min(1, erroRelativo(alvo.kcal, atual.kcal)) +
+    pesos.p * Math.min(1, erroRelativo(alvo.p, atual.p)) +
+    pesos.c * Math.min(1, erroRelativo(alvo.c, atual.c)) +
+    pesos.g * Math.min(1, erroRelativo(alvo.g, atual.g))
 
   return Math.max(0, Math.round((1 - erro) * 100))
 }
@@ -107,7 +107,6 @@ const MAPA_CATEGORIA_SWAP: Record<string, CategoriaAlimento[]> = {
 type GrupoSwap =
   | 'proteina-principal'
   | 'ovo'
-  | 'clara'
   | 'suplemento-proteico'
   | 'carbo-amido'
   | 'fruta'
@@ -122,9 +121,23 @@ type GrupoSwap =
 
 function getGrupoSwap(id: string, categoria: CategoriaAlimento): GrupoSwap {
   const normalizado = id.toLowerCase()
+  const termosFruta = [
+    'banana',
+    'maca',
+    'laranja',
+    'caqui',
+    'mamao',
+    'manga',
+    'melancia',
+    'abacaxi',
+    'tangerina',
+    'pera',
+  ]
 
   if (categoria === 'proteina') {
-    if (normalizado.includes('clara')) return 'clara'
+    // Clara continua no catalogo, mas nao entra como swap pratico para evitar
+    // sugestoes com desperdicio de gema no uso real.
+    if (normalizado.includes('clara')) return 'outro'
     if (normalizado.includes('ovo')) return 'ovo'
     return 'proteina-principal'
   }
@@ -148,7 +161,7 @@ function getGrupoSwap(id: string, categoria: CategoriaAlimento): GrupoSwap {
   }
 
   if (categoria === 'carboidrato' || categoria === 'farinha') {
-    if (normalizado.includes('banana') || normalizado.includes('maca')) return 'fruta'
+    if (termosFruta.some((termo) => normalizado.includes(termo))) return 'fruta'
     if (normalizado.includes('pao')) return 'pao'
     return 'carbo-amido'
   }
@@ -158,9 +171,8 @@ function getGrupoSwap(id: string, categoria: CategoriaAlimento): GrupoSwap {
 
 function isGrupoCompativel(origem: GrupoSwap, destino: GrupoSwap): boolean {
   const mapa: Record<GrupoSwap, GrupoSwap[]> = {
-    'proteina-principal': ['proteina-principal', 'ovo', 'clara'],
-    ovo: ['ovo', 'clara', 'proteina-principal'],
-    clara: ['clara', 'ovo', 'proteina-principal'],
+    'proteina-principal': ['proteina-principal', 'ovo'],
+    ovo: ['ovo', 'proteina-principal'],
     'suplemento-proteico': ['suplemento-proteico'],
     'carbo-amido': ['carbo-amido', 'pao'],
     fruta: ['fruta'],
@@ -254,7 +266,7 @@ export function listarSubstitutosCompativeis(
   const idsEscolhidos = new Set(sugestoes.map((entry) => entry.alimento.id))
 
   if (categoriaOriginal === 'proteina') {
-    for (const grupo of ['ovo', 'clara'] as const) {
+    for (const grupo of ['ovo'] as const) {
       const extra = ranqueados.find((entry) =>
         getGrupoSwap(entry.alimento.id, entry.alimento.categoria) === grupo
       )

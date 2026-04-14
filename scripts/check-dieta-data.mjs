@@ -155,7 +155,7 @@ function main() {
     )
     const ids = new Set(sugestoes.map((entry) => entry.alimento.id))
 
-    for (const esperado of ['ovo-inteiro', 'clara-ovo']) {
+    for (const esperado of ['ovo-inteiro']) {
       if (!ids.has(esperado)) {
         swapIssues.push({
           itemId: almocoFolgaFrango.id,

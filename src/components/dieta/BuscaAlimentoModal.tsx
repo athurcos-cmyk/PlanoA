@@ -69,7 +69,7 @@ export function BuscaAlimentoModal({ onSelect, onClose, titulo = 'Buscar aliment
               type="text"
               value={query}
               onChange={(e) => handleSearch(e.target.value)}
-              placeholder="Ex: frango, arroz, aveia..."
+              placeholder="Ex: frango, arroz, laranja, caqui..."
               className="flex-1 bg-transparent text-sm text-ink placeholder:text-ink-3 outline-none"
             />
           </div>
@@ -77,6 +77,12 @@ export function BuscaAlimentoModal({ onSelect, onClose, titulo = 'Buscar aliment
 
         {/* Results */}
         <div className="flex-1 overflow-y-auto px-4 pb-8">
+          {query.length === 0 && (
+            <p className="py-4 text-center text-xs text-ink-3">
+              Busque alimentos do plano e extras saudaveis, incluindo frutas.
+            </p>
+          )}
+
           {query.length > 0 && query.length < 2 && (
             <p className="py-4 text-center text-xs text-ink-3">Digite pelo menos 2 caracteres</p>
           )}
