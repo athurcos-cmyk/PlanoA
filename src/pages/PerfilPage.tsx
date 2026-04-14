@@ -64,7 +64,7 @@ export function PerfilPage() {
       <div className="rounded-lg bg-surface p-4">
         <div className="flex items-center gap-2 mb-3">
           <Target size={16} className="text-accent" />
-          <span className="text-xs text-ink-3 uppercase tracking-wider">Metas Diarias</span>
+          <span className="text-xs text-ink-3 uppercase tracking-wider">Meta Base Estimada</span>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <MacroItem label="Calorias" value={`${PERFIL.macrosAlvo.kcal}`} unit="kcal" />
@@ -72,6 +72,9 @@ export function PerfilPage() {
           <MacroItem label="Carboidrato" value={`${PERFIL.macrosAlvo.c}`} unit="g" />
           <MacroItem label="Gordura" value={`${PERFIL.macrosAlvo.g}`} unit="g" />
         </div>
+        <p className="mt-3 text-xs text-ink-3">
+          O plano alimentar do dia pode variar levemente entre folga e plantao.
+        </p>
         <div className="mt-3 pt-3 border-t border-border-soft grid grid-cols-2 gap-3">
           <MacroItem label="TMB" value={`${PERFIL.tmb}`} unit="kcal" />
           <MacroItem label="GET" value={`${PERFIL.get}`} unit="kcal" />

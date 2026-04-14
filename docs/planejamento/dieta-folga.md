@@ -49,30 +49,26 @@ Estrutura: 6 refeições. Cada refeição tem 3 opções — escolha a que coube
 
 ### Opção 1 — Shake whey com leite
 - 1 scoop whey FTW
-- 200ml leite desnatado
+- 250ml leite desnatado
 - 1 banana
 
-**Macros:** ~280 kcal | 32g P | 36g C | 1g F
+**Macros:** ~300 kcal | 34g P | 39g C | 2g F
 
 ---
 
-### Opção 2 — Ovo com pão
-- 3 ovos inteiros mexidos
+### Opção 2 — Pão com frango desfiado
 - 1 pão francês
-- Café preto
+- 100g frango desfiado
 
-> **Mudança:** removida a opção "4 claras cozidas" (desperdiça gema). Agora são 3 ovos inteiros + pão. Proteína fica um pouco abaixo do alvo, mas você compensa nas outras refeições do dia.
-
-**Macros:** ~350 kcal | 22g P | 32g C | 16g F
+**Macros:** ~313 kcal | 35g P | 29g C | 5g F
 
 ---
 
-### Opção 3 — Shake whey com achocolatado
-- 300ml leite desnatado
-- 1 scoop whey FTW
-- 1 colher (10g) achocolatado (Toddy, Nescau)
+### Opção 3 — Cuscuz com frango desfiado
+- 120g cuscuz cozido
+- 100g frango desfiado
 
-**Macros:** ~265 kcal | 35g P | 26g C | 2g F
+**Macros:** ~300 kcal | 35g P | 28g C | 4g F
 
 ---
 

@@ -8,10 +8,9 @@ import type {
   OpcaoRefeicao,
   SlotRefeicao,
   Alimento,
-  CategoriaAlimento,
   SubstituicaoPadrao,
 } from '../../data/tipos'
-import { getAlimentoPorId } from '../../data/alimentos'
+import { getAlimentoPorId, getCategoriaDoItem } from '../../data/alimentos'
 import { DIETA_FOLGA } from '../../data/dieta-folga'
 import { DIETA_PLANTAO } from '../../data/dieta-plantao'
 import { useDiaStore } from '../../stores/useDiaStore'
@@ -39,30 +38,6 @@ function findSlotAndOpcao(
   const opcao = slot.opcoes.find((o) => o.id === opcaoId)
   if (!opcao) return null
   return { slot, opcao }
-}
-
-function inferCategoria(item: ItemOpcao): CategoriaAlimento {
-  // Infer from item id patterns
-  const id = item.id.toLowerCase()
-  if (id.includes('frango') || id.includes('patinho') || id.includes('ovo') ||
-      id.includes('atum') || id.includes('sardinha') || id.includes('tilapia') ||
-      id.includes('salmao') || id.includes('figado') || id.includes('peru') ||
-      id.includes('carne') || id.includes('linguica'))
-    return 'proteina'
-  if (id.includes('whey')) return 'suplemento'
-  if (id.includes('azeite') || id.includes('oleo') || id.includes('amendoim') ||
-      id.includes('castanha') || id.includes('pasta-amendoim') || id.includes('manteiga'))
-    return 'gordura'
-  if (id.includes('feijao') || id.includes('lentilha') || id.includes('grao'))
-    return 'leguminosa'
-  if (id.includes('aveia')) return 'farinha'
-  if (id.includes('leite') || id.includes('iogurte') || id.includes('queijo') ||
-      id.includes('requeijao') || id.includes('achocolatado'))
-    return 'laticinio'
-  if (id.includes('salada') || id.includes('brocolis') || id.includes('tomate') ||
-      id.includes('cenoura') || id.includes('alface') || id.includes('couve'))
-    return 'vegetal'
-  return 'carboidrato'
 }
 
 function criarRegistradosComSubstituicoes(
@@ -359,7 +334,7 @@ export function OpcaoDetalhePage() {
       {swapIngredienteItem && (
         <SwapIngredienteModal
           item={swapIngredienteItem}
-          categoriaItem={inferCategoria(swapIngredienteItem)}
+          categoriaItem={getCategoriaDoItem(swapIngredienteItem)}
           onSelect={handleSwapIngrediente}
           onSalvarPadrao={handleSalvarSubstituicaoPadrao}
           onClose={() => setSwapIngredienteItem(null)}

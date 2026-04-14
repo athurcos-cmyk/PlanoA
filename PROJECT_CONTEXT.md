@@ -280,7 +280,7 @@ Pontos importantes para a proxima sessao:
 - a fonte de verdade nutricional operacional e `src/data/alimentos/index.ts`
 - os arquivos `dieta-folga.ts` e `dieta-plantao.ts` ja foram sincronizados com o catalogo
 - o app nao deve mais mostrar algo como `1 ovo` quando estiver calculando `150g`; a exibicao de unidade caseira foi corrigida
-- a auditoria atual das opcoes da dieta deixa a maioria em `ok` ou `ajuste`, com apenas uma opcao ainda `fora` por decisao pratica: o pos-treino de folga `3 ovos + 1 pao`
+- o pos-treino de folga foi revisado para ter so um shake e duas opcoes solidas mais coerentes com o alvo do slot
 
 ## Scripts de Validacao
 

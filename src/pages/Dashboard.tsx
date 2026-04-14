@@ -9,6 +9,7 @@ import { MacroProgress } from '../components/dieta/MacroProgress'
 import { ExtraButton } from '../components/dieta/ExtraButton'
 import { ExtrasList } from '../components/dieta/ExtrasList'
 import { cn } from '../utils/cn'
+import { calcularMacrosAlvoDia } from '../utils/dieta'
 import { db } from '../db/schema'
 import { hoje } from '../utils/datas'
 
@@ -22,7 +23,7 @@ export function Dashboard() {
   const { tipoDia, dieta } = useDiaAtual()
   const refeicoes = useRefeicoesFeitas()
   const macros = useProgressoMacros()
-  const alvo = PERFIL.macrosAlvo
+  const alvo = calcularMacrosAlvoDia(dieta)
 
   const treinoHoje = useLiveQuery(
     () => db.treinos.where('data').equals(hoje()).first(),
@@ -54,6 +55,10 @@ export function Dashboard() {
       {/* Macro progress */}
       <div className="rounded-lg bg-surface p-4">
         <MacroProgress macros={macros} alvo={alvo} />
+        <p className="mt-3 text-xs text-ink-3">
+          Alvo do dia baseado no plano atual de {tipoDia === 'folga' ? 'folga' : 'plantao'}.
+          Meta base do perfil: {PERFIL.metaKcal} kcal.
+        </p>
       </div>
 
       {/* Next meal */}

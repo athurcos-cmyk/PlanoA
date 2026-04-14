@@ -1,4 +1,4 @@
-import type { Alimento, ItemOpcao, Macros } from '../tipos'
+import type { Alimento, CategoriaAlimento, ItemOpcao, Macros } from '../tipos'
 
 export const ALIMENTOS: Alimento[] = [
   // ── PROTEINAS (15) ─────────────────────────────────────────
@@ -110,6 +110,92 @@ export function buscarAlimentos(query: string): Alimento[] {
 export function getAlimentoPorId(id: string): Alimento | undefined {
   const normalizado = normalizarAlimentoId(id)
   return ALIMENTOS.find((a) => a.id === normalizado)
+}
+
+function inferirCategoriaFallback(id: string): CategoriaAlimento {
+  const normalizado = normalizarAlimentoId(id).toLowerCase()
+
+  if (
+    normalizado.includes('frango') ||
+    normalizado.includes('patinho') ||
+    normalizado.includes('ovo') ||
+    normalizado.includes('atum') ||
+    normalizado.includes('sardinha') ||
+    normalizado.includes('tilapia') ||
+    normalizado.includes('salmao') ||
+    normalizado.includes('figado') ||
+    normalizado.includes('peru') ||
+    normalizado.includes('carne') ||
+    normalizado.includes('linguica')
+  ) {
+    return 'proteina'
+  }
+
+  if (normalizado.includes('whey')) return 'suplemento'
+
+  if (
+    normalizado.includes('azeite') ||
+    normalizado.includes('oleo') ||
+    normalizado.includes('amendoim') ||
+    normalizado.includes('castanha') ||
+    normalizado.includes('pasta-amendoim') ||
+    normalizado.includes('manteiga') ||
+    normalizado.includes('abacate') ||
+    normalizado.includes('linhaca')
+  ) {
+    return 'gordura'
+  }
+
+  if (
+    normalizado.includes('feijao') ||
+    normalizado.includes('lentilha') ||
+    normalizado.includes('grao')
+  ) {
+    return 'leguminosa'
+  }
+
+  if (normalizado.includes('aveia')) return 'farinha'
+
+  if (
+    normalizado.includes('leite') ||
+    normalizado.includes('iogurte') ||
+    normalizado.includes('queijo') ||
+    normalizado.includes('requeijao') ||
+    normalizado.includes('ricota')
+  ) {
+    return 'laticinio'
+  }
+
+  if (normalizado.includes('achocolatado') || normalizado.includes('pacoca')) {
+    return 'snack'
+  }
+
+  if (
+    normalizado.includes('salada') ||
+    normalizado.includes('brocolis') ||
+    normalizado.includes('tomate') ||
+    normalizado.includes('cenoura') ||
+    normalizado.includes('alface') ||
+    normalizado.includes('couve') ||
+    normalizado.includes('abobrinha') ||
+    normalizado.includes('pepino') ||
+    normalizado.includes('chuchu') ||
+    normalizado.includes('espinafre')
+  ) {
+    return 'vegetal'
+  }
+
+  return 'carboidrato'
+}
+
+export function getCategoriaAlimentoPorId(id: string): CategoriaAlimento {
+  const alimento = getAlimentoPorId(id)
+  if (alimento) return alimento.categoria
+  return inferirCategoriaFallback(id)
+}
+
+export function getCategoriaDoItem(item: Pick<ItemOpcao, 'id'>): CategoriaAlimento {
+  return getCategoriaAlimentoPorId(item.id)
 }
 
 export function getMedidaCaseira(alimentoId: string): {
