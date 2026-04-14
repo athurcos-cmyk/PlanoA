@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 import type { SerieFeita } from '../data/tipos'
 
 interface TreinoStore {
@@ -12,30 +13,61 @@ interface TreinoStore {
   finalizarTreino: () => { series: SerieFeita[]; duracaoMin: number } | null
 }
 
-export const useTreinoStore = create<TreinoStore>((set, get) => ({
-  treinoAtivo: null,
-  seriesFeitas: [],
-  inicioTimestamp: null,
+export const useTreinoStore = create<TreinoStore>()(
+  persist(
+    (set, get) => ({
+      treinoAtivo: null,
+      seriesFeitas: [],
+      inicioTimestamp: null,
 
-  iniciarTreino: (id) =>
-    set({ treinoAtivo: id, seriesFeitas: [], inicioTimestamp: Date.now() }),
+      iniciarTreino: (id) =>
+        set((state) => {
+          if (state.treinoAtivo === id && state.seriesFeitas.length > 0) {
+            return state
+          }
 
-  registrarSerie: (serie) =>
-    set((s) => ({ seriesFeitas: [...s.seriesFeitas, serie] })),
+          return { treinoAtivo: id, seriesFeitas: [], inicioTimestamp: Date.now() }
+        }),
 
-  removerSerie: (exercicioId, serieNum) =>
-    set((s) => ({
-      seriesFeitas: s.seriesFeitas.filter(
-        (sf) => !(sf.exercicioId === exercicioId && sf.serie === serieNum)
-      ),
-    })),
+      registrarSerie: (serie) =>
+        set((s) => ({
+          seriesFeitas: [
+            ...s.seriesFeitas.filter(
+              (sf) => !(sf.exercicioId === serie.exercicioId && sf.serie === serie.serie)
+            ),
+            serie,
+          ].sort((a, b) => {
+            if (a.exercicioId === b.exercicioId) return a.serie - b.serie
+            return a.exercicioId.localeCompare(b.exercicioId)
+          }),
+        })),
 
-  finalizarTreino: () => {
-    const state = get()
-    if (!state.treinoAtivo || !state.inicioTimestamp) return null
-    const duracaoMin = Math.round((Date.now() - state.inicioTimestamp) / 60000)
-    const result = { series: state.seriesFeitas, duracaoMin }
-    set({ treinoAtivo: null, seriesFeitas: [], inicioTimestamp: null })
-    return result
-  },
-}))
+      removerSerie: (exercicioId, serieNum) =>
+        set((s) => ({
+          seriesFeitas: s.seriesFeitas.filter(
+            (sf) => !(sf.exercicioId === exercicioId && sf.serie === serieNum)
+          ),
+        })),
+
+      finalizarTreino: () => {
+        const state = get()
+        if (!state.treinoAtivo || !state.inicioTimestamp) return null
+        const duracaoMin = Math.max(
+          1,
+          Math.round((Date.now() - state.inicioTimestamp) / 60000)
+        )
+        const result = { series: state.seriesFeitas, duracaoMin }
+        set({ treinoAtivo: null, seriesFeitas: [], inicioTimestamp: null })
+        return result
+      },
+    }),
+    {
+      name: 'plano-a-treino-ativo',
+      partialize: (state) => ({
+        treinoAtivo: state.treinoAtivo,
+        seriesFeitas: state.seriesFeitas,
+        inicioTimestamp: state.inicioTimestamp,
+      }),
+    }
+  )
+)

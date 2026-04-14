@@ -14,6 +14,7 @@ const treinos = [TREINO_A, TREINO_B]
 export function TreinoListPage() {
   const navigate = useNavigate()
   const iniciarTreino = useTreinoStore((s) => s.iniciarTreino)
+  const treinoAtivo = useTreinoStore((s) => s.treinoAtivo)
 
   const ultimosTreinos = useLiveQuery(async () => {
     const todos = await db.treinos.orderBy('data').reverse().toArray()
@@ -33,6 +34,10 @@ export function TreinoListPage() {
   })()
 
   const handleIniciar = (id: 'A' | 'B') => {
+    if (treinoAtivo) {
+      navigate('/treino/ativo')
+      return
+    }
     iniciarTreino(id)
     navigate('/treino/ativo')
   }
@@ -50,6 +55,8 @@ export function TreinoListPage() {
           treino={treino}
           ultimoTreino={ultimosTreinos?.[treino.id]}
           isProximo={treino.id === proximoId}
+          isAtivo={treino.id === treinoAtivo}
+          bloqueadoPorOutroTreino={Boolean(treinoAtivo && treino.id !== treinoAtivo)}
           onIniciar={() => handleIniciar(treino.id)}
         />
       ))}
@@ -61,11 +68,15 @@ function TreinoCard({
   treino,
   ultimoTreino,
   isProximo,
+  isAtivo,
+  bloqueadoPorOutroTreino,
   onIniciar,
 }: {
   treino: Treino
   ultimoTreino?: TreinoFeito
   isProximo: boolean
+  isAtivo: boolean
+  bloqueadoPorOutroTreino: boolean
   onIniciar: () => void
 }) {
   const totalExercicios = treino.blocos.reduce(
@@ -77,7 +88,9 @@ function TreinoCard({
     <div
       className={cn(
         'rounded-lg bg-surface overflow-hidden',
-        isProximo && 'ring-1 ring-accent/40'
+        isAtivo
+          ? 'ring-1 ring-green/40'
+          : isProximo && 'ring-1 ring-accent/40'
       )}
     >
       <div className="p-4">
@@ -124,7 +137,18 @@ function TreinoCard({
           )}
         </div>
 
-        {isProximo && (
+        {isAtivo && (
+          <button
+            type="button"
+            onClick={onIniciar}
+            className="w-full min-h-[48px] rounded-lg bg-green/20 text-green text-sm font-bold flex items-center justify-center gap-2 active:bg-green/30 transition-colors"
+          >
+            <Play size={16} fill="currentColor" />
+            CONTINUAR TREINO
+          </button>
+        )}
+
+        {!isAtivo && isProximo && (
           <button
             type="button"
             onClick={onIniciar}
@@ -135,7 +159,7 @@ function TreinoCard({
           </button>
         )}
 
-        {!isProximo && (
+        {!isAtivo && !isProximo && !bloqueadoPorOutroTreino && (
           <button
             type="button"
             onClick={onIniciar}
@@ -143,6 +167,17 @@ function TreinoCard({
           >
             <Play size={16} />
             INICIAR
+          </button>
+        )}
+
+        {bloqueadoPorOutroTreino && (
+          <button
+            type="button"
+            onClick={onIniciar}
+            className="w-full min-h-[48px] rounded-lg bg-surface-2 text-sm font-bold text-ink-3 flex items-center justify-center gap-2 active:bg-surface-3 transition-colors"
+          >
+            <Play size={16} />
+            TREINO EM ANDAMENTO
           </button>
         )}
       </div>
