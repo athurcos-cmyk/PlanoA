@@ -32,6 +32,13 @@ export function getRefeicoesDoDia(data: string) {
   return db.refeicoes.where('data').equals(data).toArray()
 }
 
+export function getRefeicaoDoDiaPorSlot(data: string, slotId: string) {
+  return db.refeicoes
+    .where('[data+slotRefeicaoId]')
+    .equals([data, slotId])
+    .first()
+}
+
 // ========== TREINOS ==========
 
 export async function registrarTreino(treino: Omit<TreinoFeito, 'id'>) {

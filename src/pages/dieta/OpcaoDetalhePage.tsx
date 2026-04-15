@@ -9,6 +9,7 @@ import type {
   SlotRefeicao,
   Alimento,
   SubstituicaoPadrao,
+  RefeicaoFeita,
 } from '../../data/tipos'
 import { getAlimentoPorId, getCategoriaDoItem } from '../../data/alimentos'
 import { DIETA_FOLGA } from '../../data/dieta-folga'
@@ -17,6 +18,7 @@ import { useDiaStore } from '../../stores/useDiaStore'
 import { calcularMacrosOpcao } from '../../utils/macros'
 import {
   desativarSubstituicao,
+  getRefeicaoDoDiaPorSlot,
   getSubstituicoesAtivas,
   registrarRefeicao,
   salvarSubstituicao,
@@ -38,6 +40,28 @@ function findSlotAndOpcao(
   const opcao = slot.opcoes.find((o) => o.id === opcaoId)
   if (!opcao) return null
   return { slot, opcao }
+}
+
+function findOpcaoById(opcaoId: string): {
+  opcao: OpcaoRefeicao
+  slotId: string
+  dieta: 'folga' | 'plantao'
+} | null {
+  for (const slot of DIETA_FOLGA.slots) {
+    const opcao = slot.opcoes.find((entry) => entry.id === opcaoId)
+    if (opcao) {
+      return { opcao, slotId: slot.id, dieta: 'folga' }
+    }
+  }
+
+  for (const slot of DIETA_PLANTAO.slots) {
+    const opcao = slot.opcoes.find((entry) => entry.id === opcaoId)
+    if (opcao) {
+      return { opcao, slotId: slot.id, dieta: 'plantao' }
+    }
+  }
+
+  return null
 }
 
 function criarRegistradosComSubstituicoes(
@@ -94,6 +118,13 @@ export function OpcaoDetalhePage() {
     () => substituicoesAtivasResult ?? [],
     [substituicoesAtivasResult]
   )
+  const refeicaoSalva = useLiveQuery(
+    async () => {
+      if (!slot) return undefined
+      return getRefeicaoDoDiaPorSlot(hoje(), slot.id)
+    },
+    [slot?.id]
+  )
 
   if (!slot || !found?.opcao) {
     return (
@@ -114,7 +145,12 @@ export function OpcaoDetalhePage() {
     .map((substituicao) => `${substituicao.itemOriginalId}:${substituicao.itemSubstitutoId}:${substituicao.gramasSubstituto}`)
     .sort()
     .join('|')
-  const pageKey = `${tipoDia}:${slot.id}:${found.opcao.id}:${substituicoesKey}`
+  const refeicaoKey = refeicaoSalva
+    ? `${refeicaoSalva.id ?? 'sem-id'}:${refeicaoSalva.opcaoId}:${(refeicaoSalva.itensRegistrados ?? [])
+        .map((item) => `${item.itemId}:${item.gramasReais}:${item.substitutoId ?? ''}`)
+        .join('|')}`
+    : 'sem-refeicao'
+  const pageKey = `${tipoDia}:${slot.id}:${found.opcao.id}:${substituicoesKey}:${refeicaoKey}`
 
   return (
     <OpcaoDetalheContent
@@ -123,6 +159,7 @@ export function OpcaoDetalhePage() {
       tipoDia={tipoDia}
       slot={slot}
       opcaoBase={found.opcao}
+      refeicaoSalva={refeicaoSalva ?? null}
       substituicoesAtivas={substituicoesAtivas}
     />
   )
@@ -133,23 +170,38 @@ function OpcaoDetalheContent({
   tipoDia,
   slot,
   opcaoBase,
+  refeicaoSalva,
   substituicoesAtivas,
 }: {
   navigate: ReturnType<typeof useNavigate>
   tipoDia: 'folga' | 'plantao'
   slot: SlotRefeicao
   opcaoBase: OpcaoRefeicao
+  refeicaoSalva: RefeicaoFeita | null
   substituicoesAtivas: SubstituicaoPadrao[]
 }) {
+  const opcaoRegistrada = refeicaoSalva?.opcaoId
+    ? findOpcaoById(refeicaoSalva.opcaoId)
+    : null
   const [swappedOpcao, setSwappedOpcao] = useState<{
     opcao: OpcaoRefeicao
     fromSlot: string
     fromDieta: string
-  } | null>(null)
+  } | null>(() => {
+    if (!opcaoRegistrada || opcaoRegistrada.opcao.id === opcaoBase.id) {
+      return null
+    }
+
+    return {
+      opcao: opcaoRegistrada.opcao,
+      fromSlot: opcaoRegistrada.slotId,
+      fromDieta: opcaoRegistrada.dieta,
+    }
+  })
   const [showSwapModal, setShowSwapModal] = useState(false)
   const [swapIngredienteItem, setSwapIngredienteItem] = useState<ItemOpcao | null>(null)
 
-  const opcao = swappedOpcao?.opcao || opcaoBase
+  const opcao = swappedOpcao?.opcao || opcaoRegistrada?.opcao || opcaoBase
   const substituicoesAtivasMap = useMemo(
     () => new Map(substituicoesAtivas.map((substituicao) => [substituicao.itemOriginalId, substituicao])),
     [substituicoesAtivas]
@@ -163,7 +215,13 @@ function OpcaoDetalheContent({
       criarRegistradosComSubstituicoes(opcaoAtual, substituicoesAtivas),
     [substituicoesAtivas]
   )
-  const [registrados, setRegistrados] = useState<ItemRegistrado[]>(() => criarRegistrados(opcaoBase))
+  const [registrados, setRegistrados] = useState<ItemRegistrado[]>(() => {
+    if (refeicaoSalva?.itensRegistrados?.length) {
+      return refeicaoSalva.itensRegistrados
+    }
+
+    return criarRegistrados(opcaoRegistrada?.opcao ?? opcaoBase)
+  })
 
   const macrosAtuais = useMemo(
     () => calcularMacrosOpcao(opcao.itens, registrados),

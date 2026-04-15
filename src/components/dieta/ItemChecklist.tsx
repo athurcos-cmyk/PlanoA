@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import { Check } from 'lucide-react'
+import { getAlimentoPorId } from '../../data/alimentos'
 import type { ItemOpcao, ItemRegistrado } from '../../data/tipos'
 import { cn } from '../../utils/cn'
-import { formatQuantidadeContextoItem, formatQuantidadeItem } from '../../utils/quantidade'
+import {
+  formatQuantidadeAlimento,
+  formatQuantidadeContextoAlimento,
+  formatQuantidadeContextoItem,
+  formatQuantidadeItem,
+} from '../../utils/quantidade'
 
 interface Props {
   itens: ItemOpcao[]
@@ -79,12 +85,19 @@ export function ItemChecklist({
     <div className="flex flex-col">
       {itens.map((item) => {
         const reg = getReg(item.id)
+        const substituto = reg.substitutoId ? getAlimentoPorId(reg.substitutoId) : undefined
         const checked = reg.gramasReais > 0
         const gramas = reg.gramasReais
         const isAdjusted = gramas !== item.gramasPlano && gramas > 0
         const showStepper = expandedId === item.id
         const temPadraoAtivo = itensComPadraoAtivo?.has(item.id)
-        const quantidadeContexto = formatQuantidadeContextoItem(item, gramas)
+        const quantidadeContexto = substituto
+          ? formatQuantidadeContextoAlimento(substituto, gramas)
+          : formatQuantidadeContextoItem(item, gramas)
+        const nomePrincipal = substituto?.nome ?? item.nome
+        const quantidadePrincipal = substituto
+          ? formatQuantidadeAlimento(substituto, gramas)
+          : formatQuantidadeItem(item, gramas)
 
         return (
           <div key={item.id} className="border-b border-border-soft last:border-b-0">
@@ -115,13 +128,13 @@ export function ItemChecklist({
                     checked ? 'text-ink' : 'text-ink-3 line-through'
                   )}
                 >
-                  <span className="truncate">{item.nome}</span>
+                  <span className="truncate">{nomePrincipal}</span>
                 </button>
 
-                {reg.substitutoNome && (
+                {substituto && (
                   <div className="mt-0.5 flex items-center gap-2 text-[11px]">
                     <span className="truncate text-accent">
-                      usando {reg.substitutoNome}
+                      no lugar de {item.nome}
                     </span>
                     {onRestoreOriginal && (
                       <button
@@ -153,7 +166,7 @@ export function ItemChecklist({
                     : 'border border-border-soft text-ink-2 bg-surface-2'
                 )}
               >
-                {formatQuantidadeItem(item, gramas)}
+                {quantidadePrincipal}
               </button>
             </div>
 
@@ -168,7 +181,7 @@ export function ItemChecklist({
                 <StepButton onClick={() => adjustGrams(item, -10)} label="-10" />
                 <StepButton onClick={() => adjustGrams(item, -5)} label="-5" />
                 <span className="w-16 text-center text-sm font-[family-name:var(--font-mono)] text-ink">
-                  {formatQuantidadeItem(item, gramas)}
+                  {quantidadePrincipal}
                 </span>
                 <StepButton onClick={() => adjustGrams(item, 5)} label="+5" />
                 <StepButton onClick={() => adjustGrams(item, 10)} label="+10" />
