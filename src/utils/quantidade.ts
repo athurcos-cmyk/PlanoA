@@ -7,6 +7,10 @@ function formatNumero(valor: number): string {
     : valor.toFixed(1).replace(/\.0$/, '')
 }
 
+function roundToHalf(valor: number): number {
+  return Math.round(valor * 2) / 2
+}
+
 const PLURAIS_IRREGULARES: Record<string, string> = {
   banana: 'bananas',
   clara: 'claras',
@@ -34,7 +38,7 @@ function formatRotulo(rotulo: string, quantidade: number): string {
 }
 
 function formatMedidaCaseira(rotulo: string, quantidadeBase: number, quantidade: number): string {
-  const unidades = quantidade / quantidadeBase
+  const unidades = roundToHalf(quantidade / quantidadeBase)
   return `${formatNumero(unidades)} ${formatRotulo(rotulo, unidades)}`
 }
 
