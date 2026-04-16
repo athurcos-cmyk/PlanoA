@@ -38,6 +38,10 @@ function formatMedidaCaseira(rotulo: string, quantidadeBase: number, quantidade:
   return `${formatNumero(unidades)} ${formatRotulo(rotulo, unidades)}`
 }
 
+function formatQuantidadeMetrica(quantidade: number, unidade: 'g' | 'ml'): string {
+  return `${formatNumero(quantidade)}${unidade}`
+}
+
 export function formatQuantidadeItem(item: ItemOpcao, quantidade: number): string {
   if (item.unidade === 'un' && item.unidadeNome) {
     const medida = getMedidaCaseira(item.id)
@@ -58,6 +62,17 @@ export function formatQuantidadeAlimento(alimento: Alimento, quantidade: number)
   }
 
   return `${Math.round(quantidade)}g`
+}
+
+export function formatQuantidadeMetricaItem(item: ItemOpcao, quantidade: number): string {
+  if (item.unidade === 'ml') return formatQuantidadeMetrica(quantidade, 'ml')
+  return formatQuantidadeMetrica(quantidade, 'g')
+}
+
+export function formatQuantidadeMetricaAlimento(alimento: Alimento, quantidade: number): string {
+  const medida = getMedidaCaseira(alimento.id)
+  if (medida?.unidade === 'ml') return formatQuantidadeMetrica(quantidade, 'ml')
+  return formatQuantidadeMetrica(quantidade, 'g')
 }
 
 export function formatQuantidadeContextoItem(item: ItemOpcao, quantidade: number): string | null {

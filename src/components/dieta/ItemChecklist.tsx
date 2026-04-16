@@ -4,8 +4,7 @@ import { getAlimentoPorId } from '../../data/alimentos'
 import type { ItemOpcao, ItemRegistrado } from '../../data/tipos'
 import { cn } from '../../utils/cn'
 import {
-  formatQuantidadeAlimento,
-  formatQuantidadeContextoAlimento,
+  formatQuantidadeMetricaAlimento,
   formatQuantidadeContextoItem,
   formatQuantidadeItem,
 } from '../../utils/quantidade'
@@ -92,11 +91,11 @@ export function ItemChecklist({
         const showStepper = expandedId === item.id
         const temPadraoAtivo = itensComPadraoAtivo?.has(item.id)
         const quantidadeContexto = substituto
-          ? formatQuantidadeContextoAlimento(substituto, gramas)
+          ? null
           : formatQuantidadeContextoItem(item, gramas)
         const nomePrincipal = substituto?.nome ?? item.nome
         const quantidadePrincipal = substituto
-          ? formatQuantidadeAlimento(substituto, gramas)
+          ? formatQuantidadeMetricaAlimento(substituto, gramas)
           : formatQuantidadeItem(item, gramas)
 
         return (
