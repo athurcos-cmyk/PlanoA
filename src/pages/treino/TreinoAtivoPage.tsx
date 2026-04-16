@@ -188,7 +188,7 @@ export function TreinoAtivoPage() {
                 <button
                   type="button"
                   onClick={handleFinalizar}
-                  className="flex-1 min-h-[48px] rounded-lg bg-green text-sm font-bold text-bg active:bg-green/80 transition-colors"
+                  className="flex-1 min-h-[48px] rounded-lg bg-green text-sm font-bold text-white active:bg-green/80 transition-colors"
                 >
                   CONFIRMAR
                 </button>

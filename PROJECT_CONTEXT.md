@@ -553,17 +553,17 @@ Isso reforca a intencao de uso como app pessoal mobile-first.
 
 ## Design System Planejado
 
-O arquivo externo `design-system.md` define uma direcao visual forte:
+O arquivo externo `design-system.md` foi revisado e aprovado com uma direcao mais coerente com saude, rotina e clareza:
 
-- visual "brutalist atletico"
-- tipografia forte
-- numeros em mono
-- poucos acentos de cor
-- toque grande
-- pouca decoracao
-- evitar visual generico de dashboard SaaS
+- tema claro com base `off-white`
+- verde natural como cor principal de acao
+- texto em verde botanico escuro, evitando preto puro
+- superficies claras com contraste suave
+- numeros continuam em mono
+- visual mobile-first mais limpo, leve e confiavel
+- evitar tanto o dark pesado quanto o look generico de app medico frio
 
-Esse design system esta mais definido e mais rigido do que a UI atual do codigo. Ele deve ser tratado como norte para futuras melhorias visuais.
+Esse sistema agora ja comecou a ser aplicado no codigo, com tokens globais novos em `src/index.css` e CTAs ajustados para o contraste correto.
 
 Tambem existem mockups em:
 

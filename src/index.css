@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0E0E0C;
-  --color-surface: #171714;
-  --color-surface-2: #1F1F1B;
-  --color-surface-3: #2A2A25;
-  --color-ink: #F2F2EC;
-  --color-ink-2: #A8A89F;
-  --color-ink-3: #6B6B62;
-  --color-border: #F2F2EC;
-  --color-border-soft: #2A2A25;
-  --color-done: #F2F2EC;
-  --color-warn: #F59E0B;
-  --color-over: #EF4444;
-  --color-accent: #EF4444;
-  --color-accent-soft: #2A0F0F;
-  --color-accent-darker: #DC2626;
-  --color-green: #22C55E;
+  --color-bg: #F7FAF5;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #EEF5EE;
+  --color-surface-3: #E2ECE3;
+  --color-ink: #163222;
+  --color-ink-2: #4F6A58;
+  --color-ink-3: #7C9483;
+  --color-border: #C8D8CB;
+  --color-border-soft: #DCE7DD;
+  --color-done: #4D9F68;
+  --color-warn: #D89B2B;
+  --color-over: #C94B4B;
+  --color-accent: #2F7D4A;
+  --color-accent-soft: #DDF3E4;
+  --color-accent-darker: #25663C;
+  --color-green: #4D9F68;
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -34,6 +34,9 @@ body {
   margin: 0;
   min-height: 100dvh;
   overscroll-behavior: none;
+  background:
+    radial-gradient(circle at top, rgba(77, 159, 104, 0.10), transparent 32%),
+    linear-gradient(180deg, #FAFCF8 0%, var(--color-bg) 24%, var(--color-bg) 100%);
 }
 
 #root {
@@ -44,7 +47,7 @@ body {
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-surface-3); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
 
 @supports (padding: env(safe-area-inset-top)) {
   body {

@@ -73,7 +73,7 @@ function AppUpdateBanner() {
           onClick={() => {
             void applyAppUpdate()
           }}
-          className="flex-1 rounded-lg bg-accent px-3 py-2 text-sm font-bold text-ink active:bg-accent-darker"
+          className="flex-1 rounded-lg bg-accent px-3 py-2 text-sm font-bold text-white active:bg-accent-darker"
         >
           Atualizar
         </button>

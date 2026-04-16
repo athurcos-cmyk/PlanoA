@@ -180,7 +180,7 @@ export function SerieInput({
           <button
             type="button"
             onClick={handleSubmit}
-            className="flex-1 min-h-[48px] rounded-lg bg-accent text-sm font-bold text-ink active:bg-accent-darker transition-colors"
+            className="flex-1 min-h-[48px] rounded-lg bg-accent text-sm font-bold text-white active:bg-accent-darker transition-colors"
           >
             REGISTRAR
           </button>

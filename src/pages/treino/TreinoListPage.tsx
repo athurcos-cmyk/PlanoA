@@ -153,7 +153,7 @@ function TreinoCard({
           <button
             type="button"
             onClick={onIniciar}
-            className="w-full min-h-[48px] rounded-lg bg-accent text-sm font-bold text-ink flex items-center justify-center gap-2 active:bg-accent-darker transition-colors"
+            className="w-full min-h-[48px] rounded-lg bg-accent text-sm font-bold text-white flex items-center justify-center gap-2 active:bg-accent-darker transition-colors"
           >
             <Play size={16} fill="currentColor" />
             INICIAR TREINO
