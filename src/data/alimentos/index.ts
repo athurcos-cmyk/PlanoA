@@ -32,6 +32,7 @@ export const ALIMENTOS: Alimento[] = [
   { id: 'banana', nome: 'Banana', kcal: 92, p: 1.4, c: 23.8, g: 0.1, categoria: 'carboidrato', unidadeRef: '1 banana = 100g' },
   { id: 'maca', nome: 'Maca', kcal: 63, p: 0.3, c: 16.6, g: 0, categoria: 'carboidrato', unidadeRef: '1 maçã = 150g' },
   { id: 'laranja', nome: 'Laranja pera', kcal: 37, p: 1, c: 8.9, g: 0.1, categoria: 'carboidrato', unidadeRef: '1 unidade = 180g' },
+  { id: 'goiaba', nome: 'Goiaba', kcal: 54, p: 1, c: 13, g: 0.4, categoria: 'carboidrato', unidadeRef: '1 unidade = 85g' },
   { id: 'caqui', nome: 'Caqui', kcal: 72, p: 0.4, c: 19.3, g: 0.2, categoria: 'carboidrato', unidadeRef: '1 unidade = 100g' },
   { id: 'mamao', nome: 'Mamao papaya', kcal: 40, p: 0.5, c: 10.4, g: 0.1, categoria: 'carboidrato', unidadeRef: '1 fatia = 170g' },
   { id: 'manga', nome: 'Manga', kcal: 72, p: 0.4, c: 19.4, g: 0.2, categoria: 'carboidrato', unidadeRef: '1 unidade = 250g' },

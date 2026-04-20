@@ -125,6 +125,7 @@ function getGrupoSwap(id: string, categoria: CategoriaAlimento): GrupoSwap {
     'banana',
     'maca',
     'laranja',
+    'goiaba',
     'caqui',
     'mamao',
     'manga',

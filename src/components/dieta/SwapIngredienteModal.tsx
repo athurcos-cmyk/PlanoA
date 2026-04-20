@@ -5,6 +5,7 @@ import { ALIMENTOS } from '../../data/alimentos'
 import { calcularMacrosItem } from '../../utils/macros'
 import { cn } from '../../utils/cn'
 import {
+  formatQuantidadeContextoAlimento,
   formatQuantidadeMetricaAlimento,
   formatQuantidadeMetricaItem,
 } from '../../utils/quantidade'
@@ -117,6 +118,7 @@ export function SwapIngredienteModal({
 
           {compativeis.map(({ alimento, gramas, score }) => {
             const gramasCalc = gramas
+            const contextoQuantidade = formatQuantidadeContextoAlimento(alimento, gramasCalc)
             const macrosSub = {
               kcal: Math.round((alimento.kcal * gramasCalc) / 100),
               p: +((alimento.p * gramasCalc) / 100).toFixed(1),
@@ -185,6 +187,11 @@ export function SwapIngredienteModal({
                     <p className="text-sm font-bold text-accent font-[family-name:var(--font-mono)]">
                       {formatQuantidadeMetricaAlimento(alimento, gramasCalc)}
                     </p>
+                    {contextoQuantidade && (
+                      <p className="text-[10px] text-ink-3">
+                        ~ {contextoQuantidade}
+                      </p>
+                    )}
                     <p className="text-[10px] text-ink-3">{score}% {getScoreLabel(score)}</p>
                   </div>
                 </button>

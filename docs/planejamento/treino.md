@@ -54,8 +54,8 @@ Antes de qualquer treino:
 - **Remada serrote com halter** - 4 x 8-12 cada lado
   > Puxar com o cotovelo e segurar 1s no topo.
 
-- **Puxada alta com elastico** - 3 x 12-20
-  > Presa num ponto alto. Pensar em "colocar o cotovelo no bolso". Se nao tiver ancoragem alta, usar remada com elastico sentado preso nos pes.
+- **Remada com elastico** - 3 x 10-15
+  > Sentado no chao com elastico preso nos pes ou em ancoragem baixa. Puxar com o cotovelo, segurar 1s no final e voltar devagar.
 
 - **Face pull com elastico** - 2 x 15-20
   > Importante para postura, ombro e saude escapular.
